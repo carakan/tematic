@@ -1,0 +1,29 @@
+<h1>Listing documento_interes</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+<%= buscar_generico_admin_tag %> 
+<% end %>
+<p>
+  <%= link_to 'Nuevo documento de interes', new_admin_documento_intere_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for documento_intere in @documento_interes %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h documento_intere.titulo %></td>
+      <td><%= link_to 'Mostrar', admin_documento_intere_path(documento_intere) %></td>
+      <td><%= link_to 'Editar', edit_admin_documento_intere_path(documento_intere) %></td>
+      <td><%= link_to 'Destruir', admin_documento_intere_path(documento_intere), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<p>
+  <%= link_to 'Nuevo documento de interes', new_admin_documento_intere_path %>
+</p>

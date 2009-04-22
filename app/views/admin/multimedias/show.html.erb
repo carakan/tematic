@@ -1,0 +1,13 @@
+<p>
+  <b>Titulo:</b>
+  <%=h @multimedia.titulo %>
+</p>
+
+<p>
+  <b>Archivo:</b>
+  <%=h @multimedia.archivo %>
+</p>
+
+
+<%= link_to 'Editar', edit_multimedia_path(@multimedia) %> |
+<%= link_to 'Ir al listado', multimedias_path %>

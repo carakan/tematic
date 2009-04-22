@@ -1,0 +1,17 @@
+<h1>Editar  tipo_medio</h1>
+
+<%= error_messages_for :tipo_medio %>
+
+<% form_for(@tipo_medio) do |f| %>
+  <p>
+    <b>Tipomedio</b><br />
+    <%= f.text_field :tipoMedio %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @tipo_medio %> |
+<%= link_to 'Ir al listado', tipo_medios_path %>

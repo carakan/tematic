@@ -1,0 +1,58 @@
+<h1>Busqueda Avanzada en las series comparativas</h1>
+<% form_for(@serie_comparativa, :url => {:action => 'btodo'}, :html => {:method => :get}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Pais<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select(:idPais, ['Todos'] + Paise.find(:all, :order => "pais").collect() { |x| [x.pais, x.idPais]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorGenerico, ['Todos'] + DescriptorGenerico.find(:all).collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}) %>
+        <%= submit_to_remote 'actualizar', "Cambiar", :url => {:action => 'cambio'}%>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        
+          <div id="especifico">
+        <%= f.select(:idDescriptorEspecifico, ["Seleccione el descriptor ..."]) %></div>
+        
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field(:hecho) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+        <%= f.text_field(:contexto) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+        <%= f.text_field(:gobierno) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+        <%= f.text_field(:fuentes) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web</th>
+      <td>
+        <%= f.text_field :paginaWeb, :cols => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p><%= f.submit "Buscar en Series Comparativas" %></p>
+<% end %>

@@ -1,0 +1,38 @@
+<p>
+  <b>Fecha:</b>
+  <%=h @calendario.fecha %>
+</p>
+
+<p>
+  <b>Tipo:</b>
+  <%=h @calendario.tipo %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%=h @calendario.titulo %>
+</p>
+
+<p>
+  <b>Resumen:</b>
+  <%=h @calendario.resumen %>
+</p>
+
+<p>
+  <b>Lugar:</b>
+  <%=h @calendario.lugar %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%=h @calendario.paginaWeb %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @calendario.email %>
+</p>
+
+
+<%= link_to 'Editar', edit_calendario_path(@calendario) %> |
+<%= link_to 'Ir al listado', calendarios_path %>

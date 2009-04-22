@@ -1,0 +1,20 @@
+<h1>Listado de tipo_medios</h1>
+
+<table>
+  <tr>
+    <th>Tipomedio</th>
+  </tr>
+
+<% for tipo_medio in @tipo_medios %>
+  <tr>
+    <td><%=h tipo_medio.tipoMedio %></td>
+    <td><%= link_to 'Mostrar', tipo_medio %></td>
+    <td><%= link_to 'Editar', edit_tipo_medio_path(tipo_medio) %></td>
+    <td><%= link_to 'Borrar', tipo_medio, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo tipo_medio', new_tipo_medio_path %>

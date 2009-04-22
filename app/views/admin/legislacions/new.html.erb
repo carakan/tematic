@@ -1,0 +1,38 @@
+<h1>Nuevo legislacion</h1>
+
+<%= error_messages_for :legislacion %>
+
+<% form_for(@legislacion, :url => admin_legislacions_path, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descripcion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :descripcion, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contenido<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :legislacion, :contenido, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo %>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_legislacions_path %>

@@ -1,0 +1,31 @@
+<% titulo 'Directorio de asambleistas'%>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "asambleistas"}, :method => :get) do %>
+        <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+      <% end %>
+  </div>
+  <% for asambleista in @asambleistas %>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <td><strong><%= asambleista.nombre%></strong></td>
+      </tr>
+      <tr>
+        <td><%= asambleista.sigla %> - <%= asambleista.nom_departamento %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{asambleista.id}', '/directorio/mostrar/#{asambleista.id}?ver=asambleista')") %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <div style="clear:both;"></div>
+  <%= will_paginate @asambleistas %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de asambleistas</strong>", width:280, height:150, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

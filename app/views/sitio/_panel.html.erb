@@ -1,0 +1,16 @@
+<table align="center" cellpadding="0" cellspacing="0" class="Panel">
+  <%- if !titulo.nil? -%>
+    <tr>
+      <td class="Panel_estilo1_left">&nbsp;</td>
+      <td class="Panel_estilo1_center">
+        <span class="Panel_estilo1_tituloDePanel"><%= titulo %></span>
+      </td>
+      <td class="Panel_estilo1_right">&nbsp;.</td>
+    </tr>
+  <%- end -%>
+  <tr>
+    <td class="Panel_estilo1_sombra" colspan="3">
+      <%= yield %>
+    </td>
+  </tr>
+</table>

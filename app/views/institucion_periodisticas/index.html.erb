@@ -1,0 +1,35 @@
+<h1>Listado de institucion_periodisticas</h1>
+
+<table>
+  <tr>
+    <th>Institucion</th>
+    <th>Sigla</th>
+    <th>Direccion</th>
+    <th>Telefono</th>
+    <th>Fax</th>
+    <th>Casilla</th>
+    <th>Email</th>
+    <th>Paginaweb</th>
+  </tr>
+
+<% for institucion_periodistica in @institucion_periodisticas %>
+  <tr>
+    <td><%=h institucion_periodistica.institucion %></td>
+    <td><%=h institucion_periodistica.sigla %></td>
+    <td><%=h institucion_periodistica.direccion %></td>
+    <td><%=h institucion_periodistica.telefono %></td>
+    <td><%=h institucion_periodistica.fax %></td>
+    <td><%=h institucion_periodistica.casilla %></td>
+    <td><%=h institucion_periodistica.email %></td>
+    <td><%=h institucion_periodistica.paginaWeb %></td>
+    <td><%= link_to 'Mostrar', institucion_periodistica %></td>
+    <td><%= link_to 'Editar', edit_institucion_periodistica_path(institucion_periodistica) %></td>
+    <td><%= link_to 'Borrar', institucion_periodistica, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    <td><%= link_to 'Periodistas', institucion_periodistica %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo institucion_periodistica', new_institucion_periodistica_path %>

@@ -1,0 +1,7 @@
+<% titulo 'Enlaces de interes.'%>
+<h2>Paginas Web</h2>
+<ul>
+  <% for enlace in EnlaceUrl.find(:all) %>
+    <li><%= link_to(((enlace.imagen.nil?)?enlace.nombre : image_tag('/archivos/enlaces/'+enlace.imagen.filename)), enlace.url, :class => "link3", :title => enlace.descripcion, :target => "_blank" ) %></li>
+  <% end %>
+</ul>

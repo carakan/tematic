@@ -1,0 +1,40 @@
+<div class="login">
+<table>
+  <tr>
+    <th>. Nombre</th>
+    <td>
+      <%= @asambleista.nombre %>
+    </td>
+  </tr>
+  <tr>
+    <th>Departamento</th>
+    <td>
+      <%= @asambleista.departamento.departamento %>
+    </td>
+  </tr>
+  <tr>
+    <th>Partido Politico</th>
+    <td>
+      <%= @asambleista.partido_politico.sigla + ' - ' + @asambleista.partido_politico.partidoPolitico %>
+    </td>
+  </tr>
+  <tr>
+    <th>Telefono</th>
+    <td>
+      <%= @asambleista.telefono %>
+    </td>
+  </tr>
+  <tr>
+    <th>Celular</th>
+    <td>
+      <%= @asambleista.celular %>
+    </td>
+  </tr>
+  <tr>
+    <th>Correo Electronico</th>
+    <td>
+      <%= @asambleista.email %>
+    </td>
+  </tr>
+</table>
+</div>

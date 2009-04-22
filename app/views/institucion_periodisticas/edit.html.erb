@@ -1,0 +1,52 @@
+<h1>Editar  institucion_periodistica</h1>
+
+<%= error_messages_for :institucion_periodistica %>
+
+<% form_for(@institucion_periodistica) do |f| %>
+  <p>
+    <b>Institucion</b><br />
+    <%= f.text_field :institucion %>
+  </p>
+
+  <p>
+    <b>Sigla</b><br />
+    <%= f.text_field :sigla %>
+  </p>
+
+  <p>
+    <b>Direccion</b><br />
+    <%= f.text_field :direccion %>
+  </p>
+
+  <p>
+    <b>Telefono</b><br />
+    <%= f.text_field :telefono %>
+  </p>
+
+  <p>
+    <b>Fax</b><br />
+    <%= f.text_field :fax %>
+  </p>
+
+  <p>
+    <b>Casilla</b><br />
+    <%= f.text_field :casilla %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Paginaweb</b><br />
+    <%= f.text_field :paginaWeb %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @institucion_periodistica %> |
+<%= link_to 'Ir al listado', institucion_periodisticas_path %>

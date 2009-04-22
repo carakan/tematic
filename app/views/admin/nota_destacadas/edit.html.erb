@@ -1,0 +1,50 @@
+<h1>Editar la nota destacada</h1>
+
+<%= error_messages_for :nota_destacada %>
+
+<% form_for(@nota_destacada, :url => admin_nota_destacada_path,:html => {:multipart => true}) do |f| %>
+<table class="no_flash">
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Imagen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :imagen, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Resumen</th>
+      <td>
+        <%= fckeditor :nota_destacada, :resumen, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuente</th>
+      <td>
+        <%= f.text_field :fuente, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Enlace<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :enlace, :size => 80  %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_nota_destacada_path(@nota_destacada) %> |
+<%= link_to 'Ir al listado', admin_nota_destacadas_path %>

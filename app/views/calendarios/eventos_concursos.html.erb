@@ -1,0 +1,31 @@
+<% titulo 'Eventos y concursos' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "eventos_concursos"}, :method => :get) do %>
+    <strong>Buscar: <%= text_field_tag(:busqueda)%> <%= submit_tag '', :class => 'botonBuscar'%>
+    <% end %>
+  </div>
+  <table id="box2">
+    <% for calendario in @calendarios %>
+    <tr>
+      <td>
+      <table id="content" width="100%" style="margin:5px 0;">	
+        <tr>
+          <td valign="top">
+            <%= calendario.fecha.to_s(:date) %>
+          </td>
+          <td>
+            <h4><%= link_to(calendario.titulo, ('/calendarios/show/' + calendario.id.to_s), :onclick => "ventana('#{calendario.id}', '/calendarios/show/#{calendario.id}'); return false;", :class=>"link3") %></h4>
+            <p align="justify"><%= calendario.resumen %></p>
+          </td>
+      </tr></table>
+    <% end %>
+  </table>
+  <%= will_paginate @calendarios, :prev_label => '&laquo;', :next_label   => '&raquo;' %>
+  <script type="text/javascript"> 
+    function ventana(id_w, url_w){
+      var win = new Window({id: id_w, className: "alphacube", title: "<strong>Fechas y eventos en el calendario</strong>", width:370, height:250, maximizable: false, minimizable: false, wiredDrag: true}); 
+      win.setAjaxContent(url_w,{ method: 'get'});
+      win.setDestroyOnClose();
+      win.showCenter();
+    }
+    </script>

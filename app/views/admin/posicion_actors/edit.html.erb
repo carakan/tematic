@@ -1,0 +1,32 @@
+<h1>Editar  posicion_actor</h1>
+
+<%= error_messages_for :posicion_actor %>
+
+<% form_for(@posicion_actor) do |f| %>
+  <p>
+    <b>Fecha</b><br />
+    <%= f.date_select :fecha %>
+  </p>
+
+  <p>
+    <b>Titular</b><br />
+    <%= f.text_field :titular %>
+  </p>
+
+  <p>
+    <b>Posicion</b><br />
+    <%= fckeditor :posicion_actor, :posicion, {:width => '600px', :height => '500px'} %>
+  </p>
+
+  <p>
+    <b>Fuente</b><br />
+    <%= fckeditor :posicion_actor, :fuente, {:width => '600px', :height => '500px'} %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @posicion_actor %> |
+<%= link_to 'Ir al listado', posicion_actors_path %>

@@ -1,0 +1,61 @@
+<h1>Nuevo especialista</h1>
+
+<%= error_messages_for :especialista %>
+
+<% form_for(@especialista) do |f| %>
+  <p>
+    <b>Nombre</b><br />
+    <%= f.text_field :nombre %>
+  </p>
+
+  <p>
+    <b>Telefono</b><br />
+    <%= f.text_field :telefono %>
+  </p>
+
+  <p>
+    <b>Celular</b><br />
+    <%= f.text_field :celular %>
+  </p>
+
+  <p>
+    <b>Perfil</b><br />
+    <%= f.text_area :perfil %>
+  </p>
+
+  <p>
+    <b>Publicacion</b><br />
+    <%= f.text_area :publicacion %>
+  </p>
+
+  <p>
+    <b>Profesion</b><br />
+    <%= f.text_area :profesion %>
+  </p>
+
+  <p>
+    <b>Especialidad</b><br />
+    <%= f.text_area :especialidad %>
+  </p>
+
+  <p>
+    <b>Lugar</b><br />
+    <%= f.text_field :lugar %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Paginaweb</b><br />
+    <%= f.text_field :paginaWeb %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', especialistas_path %>

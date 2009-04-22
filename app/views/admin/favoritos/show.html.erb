@@ -1,0 +1,13 @@
+<p>
+  <b>Titulo:</b>
+  <%=h @favorito.titulo %>
+</p>
+
+<p>
+  <b>Enlace:</b>
+  <%=h @favorito.enlace %>
+</p>
+
+
+<%= link_to 'Editar', edit_favorito_path(@favorito) %> |
+<%= link_to 'Ir al listado', favoritos_path %>

@@ -1,0 +1,56 @@
+<h1>Nueva Serie Cronológica</h1>
+
+<%= error_messages_for :serie_cronologica %>
+
+<% form_for(@serie_cronologica, :url => admin_serie_cronologicas_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorGenerico, DescriptorGenerico.find(:all).collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}, {}, :onchange => "new Ajax.Request('/admin/serie_cronologicas/cambio', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this.form) }); return false;") %>
+        <%= submit_to_remote 'actualizar', "Cambiar", :url => {:action => 'cambio'}%>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td><div id="especifico">
+        <%= f.select(:idDescriptorEspecifico, ["Seleccione el descriptor ..."]) %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>A&ntilde;o:<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fechaYear %>
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho</th>
+      <td>
+        <%= fckeditor :serie_cronologica, :hecho, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+        <%= fckeditor :serie_cronologica, :contexto, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+        <%= fckeditor :serie_cronologica, :gobierno, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+        <%= fckeditor :serie_cronologica, :fuentes, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear Serie Cronológica" %>
+  </p>
+<% end %>
+
+<%= link_to 'Atrás', admin_serie_cronologicas_path %>

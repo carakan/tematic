@@ -1,0 +1,46 @@
+<h1>New calendario</h1>
+
+<%= error_messages_for :calendario %>
+
+<% form_for(@calendario) do |f| %>
+  <p>
+    <b>Fecha</b><br />
+    <%= f.date_select :fecha %>
+  </p>
+
+  <p>
+    <b>Tipo</b><br />
+    <%= f.text_field :tipo %>
+  </p>
+
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Resumen</b><br />
+    <%= f.text_area :resumen %>
+  </p>
+
+  <p>
+    <b>Lugar</b><br />
+    <%= f.text_field :lugar %>
+  </p>
+
+  <p>
+    <b>Paginaweb</b><br />
+    <%= f.text_field :paginaWeb %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', calendarios_path %>

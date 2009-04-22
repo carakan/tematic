@@ -1,0 +1,62 @@
+<h1>Nueva Serie comparativa</h1>
+<%= error_messages_for :serie_comparativa %>
+<% form_for(@serie_comparativa, :url => admin_serie_comparativas_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Pais<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select(:idPais, Paise.find(:all, :order => "pais").collect() { |x| [x.pais, x.idPais]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <% genericos = DescriptorGenerico.find(:all) %>
+        <%= f.select(:idDescriptorGenerico, genericos.collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}, {},:onchange => "new Ajax.Request('/admin/serie_comparativas/cambio', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this.form) }); return false;") %>
+        <%= submit_to_remote 'actualizar', "Cambiar", :url => {:action => 'cambio'}%>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <div id="especifico">
+          <%= f.select(:idDescriptorEspecifico, DescriptorEspecifico.find(:all, :conditions => ["idDescriptorGenerico = ?", genericos[0].idDescriptorGenerico]).collect() { |x| [x.descriptorEspecifico, x.idDescriptorEspecifico]}) %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :serie_comparativa, :hecho, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :contexto, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :gobierno, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :fuentes, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web</th>
+      <td>
+        <%= f.text_field :paginaWeb, :cols => 80, :rows => 5  %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "Crear Series Comparativas" %>
+<% end %>
+<p>
+  <%= link_to 'Ir al listado', admin_serie_comparativas_path %>
+</p>

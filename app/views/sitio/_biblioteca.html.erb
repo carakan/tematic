@@ -1,0 +1,10 @@
+<table border="0">
+  <%- for documento in DocumentoIntere.find(:all, :order => "idDocumentosInteres DESC", :include => :documento, :limit => 5 ) -%>
+    <% if !documento.documento.nil? -%>  
+      <tr><td>
+        <img src="/images/icono-libros.gif" align="middle"/>&nbsp;
+        <%= link_to(documento.titulo, '/archivos/documentos/' + documento.documento.archivo.filename, :class => "enlaceTitulo_ficha", :target => "_blank") %>
+      </td></tr>
+    <% end -%>
+  <% end -%>
+</table>

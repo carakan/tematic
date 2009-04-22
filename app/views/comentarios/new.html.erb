@@ -1,0 +1,26 @@
+<h1>Nuevo comentario</h1>
+
+<%= error_messages_for :comentario %>
+
+<% form_for(@comentario) do |f| %>
+  <p>
+    <b>Nombre</b><br />
+    <%= f.text_field :nombre %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Mensaje</b><br />
+    <%= f.text_area :mensaje %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', comentarios_path %>

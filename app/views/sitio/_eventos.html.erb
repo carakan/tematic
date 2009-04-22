@@ -1,0 +1,10 @@
+<table border="0">
+<% for dia in Calendario.find(:all, :conditions => "tipo <> 'F'", :order => "fecha DESC", :limit => 2)%>
+  <tr>
+    <td>
+      <%= link_to dia.titulo, {:controller => "calendarios", :action => "show", :id => dia}, :class=>"enlaceTitulo_ficha" %>
+      <p class="texto_ficha"><%= truncate(dia.resumen, 250) %></p>
+    </td>
+  </tr>
+<% end %>
+</table>

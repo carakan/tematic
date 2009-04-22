@@ -1,0 +1,49 @@
+<h1>Nuevo asambleista</h1>
+
+<%= error_messages_for :asambleista %>
+
+<% form_for(@asambleista, :url => admin_asambleistas_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Departamento<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDepartamento, DepartamentoBolivia.find(:all).collect { |x| [x.departamento, x.idDepartamento] }  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Partido politico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idPartidoPolitico, PartidoPolitico.find(:all).collect { |x| [x.sigla, x.idPartidoPolitico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :telefono %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :celular %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_asambleistas_path %>

@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>
+      banco tematico
+    </title>
+    <%= stylesheet_link_tag 'print', :media => 'all' %>
+  </head>
+  <body id="body" onLoad="window.print()">
+    <div class="logo"><%= image_tag('logoprint.jpg', :size => '125x50')%></div>
+    <div id="content">
+      <%= yield  %>
+    </div>
+  </body>
+</html>

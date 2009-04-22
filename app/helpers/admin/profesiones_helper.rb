@@ -1,0 +1,2 @@
+module Admin::ProfesionesHelper
+end

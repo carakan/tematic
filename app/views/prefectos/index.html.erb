@@ -1,0 +1,32 @@
+<h1>Listado de prefectos</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Celular</th>
+    <th>Fax</th>
+    <th>Direccion</th>
+    <th>Email</th>
+    <th>Paginaweb</th>
+  </tr>
+
+<% for prefecto in @prefectos %>
+  <tr>
+    <td><%=h prefecto.nombre %></td>
+    <td><%=h prefecto.telefono %></td>
+    <td><%=h prefecto.celular %></td>
+    <td><%=h prefecto.fax %></td>
+    <td><%=h prefecto.direccion %></td>
+    <td><%=h prefecto.email %></td>
+    <td><%=h prefecto.paginaWeb %></td>
+    <td><%= link_to 'Mostrar', prefecto %></td>
+    <td><%= link_to 'Editar', edit_prefecto_path(prefecto) %></td>
+    <td><%= link_to 'Borrar', prefecto, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo prefecto', new_prefecto_path %>

@@ -1,0 +1,24 @@
+<% titulo 'Foros del Banco Temático' %>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Iniciado por</th>
+    <th>Visto</th>
+    <th>Comentarios</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for foro in @foros %>
+    <tr class="<%= cycle('odd','par') %>">
+      <% contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= link_to(foro.titulo, foro, :class => "enlaceTitulo_ficha", :title => "#{foro.autor}: #{foro.titulo}") %></td>
+      <td><%=h foro.autor %></td>
+      <td><%=h foro.contador %></td>
+      <td><%=h foro.comentarios.length %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @foros %>
+<br />

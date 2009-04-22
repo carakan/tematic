@@ -1,0 +1,34 @@
+<h1>Listado de institucions</h1>
+
+<table>
+  <tr>
+    <th>Institucion</th>
+    <th>Sigla</th>
+    <th>Direccion</th>
+    <th>Telefono</th>
+    <th>Fax</th>
+    <th>Casilla</th>
+    <th>Email</th>
+    <th>Paginaweb</th>
+  </tr>
+
+<% for institucion in @institucions %>
+  <tr>
+    <td><%=h institucion.institucion %></td>
+    <td><%=h institucion.sigla %></td>
+    <td><%=h institucion.direccion %></td>
+    <td><%=h institucion.telefono %></td>
+    <td><%=h institucion.fax %></td>
+    <td><%=h institucion.casilla %></td>
+    <td><%=h institucion.email %></td>
+    <td><%=h institucion.paginaWeb %></td>
+    <td><%= link_to 'Mostrar', institucion %></td>
+    <td><%= link_to 'Editar', edit_institucion_path(institucion) %></td>
+    <td><%= link_to 'Borrar', institucion, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo institucion', new_institucion_path %>

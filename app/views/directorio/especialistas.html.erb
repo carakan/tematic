@@ -1,0 +1,31 @@
+<% titulo 'Directorio de especialistas'%>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "especialistas"}, :method => :get) do %>
+      <%= select_tag(:especialidad, options_for_select(DescriptorGenerico.seleccion)) %> <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>  <%= link_to('Todos los especialistas', '/directorio/especialistas/' + params[:id], :class => 'link3') %>
+    <% end %>
+  </div>
+  <% for especialista in @especialistas %>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <td><strong><%= especialista.nombre%></strong></td>
+      </tr>
+      <tr>
+        <td><%= especialista.descriptor_generico.descriptorGenerico %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{especialista.id}', '/directorio/mostrar/#{especialista.id}?ver=especialista')") %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <div style="clear:both;"></div>
+  <%= will_paginate @especialistas %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de especialistas</strong>", width:400, height:400, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

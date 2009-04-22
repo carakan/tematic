@@ -1,0 +1,16 @@
+<p>
+  <b>Descripcion:</b>
+  <%=h @legislacion.descripcion %>
+</p>
+
+<p>
+  <b>Contenido:</b>
+  <%=h @legislacion.contenido %>
+</p>
+
+<p>
+  <b>Archivo:</b>
+  <%=h @legislacion.archivo %>
+</p>
+<%= link_to 'Editar', edit_admin_legislacion_path(@legislacion) %> |
+<%= link_to 'Ir al listado', admin_legislacions_path %>

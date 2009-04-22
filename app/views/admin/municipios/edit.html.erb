@@ -1,0 +1,20 @@
+<h1>Editar  municipio</h1>
+
+<%= error_messages_for :municipio %>
+
+<% form_for(@municipio, :url => admin_municipio_path) do |f| %>
+  <p>
+    <b>Departamento</b><br />
+    <%= f.select :idDepartamento, DepartamentoBolivia.find(:all).collect { |x| [x.departamento, x.idDepartamento]} %>
+  </p>  
+  <p>
+    <b>Municipio</b><br />
+    <%= f.text_field :municipio %>
+  </p>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_municipio_path(@municipio) %> |
+<%= link_to 'Ir al listado', admin_municipios_path %>

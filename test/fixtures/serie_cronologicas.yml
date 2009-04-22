@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fechaYear: 1
+  hecho: MyText
+  contexto: MyText
+  gobierno: MyText
+  fuentes: MyText
+
+two:
+  fechaYear: 1
+  hecho: MyText
+  contexto: MyText
+  gobierno: MyText
+  fuentes: MyText

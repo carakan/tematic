@@ -1,0 +1,79 @@
+<h1>Nuevo documento</h1>
+
+<%= error_messages_for :documento %>
+
+<% form_for(@documento, :url => admin_documentos_url, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>T&iacute;tulo monografia<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :tituloMonografia, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Autor monografia<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :autorMonografia, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>T&iacute;tulo analitico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :tituloAnalitico, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Autor Analitico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :autorAnalitico, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Autor monografia<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :autorMonografia, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Valor Titular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :valorTitular, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Valor Autor<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :valorAutor, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Resumen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :documento, :resumen, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>   
+    <tr>
+      <th>Archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo %>
+      </td>
+    </tr>
+    <tr>
+      <th>Incluir en documentos de interes.<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= check_box_tag :interes %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_documentos_path %>

@@ -1,0 +1,44 @@
+<h3>Listado de calendario</h3>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+  Tipo de evento: <select id="calendario_tipo" name="tipo">
+          <option value="" selected>
+          Por favor Seleccione</option>
+          <option value="E">
+          Eventos</option>
+          <option value="F">
+          Fecha Historica</option>
+          <option value="P">
+          Premio Concurso</option>
+        </select> Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+  <input type="submit" value="Buscar"> 
+<% end %>
+<p>
+<%= link_to 'Nueva fecha en calendario', new_admin_calendario_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Fecha</th>
+    <th>Titulo</th>
+    <th>Hecho</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for calendario in @calendarios %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= calendario.fecha.to_s(:date) %></td>
+      <td><%=h calendario.titulo %></td>
+      <td><%= truncate(calendario.resumen, 150) %></td>
+<td><%= link_to('Mostrar', admin_calendario_path(calendario)) %></td>
+<td><%= link_to('Editar', edit_admin_calendario_path(calendario)) %></td>
+<td><%= link_to('Borrar', admin_calendario_path(calendario), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @calendarios, :prev_label => '&laquo;', :next_label   => '&raquo;' %>
+<p>
+<%= link_to 'Nueva fecha en calendario', new_admin_calendario_path %>
+</p>
+

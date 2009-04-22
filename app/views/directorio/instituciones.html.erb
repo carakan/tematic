@@ -1,0 +1,41 @@
+<% titulo 'Directorio de instituciones' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "instituciones"}, :method => :get) do %>
+    <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%> <%= link_to('Todas los instituciones', '/directorio/instituciones', :class => 'link3') %>
+  <% end %>
+</div>
+<%- if !@instituciones.empty? -%>
+<%- for institucion in @instituciones -%>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <td><strong><%= institucion.institucion %></strong></td>
+      </tr>
+      <tr>
+        <td><%= institucion.sigla %></td>
+      </tr>
+      <tr>
+        <td><%= institucion.tipo_institucion %></td>
+      </tr>
+      <tr>
+        <td><%= institucion.departamento %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{institucion.id}', '/directorio/mostrar/#{institucion.id}?ver=institucion')") %>
+        </td>
+      </tr>
+    </table>
+  <%- end -%>
+  <%- else -%>
+    <strong>No existen registros</strong>
+  <%- end -%>
+  <div style="clear:both;"></div>
+  <%= will_paginate @instituciones %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de instituciones</strong>", width:350, height:250, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

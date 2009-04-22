@@ -1,0 +1,26 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @alcalde.nombre %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @alcalde.telefono %>
+</p>
+
+<p>
+  <b>Celular:</b>
+  <%=h @alcalde.celular %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @alcalde.email %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%=h @alcalde.paginaWeb %>
+</p>
+<%= link_to 'Editar', edit_admin_alcalde_path(@alcalde) %> |
+<%= link_to 'Ir al listado', admin_alcaldes_path %>

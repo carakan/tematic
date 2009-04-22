@@ -1,0 +1,15 @@
+<h1>Nuevo Pais registrado</h1>
+
+<%= error_messages_for :paise %>
+
+<% form_for(@paise , :url => admin_paises_path ) do |f| %>
+  <p>
+    <b>Nombre</b><br />
+    <%= f.text_field :pais %>
+  </p>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_paises_path %>

@@ -1,0 +1,22 @@
+<h1>Listado de Instituciones registradas</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Institucion</th>
+    <th>Sigla</th>
+    <th>Direccion</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for institucion in @institucions %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h institucion.institucion %></td>
+      <td><%=h institucion.sigla %></td>
+      <td><%=h institucion.direccion %></td>
+      <td><%=h institucion.telefono %></td>
+      <td><%=h institucion.email %></td>
+    </tr>
+  <% end %>
+</table>

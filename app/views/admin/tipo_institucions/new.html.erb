@@ -1,0 +1,16 @@
+<h1>Nuevo tipo_institucion</h1>
+
+<%= error_messages_for :tipo_institucion %>
+
+<% form_for(@tipo_institucion, :url => admin_tipo_institucions_path) do |f| %>
+  <p>
+    <b>Tipo de institucion</b><br />
+    <%= f.text_field :tipoInstitucion %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_tipo_institucions_path %>

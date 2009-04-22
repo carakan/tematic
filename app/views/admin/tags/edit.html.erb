@@ -1,0 +1,26 @@
+<h1>Editando palabras claves</h1>
+
+<%= error_messages_for :tag %>
+
+<% form_for(@tag, :url => admin_tag_path, :method => :put) do |f|  %>
+  <p>
+    <b>Descripción: </b><br />
+    <%= f.text_field :descripcion %>
+  </p>
+
+  <p>
+    <%= f.submit "Guardar cambios" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_tag_path %> |
+<%= link_to 'Atrás', admin_tags_path %>
+
+<ul id="tags_list"></ul>
+<%= observe_field :tag_descripcion,
+                  :frequency => 1.5,
+                  :url => buscar_admin_tags_path,
+                  :update=> :tags_list,                  
+                  :with => :descripcion,
+                  :method => :get,
+                  :position => :top%>

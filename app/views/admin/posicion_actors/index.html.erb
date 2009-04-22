@@ -1,0 +1,28 @@
+<h1>Posicion de los actores</h1>
+<p>
+  <%= link_to 'Nuevo posicion_actor', new_admin_actor_posicion_actor_path(@actor) %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titular</th>
+    <th>Fecha</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for posicion_actor in @posicion_actors %>
+    <tr class="<%= cycle('odd','par') %>">
+      <% contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h posicion_actor.titular %></td>
+      <td><%=h posicion_actor.fecha.to_s(:date) %></td>
+      <td><%= link_to 'Mostrar', admin_actor_posicion_actor_path(@actor, posicion_actor) %></td>
+      <td><%= link_to 'Editar', edit_admin_actor_posicion_actor_path(@actor, posicion_actor) %></td>
+      <td><%= link_to 'Borrar', admin_actor_posicion_actor_path(@actor, posicion_actor), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<% will_paginate @posicion_actors %>
+<p>
+  <%= link_to 'Nuevo posicion_actor', new_admin_actor_posicion_actor_path(@actor) %>
+</p>

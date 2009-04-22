@@ -1,0 +1,26 @@
+<% titulo 'Biblioteca - Glosario de terminos' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "glosario"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+    <% end %>
+  </div>
+  <table id="box2">
+    <%- if @glosarios.empty? -%>
+      <strong>No existen registros.</strong>
+    <%- else -%>
+    <% for glosario in @glosarios %>
+      <tr><td>
+      <table id="content" width="100%" style="margin:5px;">
+        <tr>
+          <td><h4><%= link_to(glosario.concepto, :action => 'show_glosario', :id => glosario.idGlosario) %></h4><br>
+            <span class="smallSubtitulo"><%= glosario.descriptor %></span>
+          </td>
+        </tr><tr>
+          <td>
+            <%= glosario.definicion %>
+          </td>
+      </tr></table>
+    <%- end -%>
+<%- end -%>
+</table>
+<%= will_paginate @glosarios %>

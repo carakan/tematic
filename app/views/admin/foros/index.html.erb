@@ -1,0 +1,36 @@
+<h1>Listado de foros</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+  <%= buscar_admin_tag %> 
+<% end %>
+<p>
+  <%= link_to 'Nuevo foro', new_admin_foro_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Mensaje</th>
+    <th>Puntuacion</th>
+    <th>Comentarios</th>
+    <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+    <% contador = 0 %>
+  </tr>
+  <% for foro in @foros %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h foro.titulo %></td>
+      <td><%= truncate(foro.mensaje, 200) %></td>
+      <td><%=h foro.puntuacion %></td>
+      <td><%= link_to(foro.comentarios.length.to_s + ' comentarios', admin_foro_comentarios_path(foro)) %></td>
+      <td><%= link_to 'Mostrar', admin_foro_path(foro) %></td>
+      <td><%= link_to 'Editar', edit_admin_foro_path(foro) %></td>
+      <td><%= link_to 'Borrar', admin_foro_path(foro), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+<%= will_paginate @foros %>
+<p>
+  <%= link_to 'Nuevo foro', new_admin_foro_path %>
+</p>

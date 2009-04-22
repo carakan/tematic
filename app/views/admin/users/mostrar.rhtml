@@ -1,0 +1,22 @@
+<h1>Listado de usuarios inscritos</h1>
+<p>
+<% form_tag(admin_users_path, :method => :get) do %>
+Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+<input type="submit" value="Buscar"> 
+<%= image_tag('spinner.gif', :id => 'indicador_busqueda', :style => 'display: none', :size => '16x16') %> 
+<% end %>
+<%= observe_field 	:busqueda,
+                                          :frequency => 1,
+                                          :before => "Element.show('indicador_busqueda')",
+                                          :url => buscar_admin_users_path,
+                                          :with => "'busqueda=' + encodeURIComponent(value)",
+                                          :method => :get	%>
+</p>
+<p>
+<%= link_to _('Nuevo usuario'), new_admin_user_path %> | <%= link_to(image_tag('print.gif', :title => "Imprimir listado de usuarios"), formatted_admin_users_path(:print))%>
+</p>
+<div id ="inscritos_list">
+  <%= render :partial => 'list'%>
+</div>
+<br />
+<%= link_to _('Nuevo usuario'), new_admin_user_path %>

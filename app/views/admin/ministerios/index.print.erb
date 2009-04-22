@@ -1,0 +1,24 @@
+<h1>Listado de Ministerios registrados</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Ministerio</th>
+    <th>Responsable</th>
+    <th>Direccion</th>
+    <th>Telefono</th>
+    <th>Email</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for ministerio in @ministerios %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h ministerio.ministerio %></td>
+      <td><%=h ministerio.responsable %></td>
+      <td><%=h ministerio.direccion %></td>
+      <td><%=h ministerio.telefono %></td>
+      <td><%=h ministerio.email %></td>
+    </tr>
+  <% end %>
+</table>

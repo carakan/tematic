@@ -1,0 +1,21 @@
+<h1>Informe de ingresos de usuarios</h1>
+<%= link_to('Imprimir', :format => 'print') %>
+<p>
+  <%= image_tag @pie_chart.to_url(:chts => '000000,20') %>
+</p>
+<table>
+  <tr>
+    <th>Fecha: # de ingresos</th>
+    <th></th><th></th><th></th><th></th><th></th><th></th><th></th>
+  </tr>
+  <% for dato in @data %>
+    <tr class="<%= cycle('odd','par') %>">
+      <td>
+        <%= dato[0].to_s(:date) %> : <strong> <%= link_to(dato[1].to_s + ' Usuarios',{:action => :mensual, :fecha => dato[0]}, :title => "Listado de usuarios que ingresaron en esa fecha #{dato[0].to_s(:date)}") %></strong><br>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td>
+      <td><%= link_to('Profesiones', {:action => 'profesiones', :fecha => dato[0]}, :title => "Listado de ingresos por profesiones") %></td>
+      <td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+  <% end %>
+</table>

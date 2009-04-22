@@ -1,0 +1,46 @@
+<% titulo 'Biblioteca - Documentos' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "documentos"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+  <% end %>
+</div>
+<br>
+<table id="box2">
+  <%- if @documentos.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <%- for documento in @documentos -%>
+      <tr><td>
+      <table id="content" width="100%">	
+        <tr>
+          <td><h4><%= documento.tituloMonografia %></h4><br>
+            <span class="smallSubtitulo"><%= documento.descriptor %></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="color2"><%= documento.tituloAnalitico %></td>
+        </tr>
+        <tr>
+          <td class="color2"><%= documento.valorTitular %></td>
+        </tr>
+        <tr>
+          <td><strong>Resumen: </strong>
+            <%= documento.resumen %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Autor:</b><br>
+            <%= documento.autorMonografia %> <%= documento.autorAnalitico %> <%= documento.valorAutor %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to documento.archivo.filename, '/archivos/documentos/' + documento.archivo.filename, :class=>"link3", :target=> "_blank" %>
+          </td>
+        </tr>
+      </table>
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @documentos %>

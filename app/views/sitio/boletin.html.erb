@@ -1,0 +1,16 @@
+<%  titulo 'Archivo de nuestros boletines.' %>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Boletin</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for file in @files %>
+    <tr class="<%= cycle('odd','par') %>">
+      <% contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= link_to(file.gsub(/public/, ''), file.gsub(/public/, '') , :class => "enlaceTitulo_ficha") %></td>      
+    </tr>
+  <% end %>
+</table>

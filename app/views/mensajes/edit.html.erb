@@ -1,0 +1,27 @@
+<h1>Editing mensaje</h1>
+
+<%= error_messages_for :mensaje %>
+
+<% form_for(@mensaje) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Mensaje</b><br />
+    <%= f.text_area :mensaje %>
+  </p>
+
+  <p>
+    <b>Leido</b><br />
+    <%= f.check_box :leido %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @mensaje %> |
+<%= link_to 'Ir al listado', mensajes_path %>

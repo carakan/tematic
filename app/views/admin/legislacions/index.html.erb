@@ -1,0 +1,36 @@
+<h1>Listado de legislaciones</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+<%= buscar_generico_admin_tag %> 
+<% end %>
+<p>
+  <%= link_to 'Nueva legislacion', new_admin_legislacion_path %>
+</p>
+<table>
+<tr>    
+  <th>#</th>
+  <th>Descriptor Generico</th>
+  <th>Descripcion</th>
+  <th>Contenido</th>
+  <th>Archivo</th>
+</tr>
+<% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+<% contador = 0 %>
+<% for legislacion in @legislacions %>
+  <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+    <td><%=h legislacion.descriptor %></td>
+    <td><%=h legislacion.descripcion %></td>
+    <td><%= legislacion.contenido %></td>
+    <td><%=h legislacion.archivo %></td>
+    <td><%= link_to 'Mostrar', admin_legislacion_path(legislacion.idLegislacion) %></td>
+    <td><%= link_to 'Editar', edit_admin_legislacion_path(legislacion.idLegislacion) %></td>
+    <td><%= link_to 'Borrar', admin_legislacion_path(legislacion.idLegislacion), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @legislacions %>
+<br />
+<p>
+  <%= link_to 'Nuevo legislacion', new_admin_legislacion_path %>
+</p>

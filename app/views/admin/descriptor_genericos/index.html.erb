@@ -1,0 +1,20 @@
+<h1>Listado de descriptores genericos</h1>
+<p>
+  <%= link_to 'Nuevo descriptor_generico', new_admin_descriptor_generico_path %>
+</p>
+<table>
+  <tr>
+    <th>Descriptorgenerico</th>
+  </tr>
+  <% for descriptor_generico in @descriptor_genericos %>
+    <tr>
+      <td><%=h descriptor_generico.descriptorGenerico %></td>
+      <td><%= link_to 'Editar', edit_admin_descriptor_generico_path(descriptor_generico) %></td>
+      <td><%= link_to 'Destruir', admin_descriptor_generico_path(descriptor_generico), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @descriptor_genericos %>
+<p>
+  <%= link_to 'Nuevo descriptor_generico', new_admin_descriptor_generico_path %>
+</p>

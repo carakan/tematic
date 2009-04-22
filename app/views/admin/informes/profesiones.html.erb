@@ -1,0 +1,21 @@
+<h1>Informe de ingresos por profesiones en fecha <%= params[:fecha].to_date.to_s(:date)%></h1>
+<p><%= link_to('Informes', '/admin/informes/usuarios') %> | <%= link_to('Imprimir', :format => "print", :fecha => params[:fecha]) %></p>
+<p align="center">
+<%= image_tag(@pie_chart.to_url) %>
+</p>
+<table>
+  <tr>
+    <th>Profesion</th>
+    <th>Total usuarios que visitaron</th>
+    </tr>
+  <% for data in @data %>
+    <tr class="<%= cycle('odd','par') %>">
+      <td>
+        <%= data.profesionn %>
+      </td>
+      <td>
+        <%= data.contador %> usuarios 
+      </td>
+    </tr>
+  <% end %>
+</table>

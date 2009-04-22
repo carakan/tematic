@@ -1,0 +1,59 @@
+<h1>Editar Serie comparativa</h1>
+<%= error_messages_for :serie_comparativa %>
+<% form_for(@serie_comparativa, :url => admin_serie_comparativa_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Pais<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select(:idPais, Paise.find(:all, :order => "pais").collect() { |x| [x.pais, x.idPais]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorGenerico, DescriptorGenerico.find(:all).collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorEspecifico, DescriptorEspecifico.find(:all).collect() { |x| [x.descriptorEspecifico, x.idDescriptorEspecifico]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :serie_comparativa, :hecho, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :contexto, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :gobierno, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+        <%= fckeditor :serie_comparativa, :fuentes, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web</th>
+      <td>
+        <%= f.text_field :paginaWeb, :cols => 80, :rows => 5 %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit "Actualizar" %>
+<% end %>
+<p>
+<%= link_to 'Mostrar', admin_serie_comparativa_path(@serie_comparativa) %> |
+<%= link_to 'Ir al listado', admin_serie_comparativas_path %>
+</p>

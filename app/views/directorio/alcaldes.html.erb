@@ -1,0 +1,36 @@
+<% titulo 'Directorio de Alcaldes de los municipios de Bolivia'%>
+<% %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "alcaldes"}, :method => :get) do %>
+    <strong>Departamento: <%= select_tag(:departamento, options_for_select(DepartamentoBolivia.seleccion)) %></strong> <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%> <%= link_to('Todos los alcaldes', '/directorio/alcaldes/' + params[:id], :class => 'link3') %>
+  <% end %>
+</div>
+<% if !@alcaldes.empty? %>
+  <% for alcalde in @alcaldes %>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <td><strong><%= alcalde.nombre%><strong></td>
+      </tr>
+      <tr>
+        <td><%= alcalde.nom_departamento %> - <%= alcalde.nom_municipio%></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{alcalde.id}', '/directorio/mostrar/#{alcalde.id}?ver=alcalde')") %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else%>
+  <strong>No existen registros.</strong>
+<% end %>
+<div style="clear:both;"></div>
+<%= will_paginate @alcaldes %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de alcaldes</strong>", width:320, height:200, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

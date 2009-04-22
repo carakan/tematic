@@ -1,0 +1,36 @@
+<h1>Listado de ministerios</h1>
+
+<table>
+  <tr>
+    <th>Ministerio</th>
+    <th>Responsable</th>
+    <th>Direccion</th>
+    <th>Telefono</th>
+    <th>Celular</th>
+    <th>Fax</th>
+    <th>Casilla</th>
+    <th>Email</th>
+    <th>Paginaweb</th>
+  </tr>
+
+<% for ministerio in @ministerios %>
+  <tr>
+    <td><%=h ministerio.ministerio %></td>
+    <td><%=h ministerio.responsable %></td>
+    <td><%=h ministerio.direccion %></td>
+    <td><%=h ministerio.telefono %></td>
+    <td><%=h ministerio.celular %></td>
+    <td><%=h ministerio.fax %></td>
+    <td><%=h ministerio.casilla %></td>
+    <td><%=h ministerio.email %></td>
+    <td><%=h ministerio.paginaWeb %></td>
+    <td><%= link_to 'Mostrar', ministerio %></td>
+    <td><%= link_to 'Editar', edit_ministerio_path(ministerio) %></td>
+    <td><%= link_to 'Borrar', ministerio, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo ministerio', new_ministerio_path %>

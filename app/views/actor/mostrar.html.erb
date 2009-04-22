@@ -1,0 +1,14 @@
+<h1>Actores</h1>
+<div id="listado">
+  <%= render :partial => 'listado'%>
+</div>
+<div id="descripcion">
+</div>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Acontecimientos del Actor</strong>", width:320, height:250, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

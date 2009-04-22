@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ministerio: MyString
+  responsable: MyString
+  direccion: MyString
+  telefono: MyString
+  celular: MyString
+  fax: MyString
+  casilla: MyString
+  email: MyString
+  paginaWeb: MyString
+
+two:
+  ministerio: MyString
+  responsable: MyString
+  direccion: MyString
+  telefono: MyString
+  celular: MyString
+  fax: MyString
+  casilla: MyString
+  email: MyString
+  paginaWeb: MyString

@@ -1,0 +1,24 @@
+<h1>Listado de Instituciones Periodistacas registradas</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Institucion</th>
+    <th>Departamento</th>
+    <th>Sigla</th>
+    <th>Direccion</th>
+    <th>Email</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for institucion_periodistica in @institucion_periodisticas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h institucion_periodistica.institucion %></td>
+      <td><%=h institucion_periodistica.departamento_bolivia.departamento if !institucion_periodistica.departamento_bolivia.nil? %></td>
+        <td><%=h institucion_periodistica.sigla %></td>
+      <td><%=h institucion_periodistica.direccion %></td>
+      <td><%=h institucion_periodistica.email %></td>
+    </tr>
+  <% end %>
+</table>

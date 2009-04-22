@@ -1,0 +1,20 @@
+<h1>Nuevo partido_politico</h1>
+
+<%= error_messages_for :partido_politico %>
+
+<% form_for(@partido_politico, :url => admin_partido_politicos_path) do |f| %>
+  <p>
+    <b>Partido politico</b><br />
+    <%= f.text_field :partidoPolitico %>
+  </p>
+  <p>
+    <b>Sigla</b><br />
+    <%= f.text_field :sigla %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_partido_politicos_path %>

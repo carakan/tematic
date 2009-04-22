@@ -1,0 +1,1 @@
+<?php header("location: http://www.bancotematico.org/biblioteca/valor_noticia"); ?>

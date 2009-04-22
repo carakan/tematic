@@ -1,0 +1,11 @@
+<h2>Actor: <%= @actor.nombre %></h2>
+<%= image_tag('/archivos/imgMapaActores/' + actor.urlArchivo.filename) %>
+<h3>Acontecimientos:</h3>
+<% for hecho in @hechos %>
+  <p>
+  <%= hecho.fecha.to_s(:date) %> 
+  <%= link_to_function(hecho.titular, "ventana('#{hecho.id}', '/actor/acontecimiento/#{hecho.id}');", :class => 'link3') %>
+  </p>
+<% end %>
+<%= will_paginate @hechos %>
+

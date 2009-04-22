@@ -1,0 +1,29 @@
+<% titulo 'Biblioteca - Bibliografia' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "bibliografia"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+  <% end %>
+</div>
+<table id="box2">
+  <%- if @bibliografias.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <%- for bibliografia in @bibliografias -%>
+      <tr><td>
+      <table id="content" width="100%" style="margin:5px;">	
+        <tr>
+          <td>
+            <span class="color2"><h4><%= bibliografia.autor %></h4></span>
+          </td>
+        </tr><tr>
+          <td>
+          <%= bibliografia.descriptor %> - <strong><%= bibliografia.titulo %></strong> - <i><%= bibliografia.lugar %></i> - <%= bibliografia.editorial %> - <%= bibliografia.fechaYear %> - <%= bibliografia.pagina %></td>
+        </tr><tr>
+          <td>
+            <%= link_to bibliografia.enlaceWeb, bibliografia.enlaceWeb, :class => "link3", :target => "_blank" %>
+          </td>
+      </tr></table>  
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @bibliografias %>

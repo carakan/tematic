@@ -1,0 +1,29 @@
+<% titulo 'Biblioteca - Valor Noticia' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "valor_noticia"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+  <% end %>
+</div>
+<table id="box2">
+  <%- if @valores.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <%- for valor in @valores -%>
+      <tr><td>
+      <table id="content" width="100%">	
+        <tr>
+          <td>
+            <strong><%= link_to(valor.titulo, {:controller => 'biblioteca', :action => 'valor_noticia', :id => valor.idValorNoticia}) %></strong>
+            <span class="smallSubtitulo"><%= valor.descriptor %></span>
+            <p class="bold" align="left">Autor: <span style="font-weight:normal"><%= valor.autor %></span></p>
+            <p align="justify"><%= valor.descripcion %></p>
+          </td>
+        </tr><tr>
+          <td>
+            <%= link_to 'Archivo', '/archivos/valorNoticia/archivos/' + valor.archivo.filename, :class => "link3", :target => "_blank" %>
+          </td>
+      </tr></table>
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @valores %>

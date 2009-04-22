@@ -1,0 +1,30 @@
+<% titulo 'Listado de articulos escritos en primera mano' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "index"}, :method => :get) do %>
+    <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>  <%= link_to('Todas las primeras manos',{:action => 'index'}, :class =>'link3' ) %>
+  <% end %>
+</div>
+<table id="box2">
+  <%- if @primera_manos.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <tr>
+      <td><strong>Fecha</strong></td>
+    </tr>
+    <%- for primera_mano in @primera_manos -%>
+      <tr><td>
+      <table id="content" width="100%">	
+        <tr>
+          <td valign="top">
+            <%= primera_mano.fecha.to_s(:date) %>
+          </td>
+          <td>
+            <h4><%= link_to(primera_mano.titular, primera_mano, :class => "link3") %></h4>
+            <%= truncate(primera_mano.presentacion, 200, '[...]') %>
+          </td>
+        </tr>
+      </table>  
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @primera_mano, :prev_label => '&laquo;', :next_label   => '&raquo;' %>

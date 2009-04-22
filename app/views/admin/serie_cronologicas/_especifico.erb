@@ -1,0 +1,1 @@
+<%= select('serie_cronologica', :idDescriptorEspecifico, DescriptorEspecifico.find(:all, :conditions => ["idDescriptorGenerico = ?", params[:serie_cronologica][:idDescriptorGenerico]]).collect() { |x| [x.descriptorEspecifico, x.idDescriptorEspecifico]}) %>

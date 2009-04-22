@@ -1,0 +1,14 @@
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="501" bgcolor="#FFD091" style="width:100%;padding:5px;font-family:Verdana, Arial, Helvetica, sans-serif;color:#000099;"><h4 style="margin:0;">Eventos</h4></td>
+  </tr>
+  <% for dia in Calendario.find(:all, :conditions => "tipo <> 'F'", :order => "fecha DESC", :limit => 2)%>
+    <tr>
+      <td>
+        <div style="border-bottom:dotted 2px #E0E0E0; margin:8px 0;">
+        <%= link_to @coder.encode(dia.titulo, :named), SITE_URL + '/calendarios/show/' + dia.id.to_s %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>

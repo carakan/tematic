@@ -1,0 +1,52 @@
+<h1>Busqueda Avanzada en las series cronologicas</h1>
+<% form_for(@serie_cronologica, :url => {:action => 'btodo'}, :html => {:method => :get}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorGenerico, ['Todos'] + DescriptorGenerico.find(:all).collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}, {}, :onchange => "new Ajax.Request('/admin/serie_cronologicas/cambio', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this.form) }); return false;") %>
+        <%= submit_to_remote 'actualizar', "Cambiar", :url => {:action => 'cambio'}%>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td><div id="especifico">
+        <%= f.select(:idDescriptorEspecifico, ["Seleccione el descriptor ..."]) %></div>
+      </td>
+    </tr>
+    <tr>
+      <th>A&ntilde;o:<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fechaYear %>
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho</th>
+      <td>
+        <%= f.text_field :hecho %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+        <%= f.text_field :contexto %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+        <%= f.text_field :gobierno %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+        <%= f.text_field :fuentes %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Buscar en Series Cronológicas" %>
+  </p>
+<% end %>
+

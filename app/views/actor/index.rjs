@@ -1,0 +1,2 @@
+page.replace_html :listado, :partial => 'listado'
+page[:listado].visual_effect :Highlight, :startcolor => '#F7FFAF'

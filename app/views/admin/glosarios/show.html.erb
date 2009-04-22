@@ -1,0 +1,13 @@
+<p>
+  <b>Concepto:</b>
+  <%=h @glosario.concepto %>
+</p>
+
+<p>
+  <b>Definicion:</b>
+  <%=h @glosario.definicion %>
+</p>
+
+
+<%= link_to 'Editar', edit_glosario_path(@glosario) %> |
+<%= link_to 'Ir al listado', glosarios_path %>

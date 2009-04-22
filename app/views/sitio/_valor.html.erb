@@ -1,0 +1,11 @@
+<table border="0">
+  <% for valor in ValorNoticia.find(:all, :limit => 2, :order => 'idValorNoticia DESC') %>
+    <tr>
+      <td>
+        <img src="/archivos/valorNoticia/imagen/<%= valor.imagen.filename %>" border=0 align="left" width="60" height="70" style="padding-right:10px">
+        <%= link_to(valor.titulo ,{:controller => 'biblioteca', :action => 'valor_noticia', :id => valor}, :class => 'enlaceTitulo_ficha') %>
+        <p class="texto_ficha"><%= valor.descripcion %></p>
+      </td>
+    </tr>
+  <% end %>
+</table>

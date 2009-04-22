@@ -1,0 +1,22 @@
+<p>
+  <b>A&ntilde;o:</b>
+  <%=h @serie_cronologica.fechaYear %>
+</p>
+<p>
+  <b>Hecho:</b>
+  <%= @serie_cronologica.hecho %>
+</p>
+<p>
+  <b>Contexto:</b>
+  <%= @serie_cronologica.contexto %>
+</p>
+<p>
+  <b>Gobierno:</b>
+  <%= @serie_cronologica.gobierno %>
+</p>
+<p>
+  <b>Fuentes:</b>
+  <%= @serie_cronologica.fuentes %>
+</p>
+<%= link_to 'Editar', edit_admin_serie_cronologica_path(@serie_cronologica) %> |
+<%= link_to 'Atr&aacute;s', admin_serie_cronologicas_path %>

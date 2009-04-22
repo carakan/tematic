@@ -1,0 +1,56 @@
+<h1>Editing calendario</h1>
+
+<%= error_messages_for :calendario %>
+
+<% form_for(@calendario, :url => admin_calendario_path ) do |f| %>
+ <table class="no_flash">
+    <tr>
+      <th>Fecha<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.date_select :fecha %>
+      </td>
+    </tr>
+    <tr>
+      <th>Tipo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :tipo %>
+      </td>
+    </tr>
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo %>
+      </td>
+    </tr>
+    <tr>
+      <th>Resumen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :calendario, :resumen, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Lugar<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :lugar %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :paginaWeb %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_calendario_path(@calendario) %> |
+<%= link_to 'Ir al listado', admin_calendarios_path %>

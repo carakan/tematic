@@ -1,0 +1,16 @@
+<h1>Nuevo descriptor_generico</h1>
+
+<%= error_messages_for :descriptor_generico %>
+
+<% form_for(@descriptor_generico, :url => admin_descriptor_genericos_path) do |f| %>
+  <p>
+    <b>Descriptorgenerico</b><br />
+    <%= f.text_field :descriptorGenerico %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_descriptor_genericos_path %>

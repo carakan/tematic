@@ -1,0 +1,43 @@
+<p>
+  <b>Institucion:</b>
+  <%=h @institucion_periodistica.institucion %>
+</p>
+
+<p>
+  <b>Sigla:</b>
+  <%=h @institucion_periodistica.sigla %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%=h @institucion_periodistica.direccion %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @institucion_periodistica.telefono %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%=h @institucion_periodistica.fax %>
+</p>
+
+<p>
+  <b>Casilla:</b>
+  <%=h @institucion_periodistica.casilla %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @institucion_periodistica.email %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%=h @institucion_periodistica.paginaWeb %>
+</p>
+
+
+<%= link_to 'Editar', edit_institucion_periodistica_path(@institucion_periodistica) %> |
+<%= link_to 'Ir al listado', institucion_periodisticas_path %>

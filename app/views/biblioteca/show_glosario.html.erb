@@ -1,0 +1,7 @@
+<% glosario = Glosario.find(params[:id]) %>
+<% titulo 'Definición de: ' + glosario.concepto %>
+<p>
+  <%= link_to('Todas las definiciones', '/biblioteca/glosario', :class => 'link3') %>
+</p>
+<h4><%=  glosario.concepto %></h4>
+<p><%=  glosario.definicion %></p>

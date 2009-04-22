@@ -1,0 +1,38 @@
+<p>
+  <b>Autor:</b>
+  <%=h @ficha_tematica.autor %>
+</p>
+
+<p>
+  <b>Resumen:</b>
+  <%= @ficha_tematica.resumen %>
+</p>
+
+<p>
+  <b>Pagina:</b>
+  <%=h @ficha_tematica.pagina %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%=h @ficha_tematica.titulo %>
+</p>
+
+<p>
+  <b>Editorial:</b>
+  <%=h @ficha_tematica.editorial %>
+</p>
+
+<p>
+  <b>Lugar:</b>
+  <%=h @ficha_tematica.lugar %>
+</p>
+
+<p>
+  <b>Fechayear:</b>
+  <%=h @ficha_tematica.fechaYear %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_ficha_tematica_path(@ficha_tematica) %> |
+<%= link_to 'Ir al listado', admin_ficha_tematicas_path %>

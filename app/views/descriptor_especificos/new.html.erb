@@ -1,0 +1,16 @@
+<h1>New descriptor_especifico</h1>
+
+<%= error_messages_for :descriptor_especifico %>
+
+<% form_for(@descriptor_especifico) do |f| %>
+  <p>
+    <b>Descriptorespecifico</b><br />
+    <%= f.text_field :descriptorEspecifico %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', descriptor_especificos_path %>

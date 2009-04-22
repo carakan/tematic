@@ -1,0 +1,33 @@
+<h4>Series Comparativas</h4>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" class="ewContentColumn">
+      <div class="cuadro_busqueda">
+        <% form_tag({:action => params[:action]}, :method => :get) do %>
+          <%= text_field_tag(:b_com, params[:b_com])%> <%= submit_tag '', :class => 'botonBuscar'%>
+    <% end %>
+      </div>
+      <table id="box2" width="100%">
+        <% if @comparativas.empty? %>
+          <h5>No existen registros.</h5>
+        <% else%>
+              <% for comparacion in @comparativas  %>
+            <tr class="ewTableRow">
+              <td id="box5">
+                <span class="title2"><%= comparacion.pais %></span>&nbsp;
+                <span class="color2"><%= comparacion.generico %> &gt; <%= comparacion.especifico %></span>
+                <br>
+              </td>
+            </tr>
+            <tr>
+              <td align="justify" style="padding:5px;">
+                <%= link_to(truncate(comparacion.hecho, 150), {:action => 'show_comparativa', :id => comparacion }, :class=>"link9") %>
+              </td>
+            </tr>
+          <% end %>
+      <% end %>
+      </table>
+      <%= will_paginate @comparativas, :param_name => 'page_com', :prev_label   => '&laquo;', :next_label   => '&raquo;'  %>
+    </td>
+  </tr>
+</table>

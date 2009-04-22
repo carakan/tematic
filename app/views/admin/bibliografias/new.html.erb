@@ -1,0 +1,61 @@
+<h1>Nuevo registro de bibliografia</h1>
+
+<%= error_messages_for :bibliografia %>
+
+<% form_for(@bibliografia, :url => admin_bibliografias_path ) do |f| %>
+  <table class="no_flash">
+  <tr>
+    <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+    </td>
+  </tr>
+  <tr>
+    <th>Autor<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :autor, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :titulo, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Lugar<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :lugar %>
+    </td>
+  </tr>
+  <tr>
+    <th>Editorial<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :editorial %>
+    </td>
+  </tr>
+  <tr>
+    <th>Pagina<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :pagina %>
+    </td>
+  </tr>
+  <tr>
+    <th>A&ntilde;o<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :fechaYear %>
+    </td>
+  </tr>
+  <tr>
+    <th>Enlace a web<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :enlaceWeb %>
+    </td>
+  </tr>
+</table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_bibliografias_path %>

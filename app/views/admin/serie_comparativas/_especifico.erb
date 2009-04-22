@@ -1,0 +1,1 @@
+<%= select 'serie_comparativa', :idDescriptorEspecifico, DescriptorEspecifico.find(:all, :conditions => ["idDescriptorGenerico = ?", params[:serie_comparativa][:idDescriptorGenerico]]).collect { |x| [x.descriptorEspecifico, x.idDescriptorEspecifico]} %>

@@ -1,0 +1,18 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @comentario.nombre %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @comentario.email %>
+</p>
+
+<p>
+  <b>Mensaje:</b>
+  <%=h @comentario.mensaje %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_foro_comentario_path(params[:foro_id], @comentario) %> |
+<%= link_to 'Ir al listado', admin_foro_comentarios_path(params[:foro_id]) %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  nombre: MyString
+  fundacion: MyString
+  aniversario: MyString
+  altitud: MyString
+  poblacion: 1
+  superficie: MyString
+  capital: MyString
+  poblacion: MyString
+
+two:
+  nombre: MyString
+  fundacion: MyString
+  aniversario: MyString
+  altitud: MyString
+  poblacion: 1
+  superficie: MyString
+  capital: MyString
+  poblacion: MyString

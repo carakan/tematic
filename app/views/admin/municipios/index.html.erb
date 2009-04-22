@@ -1,0 +1,21 @@
+<h1>Listado de municipios de Bolivia</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Municipio</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for municipio in @municipios %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h municipio.municipio %></td>
+      <td><%= link_to 'Editar', edit_admin_municipio_path(municipio) %></td>
+      <td><%= link_to 'Borrar', admin_municipio_path(municipio), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @municipios %>
+
+<%= link_to 'Nuevo municipio', new_admin_municipio_path %>

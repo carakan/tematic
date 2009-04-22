@@ -1,0 +1,21 @@
+<h1>Listado de paises</h1>
+<p>
+  <%= link_to 'Nuevo Pais', new_admin_paise_path %>
+</p>
+<table>
+  <tr>
+    <th>Nombre</th>
+  </tr>
+  
+  <% for comentario in @paises %>
+    <tr class="<%= cycle('odd','par') %>">
+      <td><%=h comentario.pais %></td>
+      <td><%= link_to 'Editar', edit_admin_paise_path(comentario) %></td>
+      <td><%= link_to 'Borrar', admin_paise_path(comentario), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @paises %>
+<p>
+  <%= link_to 'Nuevo Pais', new_admin_paise_path %>
+</p>

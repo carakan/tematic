@@ -1,0 +1,21 @@
+<h1>New imagen</h1>
+
+<%= error_messages_for :imagen %>
+
+<% form_for(@imagen) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Imagen</b><br />
+    <%= f.text_field :imagen %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', imagens_path %>

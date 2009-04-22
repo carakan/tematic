@@ -1,0 +1,36 @@
+<h1>Listado de fichas tematicas</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+<%= buscar_generico_admin_tag %> 
+<% end %>
+<p>
+<%= link_to 'Nueva ficha tematica', new_admin_ficha_tematica_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Descriptor generico</th>
+    
+    <th>Autor</th>
+    <th>Titulo</th>
+    <th>Resumen</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for ficha_tematica in @ficha_tematicas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h ficha_tematica.descriptor %></td>
+      
+      <td><%=h ficha_tematica.autor %></td>
+      <td><%=h ficha_tematica.titulo %></td>
+      <td><%= truncate(ficha_tematica.resumen, 150) %></td>
+      <td><%= link_to 'Mostrar', admin_ficha_tematica_path(ficha_tematica.idFichasTematicas) %></td>
+      <td><%= link_to 'Editar', edit_admin_ficha_tematica_path(ficha_tematica.idFichasTematicas) %></td>
+      <td><%= link_to 'Borrar', admin_ficha_tematica_path(ficha_tematica.idFichasTematicas), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @documentos%>
+<br />
+<%= link_to 'Nuevo ficha_tematica', new_admin_ficha_tematica_path %>

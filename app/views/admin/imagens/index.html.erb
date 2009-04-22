@@ -1,0 +1,26 @@
+<h1>Listado de imagenes</h1>
+<p>
+  <%= link_to 'Nueva imagen', new_admin_imagen_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Imagen</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for imagen in @imagens %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h imagen.titulo %></td>
+      <td><%= image_tag('/archivos/imagenes/' + imagen.imagen.thumb.filename) %></td>
+      <td><%= link_to 'Editar', edit_admin_imagen_path(imagen) %></td>
+      <td><%= link_to 'Destruir', admin_imagen_path(imagen), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+  <%= link_to 'Nueva imagen', new_admin_imagen_path %>
+</p>

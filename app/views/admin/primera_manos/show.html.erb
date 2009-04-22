@@ -1,0 +1,16 @@
+<h3><%=h @primera_mano.titular %></h3>  
+<div class=""><%= image_tag(@primera_mano.imagen)%></div>
+<p>
+  <b>Presentacion:</b>
+  <%= @primera_mano.presentacion %>
+</p>
+<p>
+  <b>Fecha:</b>
+  <%=h @primera_mano.fecha %>
+</p>
+<p>
+  <b>Archivo1:</b>
+  <%=h @primera_mano.archivo1 %>
+</p>
+<%= link_to 'Editar', edit_primera_mano_path(@primera_mano) %> |
+<%= link_to 'Ir al listado', primera_manos_path %>

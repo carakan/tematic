@@ -1,0 +1,1140 @@
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Class: UploadColumn::UploadedFile</title><link rel="stylesheet" type="text/css" media="screen" href="../.././rdoc-style.css"/><script type="text/javascript">
+// Javascript for Allison RDoc template
+// Copyright 2006 Cloudburst LLC
+// Some sections originally from public domain material
+
+var href_base = '../.././rdoc-style.css'.replace(/(.*\/).*/, '$1'); // haha! inline js is good for something  
+
+function $(id) {
+    if (document.getElementById)
+      elem = document.getElementById(id);
+    else if ( document.all )
+      elem = eval("document.all." + id);
+    else
+      return false;
+    return elem;
+}
+
+  function toggle(id) {
+    elem = $(id);
+    elemStyle = elem.style;   
+    if (elemStyle.display == "block") {
+      elemStyle.display = "none"
+    } else {
+      elemStyle.display = "block"
+    }
+    return true;
+  }
+
+  function toggleText(id) {
+    elem = $(id)
+    if (m = elem.innerHTML.match(/(Hide)(.*)/)) {
+      elem.innerHTML = "Show" + m[2];
+    } else if (m = elem.innerHTML.match(/(Show)(.*)/)) {
+      elem.innerHTML = "Hide" + m[2];
+    }
+    return true;
+  }
+
+function span(s, klass) {
+  return '<span class="' + klass + '">' + s + '</span>';
+}
+  
+function highlightSymbols() {
+  pres = document.getElementsByTagName('pre');
+  for(var i = 0; i < pres.length; i++) {
+    pre = pres[i];
+    spans = pre.getElementsByTagName('span');
+    for(var k = 0; k < spans.length; k++) {
+      span = spans[k];
+      if (span.className.match(/ruby-identifier/)) {
+        if (span.innerHTML.match(/^:/)) {
+          span.className += " ruby-symbol";
+        }
+      }
+    }
+  }
+}
+
+ function hasClass(obj) {
+     var result = false;
+     if (obj.getAttributeNode("class") != null) {
+         result = obj.getAttributeNode("class").value;
+     }
+     return result;
+  }   
+
+ function stripe() {
+    var even = true;
+    var color = "#f4eefd";
+    var tables = document.getElementsByTagName('table');
+    if (tables.length == 0) { return; }
+    for (var h = 0; h < tables.length; h++) {
+        var trs = tables[h].getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+          var tds = trs[i].getElementsByTagName("td");
+            for (var j = 0; j < tds.length; j++) {       
+              if (hasClass(tds[j]) != "first") {                
+              var mytd = tds[j];
+              if (even) {
+                mytd.style.backgroundColor = color;
+              }         
+            }
+          }
+          even =  ! even;
+      }
+    }
+  }
+  
+function ajaxGet(url) {
+  url = (href_base + url).replace('/./', '/')
+  var req = false;
+
+  if (window.ActiveXObject) {
+    try {
+      // stupid hack because IE7 disables local Ajax with the native xmlhttprequest object
+      // for security purposes. Yet ActiveX still works. Thanks, Microsoft. I hate you. Die.
+      req = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    } catch (e) {
+      try {
+        /* IE 6 and maybe 5, don't know, don't care */
+        req = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        try {
+          req = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (e) {
+          req = false;
+        }
+      }
+    }
+  }
+    
+  /* real browsers */
+  if (!req && window.XMLHttpRequest) {
+    try {
+      req = new XMLHttpRequest();
+    } catch (e) {
+      req = false;
+    }
+  } 
+  
+  if (req) {
+    req.open('GET', url, false);
+    req.send(null);
+    return req.responseText;
+  } else {
+    return "Ajax error";  
+  }
+}
+
+
+function addEvent(elm, evType, fn, useCapture) {
+	if (elm.addEventListener) {
+	  elm.addEventListener(evType, fn, useCapture);  
+  	return true;
+	} else if (elm.attachEvent) {
+  	var r = elm.attachEvent('on' + evType, fn);  
+	  return r;  
+	} else {
+  	elm['on' + evType] = fn;
+	}
+}
+
+function insertIndices() {
+  pages = ["class", "file", "method"]
+  for (x in pages) { 
+    $(pages[x]).innerHTML += ajaxGet('fr_' + pages[x] + '_index.html').replace(/(href=")/g, '$1' + href_base);
+  }
+  /* mouseoverify method links */
+  links = $('method').getElementsByTagName('a');
+  for (var x = 0; x < links.length; x++) {
+    if (m = links[x].innerHTML.match(/(.*)\s\((.*)\)/)) {
+      links[x].innerHTML = m[1] + '<br>';
+      links[x].title = m[2];
+    }
+  }
+  /* this is stupid */
+  $('class').style.display = "block";
+  $('file').style.display = "block";
+  
+  /* has to be here because IE7 does not guarantee the onLoad callback order */
+  abbreviateIndicesInner(["class", "file"], 25, "a");
+  /* same, linkTitle() depends on the class link list */
+  linkTitle();
+}
+
+function abbreviateIndices() {
+  abbreviateIndicesInner(["defined_in", "child_of", "includes"], 20, 'a');
+  abbreviateIndicesInner(["defined_in", "requires", "child_of", "includes"], 20, 'span');
+}
+
+function abbreviateIndicesInner(indices, amount, tag) {
+  for (var x = 0; x < indices.length; x++) { 
+    var the_index = $(indices[x]);
+    if (the_index) {
+      links = the_index.getElementsByTagName(tag);
+      for (var y = 0; y < links.length; y++) {
+        var link = links[y];
+        if (link.getElementsByTagName('span').length == 0 && link.getElementsByTagName('a').length == 0) {
+          // avoid nesting
+          link.innerHTML = abbreviate(link.innerHTML, amount);
+        }
+      }
+    }
+  }
+}
+
+function linkTitle() {
+  /* grab the correct title element from the index */
+  var index_page = ajaxGet('index.html');
+  title_text = index_page.match(/<title>(.*)<\/title>/m)[1];
+  document.title = title_text + " - " + document.title;
+  var p = $('header').getElementsByTagName('p')[0]
+  if (p.innerHTML.match(/^\s*$/)) {
+    p.innerHTML = title_text;
+  } else {
+    p.innerHTML = title_text + ": " + p.innerHTML;
+  }
+  /* set the link properly */
+  title_link = index_page.match(/<a\s+href="(.*?)"/)[1];
+  var element = $('title');
+  var item_type = "";
+  var item_name = "";
+  if (m = element.innerHTML.match(/(Class:|Module:|File:)\s*(.*)/)) {
+    item_type = m[1];
+    item_name = m[2];
+  } else {
+    item_name = element.innerHTML;
+  }
+  element.innerHTML = '<a href="' + href_base + title_link + '">' + item_type + " " + abbreviate(item_name, 25) + '</a>';
+  /* breadcrumb navigation for the win */
+  items = item_name.split("::");
+  items_new = item_name.split("::");
+  var s = ""
+  file_links = $('class').getElementsByTagName('a');
+  for (var x = 0; x < items.length - 1; x++ ){
+    var item = items[x];
+    link = ("/classes/" + items.slice(0,x).join("/") + "/" + item + ".html").replace('//', '/');
+    regex = new RegExp(RegExp.escape(link) + '$');
+    for (var y = 0; y < file_links.length; y++) {
+      if (file_links[y].href.match(regex)) {
+         items_new[x] = '<a href="' + href_base + link + '">' + item + '</a>';
+         break;
+      }
+    }  
+  }
+  $('item_name').innerHTML = item_type + ' ' + items_new.join(" :: ");
+}
+
+function abbreviate(s, size) {
+  while (s.length > size) {
+    var old_s = s;
+    s = s.replace(/\s|\n/mg, '');
+    s = s.replace(/([A-Z])[a-z]+/m, '$1');
+    if (!s || old_s == s) {
+      return "..." + s.substring(s.length - size, s.length);
+    }
+  }
+  return s;
+}
+
+function disableSubmit(event) {
+  var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+  if (keyCode == 13) {
+    return false;
+  } else {
+    return true;
+  }
+}
+  
+function filterList(id, s, event) {
+  
+  /* some half-assed escaping */
+  s = s.replace(/[^\w\d\.\_\-\/\:\=\[\]\?\!]/g, '');
+  s = RegExp.escape(s);
+  
+  var show_all = false;
+  if (s.match(/^\s*$/)) {
+    show_all = true;
+  }
+  
+  links = $(id).getElementsByTagName('a')
+  regex = new RegExp(s, 'i');
+  
+  for (var x = 0; x < links.length; x++) {
+    var link = links[x];
+    if (show_all) {
+      link.style.display = 'inline';
+    } else {
+       if (link.innerHTML.match(regex)) {        
+         link.style.display = 'inline';
+       } else {
+         link.style.display = 'none';
+       }
+    }
+  }
+  return true;
+}
+
+RegExp.escape = function(text) {
+  if (!arguments.callee.sRE) {
+    var specials = [
+      '/', '.', '*', '+', '?', '|',
+      '(', ')', '[', ']', '{', '}', '\\'
+    ];
+    arguments.callee.sRE = new RegExp(
+      '(\\' + specials.join('|\\') + ')', 'g'
+    );
+  }
+  return text.replace(arguments.callee.sRE, '\\$1');
+}
+
+
+function hacks() {
+  // show the spacer if necessary, 
+  divs = document.getElementsByTagName('div');
+  for (x in divs) {
+    if (divs[x].className && divs[x].className.match(/top/)) {
+      document.getElementById('spacer').style.display = 'block';
+    }
+  }
+}
+
+addEvent(window, 'load', insertIndices, false);
+addEvent(window, 'load', abbreviateIndices, false);
+addEvent(window, 'load', stripe, false);
+addEvent(window, 'load', highlightSymbols, false);
+addEvent(window, 'load', hacks, false);
+</script></head><body><div id="container"><div class="curve" id="preheader_curve_0"></div><div class="curve" id="preheader_curve_1"></div><div class="curve" id="preheader_curve_2"></div><div class="curve" id="preheader_curve_3"></div><div class="curve" id="preheader_curve_4"></div><div class="curve" id="preheader_curve_5"></div><div class="curve" id="preheader_curve_6"></div><div class="curve" id="preheader_curve_7"></div><div class="curve" id="preheader_curve_8"></div><div class="curve" id="preheader_curve_9"></div><div id="header"><p>
+</p><span><h1 id="title">
+Class: UploadColumn::UploadedFile
+</h1></span></div><div class="clear"></div><div id="left">
+<div class="navigation dark top" id="child_of"><h3>Child of</h3><span>
+
+Object
+</span></div>
+
+<div class="navigation dark top" id="defined_in"><h3>Defined in</h3>
+
+<a href="../../files/lib/upload_column_rb.html">lib/upload_column.rb</a>
+
+</div>
+
+
+
+<div class="navigation top" id="methods"><h3>Methods</h3>
+
+<span class='bpink'>
+
+<a href='#M000039'>
+dir<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000036'>
+exists?<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000050'>
+filename<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000047'>
+filename_base<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000048'>
+filename_extension<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000049'>
+mime_type<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000034'>
+new<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000040'>
+path<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000037'>
+process<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000038'>
+process!<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000041'>
+relative_path<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000044'>
+relative_store_dir<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000046'>
+relative_tmp_dir<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000035'>
+size<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000043'>
+store_dir<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000045'>
+tmp_dir<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000042'>
+url<br/>
+</a>
+</span>
+
+</div>
+<div id="spacer"></div><div class="navigation dark index" id="class_wrapper"><div class="list_header"><h3>All classes</h3></div><div class="list_header_link"><a id="class_link" onclick="toggle('class'); toggleText('class_link'); return false;" href="#">Hide...</a></div><div class="clear"></div><div id="class"><form><label for="filter_class">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_class" type="text" onKeyUp="return filterList('class', this.value, event);"></input></form></div></div><div class="navigation dark index" id="file_wrapper"><div class="list_header"><h3>All files</h3></div><div class="list_header_link"><a id="file_link" onclick="toggle('file'); toggleText('file_link'); return false;" href="#">Hide...</a></div><div class="clear"></div><div id="file"><form><label for="filter_file">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_file" type="text" onKeyUp="return filterList('file', this.value, event);"></input></form></div></div><div class="navigation dark index" id="method_wrapper"><div class="list_header"><h3>All methods</h3></div><div class="list_header_link"><a id="method_link" onclick="toggle('method'); toggleText('method_link'); return false;" href="#">Show...</a></div><div class="clear"></div><div id="method"><form><label for="filter_method">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_method" type="text" onKeyUp="return filterList('method', this.value, event);"></input></form></div></div><div class="curve" id="left_curve_0"></div><div class="curve" id="left_curve_1"></div><div class="curve" id="left_curve_2"></div><div class="curve" id="left_curve_3"></div><div class="curve" id="left_curve_4"></div><div class="curve" id="left_curve_5"></div><div class="curve" id="left_curve_6"></div><div class="curve" id="left_curve_7"></div><div class="curve" id="left_curve_8"></div><div class="curve" id="left_curve_9"></div></div><div id="content">
+<h1 id="item_name">Class: UploadColumn::UploadedFile</h1>
+
+<h1>Description</h1><h1>Basics</h1>
+<p>
+When you call an upload_column field, an instance of this class will be
+returned.
+</p>
+<p>
+Suppose a <tt>User</tt> model has a <tt>picture</tt> upload_column, like
+so:
+</p>
+<pre>
+    class User &lt; ActiveRecord::Base
+      upload_column :picture
+    end
+</pre>
+<p>
+Now in our controller we did:
+</p>
+<pre>
+    @user = User.find(params[:id])
+</pre>
+<p>
+We could then access the file:
+</p>
+<pre>
+    @user.picture.url
+</pre>
+<p>
+Which would output the <a href="UploadedFile.html#M000042">url</a> to the
+file (assuming it is stored in /public/)
+</p>
+<h1>Versions</h1>
+<p>
+If we had instead added different versions in our model
+</p>
+<pre>
+    upload_column :picture, :versions =&gt; [:thumb, :large]
+</pre>
+<p>
+Then we could access them like so:
+</p>
+<pre>
+    @user.picture.thumb.url
+</pre>
+
+
+
+
+
+<p></p>
+
+
+
+
+<h1>Attributes</h1><p><table><tr><th class="first"> </th><th>Name</th><th>Read/write?</th><th class="description" colspan="2">Description</th></tr>
+<tr><td class="first"> </td>
+<td class="highlight">attribute</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">ext</td>
+
+
+
+
+<td class="normal">RW</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">instance</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">mime_type</td>
+
+
+
+
+<td class="normal">RW</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">options</td>
+
+
+
+
+<td class="normal">RW</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">options</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">original_basename</td>
+
+
+
+
+<td class="normal">RW</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">relative_dir</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">suffix</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+<tr><td class="first"> </td>
+<td class="highlight">versions</td>
+
+
+
+
+<td class="normal">R</td>
+<td>
+</td><td>
+
+</td></tr>
+</table></p>
+
+
+<div class="section_spacer"></div><h1>Public Class methods</h1>
+
+
+<a class="small" name="M000034"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000034'>
+
+
+new
+
+(options, instance, attribute, dir = nil, filename = nil, suffix = nil)
+
+</a>
+</h3>
+
+<p class="source_link" id="M000034-show-link"><a id="M000034-link" onclick="toggle('M000034-source'); toggleText('M000034-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000034-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 108</span>
+108:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">instance</span>, <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">dir</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">filename</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">suffix</span> = <span class="ruby-keyword kw">nil</span>)
+109:       <span class="ruby-identifier">options</span> = <span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+110:   
+111:       <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+112:       <span class="ruby-ivar">@instance</span> = <span class="ruby-identifier">instance</span>
+113:       <span class="ruby-ivar">@attribute</span> = <span class="ruby-identifier">attribute</span>
+114:       <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">instance</span>[<span class="ruby-identifier">attribute</span>]
+115:       <span class="ruby-ivar">@suffix</span> = <span class="ruby-identifier">suffix</span>
+116:       
+117:       <span class="ruby-ivar">@relative_dir</span> = <span class="ruby-identifier">dir</span>
+118:       <span class="ruby-ivar">@relative_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_store_dir</span> 
+119:       
+120:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:web_root</span>].<span class="ruby-identifier">blank?</span>
+121:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:web_root</span>] = <span class="ruby-value str">'/'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:web_root</span>] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:web_root</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">%r{^/}</span>
+122:       <span class="ruby-keyword kw">end</span>
+123:       
+124:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>].<span class="ruby-identifier">blank?</span>
+125:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>][<span class="ruby-value">0</span>] = <span class="ruby-value str">''</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">%r{^/}</span>
+126:       <span class="ruby-keyword kw">end</span>
+127:   
+128:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:versions</span>]
+129:         <span class="ruby-ivar">@versions</span> = {}
+130:         <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">version</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:versions</span>]
+131:           <span class="ruby-identifier">version</span> = <span class="ruby-identifier">version</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">version</span>.<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Array</span> )
+132:           <span class="ruby-ivar">@versions</span>[<span class="ruby-identifier">version</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">instance</span>, <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-identifier">version</span>.<span class="ruby-identifier">to_s</span> )
+133:         <span class="ruby-keyword kw">end</span>
+134:       <span class="ruby-keyword kw">end</span>
+135:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+
+<div class="section_spacer"></div><h1>Public Instance methods</h1>
+
+
+<a class="small" name="M000039"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000039'>
+
+
+dir
+
+()
+
+</a>
+</h3>
+<p>
+Returns the (absolute) directory where the file is currently stored.
+</p>
+
+<p class="source_link" id="M000039-show-link"><a id="M000039-link" onclick="toggle('M000039-source'); toggleText('M000039-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000039-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 212</span>
+212:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dir</span>
+213:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_dir</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root_path</span>])
+214:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000036"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000036'>
+
+
+exists?
+
+()
+
+</a>
+</h3>
+<p>
+checks whether the file exists
+</p>
+
+<p class="source_link" id="M000036-show-link"><a id="M000036-link" onclick="toggle('M000036-source'); toggleText('M000036-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000036-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 147</span>
+147:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exists?</span>
+148:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">path</span>)
+149:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000050"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000050'>
+
+
+filename
+
+()
+
+</a>
+</h3>
+<p>
+returns the file&#8216;s name
+</p>
+
+<p class="source_link" id="M000050-show-link"><a id="M000050-link" onclick="toggle('M000050-source'); toggleText('M000050-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000050-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 293</span>
+293:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename</span>
+294:       <span class="ruby-identifier">expand_filename</span>(<span class="ruby-ivar">@filename</span>)
+295:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000047"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000047'>
+
+
+filename_base
+
+()
+
+</a>
+</h3>
+<p>
+Returns the <a href="UploadedFile.html#M000050">filename</a> without the
+extension
+</p>
+
+<p class="source_link" id="M000047-show-link"><a id="M000047-link" onclick="toggle('M000047-source'); toggleText('M000047-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000047-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 268</span>
+268:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename_base</span>
+269:       <span class="ruby-identifier">split_extension</span>(<span class="ruby-ivar">@filename</span>)[<span class="ruby-value">0</span>]
+270:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000048"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000048'>
+
+
+filename_extension
+
+()
+
+</a>
+</h3>
+<p>
+Returns the file&#8216;s extension
+</p>
+
+<p class="source_link" id="M000048-show-link"><a id="M000048-link" onclick="toggle('M000048-source'); toggleText('M000048-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000048-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 273</span>
+273:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename_extension</span>
+274:       <span class="ruby-identifier">split_extension</span>(<span class="ruby-ivar">@filename</span>)[<span class="ruby-value">1</span>]
+275:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000049"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000049'>
+
+
+mime_type
+
+()
+
+</a>
+</h3>
+<p>
+Returns the mime-type of the file.
+</p>
+
+<p class="source_link" id="M000049-show-link"><a id="M000049-link" onclick="toggle('M000049-source'); toggleText('M000049-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000049-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 278</span>
+278:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mime_type</span>
+279:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@mime_type</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@mime_type</span>
+280:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">filename_extension</span>
+281:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;jpg&quot;</span><span class="ruby-operator">:</span>
+282:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">&quot;image/jpeg&quot;</span>
+283:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;gif&quot;</span><span class="ruby-operator">:</span>
+284:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">&quot;image/gif&quot;</span>
+285:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;png&quot;</span><span class="ruby-operator">:</span>
+286:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">&quot;image/png&quot;</span>
+287:       <span class="ruby-keyword kw">else</span>
+288:         <span class="ruby-ivar">@mime_type</span> = <span class="ruby-constant">MIME_EXTENSIONS</span>.<span class="ruby-identifier">invert</span>[<span class="ruby-identifier">filename_extension</span>]
+289:       <span class="ruby-keyword kw">end</span>
+290:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000040"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000040'>
+
+
+path
+
+()
+
+</a>
+</h3>
+<p>
+Returns the (absolute) <a href="UploadedFile.html#M000040">path</a> of the
+file
+</p>
+
+<p class="source_link" id="M000040-show-link"><a id="M000040-link" onclick="toggle('M000040-source'); toggleText('M000040-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000040-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 217</span>
+217:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">path</span>
+218:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_path</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root_path</span>])
+219:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000037"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000037'>
+
+
+process
+
+() {|img| ...}
+
+</a>
+</h3>
+<p>
+Processes the file with RMagick. This works only if the file is an image
+that RMagick can understand. The image is loaded using +Image::read+ and
+then passed to a block, <tt><a
+href="UploadedFile.html#M000037">process</a></tt> then returns the result
+of the block, like so:
+</p>
+<pre>
+    new_image = @user.picture.process do |img|
+      img = img.thumbnail( 0.1 )
+      img.solarize
+    end
+</pre>
+<p>
+Resulting in an image shrunk to 10% of the original <a
+href="UploadedFile.html#M000035">size</a> and solarized. For more
+information on what you can do inside a <tt><a
+href="UploadedFile.html#M000037">process</a></tt> block, see the RMagick
+doumentation at: <a
+href="http://www.simplesystems.org/RMagick/doc/index.html">www.simplesystems.org/RMagick/doc/index.html</a>.
+</p>
+<p>
+Note that you will need to &#8216;carry&#8217; the image since most Rmagick
+methods do not modify the image itself but rather return the result of the
+transformation.
+</p>
+<p>
+Note also that unlike RMagicks&#8216;s read, this method will return nil if
+the image cannot be opened, it will not throw an Error, so you can happily
+apply this, even if you aren&#8216;t sure that the file is an image.
+</p>
+<p>
++<a href="UploadedFile.html#M000038">process!</a>+ is usually more useful,
+don&#8216;t use <tt><a href="UploadedFile.html#M000037">process</a></tt>
+unless there is a good reason to!
+</p>
+<p>
+Remember to call GC.start after you are done processing the image, to avoid
+memory leaks.
+</p>
+
+<p class="source_link" id="M000037-show-link"><a id="M000037-link" onclick="toggle('M000037-source'); toggleText('M000037-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000037-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 172</span>
+172:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process</span>
+173:       <span class="ruby-comment cmt"># Load the file as a ImageMagick object, pass to block, return the yielded result</span>
+174:       <span class="ruby-keyword kw">begin</span>
+175:         <span class="ruby-identifier">img</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span><span class="ruby-operator">::</span><span class="ruby-identifier">read</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">first</span>
+176:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">ImageMagickError</span>
+177:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+178:       <span class="ruby-keyword kw">end</span>
+179:       <span class="ruby-keyword kw">yield</span>( <span class="ruby-identifier">img</span> )
+180:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000038"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000038'>
+
+
+process!
+
+() {|img| ...}
+
+</a>
+</h3>
+<p>
+Like <tt><a href="UploadedFile.html#M000037">process</a></tt>, but instead
+of returning the <a href="UploadedFile.html#M000034">new</a> image, it will
+replace this one. Use +<a href="UploadedFile.html#M000038">process!</a>+ in
+an _after_assign callback, like so:
+</p>
+<pre>
+    class User &lt; ActiveRecord::Base
+      upload_column :picture
+
+      def picture_after_assign
+        picture.process! do |img|
+          img.solarize
+        end
+      end
+
+    end
+</pre>
+<p>
+This is an easy way to apply some RMagick effect to an image right after
+it&#8216;s uploaded
+</p>
+<p>
+Note that this method will silently fail if the image cannot be opened, so
+you can happily apply this, even if you aren&#8216;t sure that the file is
+an images.
+</p>
+<p>
+To prevent memory leaks, <a href="UploadedFile.html#M000038">process!</a>
+will call GC.start manually.
+</p>
+
+<p class="source_link" id="M000038-show-link"><a id="M000038-link" onclick="toggle('M000038-source'); toggleText('M000038-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000038-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 200</span>
+200:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process!</span>
+201:       <span class="ruby-identifier">img</span> = <span class="ruby-identifier">process</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">img</span><span class="ruby-operator">|</span>
+202:         <span class="ruby-identifier">img</span> = <span class="ruby-keyword kw">yield</span>( <span class="ruby-identifier">img</span> )
+203:       <span class="ruby-keyword kw">end</span>
+204:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">img</span>.<span class="ruby-identifier">nil?</span>
+205:       <span class="ruby-identifier">img</span>.<span class="ruby-identifier">write</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">path</span>
+206:       <span class="ruby-identifier">img</span> = <span class="ruby-keyword kw">nil</span>
+207:       <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>
+208:       <span class="ruby-keyword kw">true</span>
+209:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000041"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000041'>
+
+
+relative_path
+
+()
+
+</a>
+</h3>
+<p>
+Returns the <a href="UploadedFile.html#M000040">path</a> of the file
+relative to :root_path
+</p>
+
+<p class="source_link" id="M000041-show-link"><a id="M000041-link" onclick="toggle('M000041-source'); toggleText('M000041-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000041-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 222</span>
+222:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">relative_path</span>()
+223:       <span class="ruby-identifier">join_path</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_dir</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">filename</span>)
+224:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000044"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000044'>
+
+
+relative_store_dir
+
+()
+
+</a>
+</h3>
+<p>
+Like <tt><a href="UploadedFile.html#M000043">store_dir</a></tt> but will
+return the directory relative to the :root_path option
+</p>
+
+<p class="source_link" id="M000044-show-link"><a id="M000044-link" onclick="toggle('M000044-source'); toggleText('M000044-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000044-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 241</span>
+241:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">relative_store_dir</span>
+242:       <span class="ruby-identifier">sd</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{self.attribute}_store_dir&quot;</span>)
+243:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:store_dir</span>].<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Proc</span> )
+244:         <span class="ruby-identifier">sd</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:store_dir</span>].<span class="ruby-identifier">call</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attribute</span>)
+245:       <span class="ruby-keyword kw">else</span>
+246:         <span class="ruby-identifier">sd</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:store_dir</span>]
+247:       <span class="ruby-keyword kw">end</span>
+248:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sd</span>
+249:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000046"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000046'>
+
+
+relative_tmp_dir
+
+()
+
+</a>
+</h3>
+<p>
+Like <tt><a href="UploadedFile.html#M000045">tmp_dir</a></tt> but will
+return the directory relative to the :root_path option
+</p>
+
+<p class="source_link" id="M000046-show-link"><a id="M000046-link" onclick="toggle('M000046-source'); toggleText('M000046-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000046-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 257</span>
+257:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">relative_tmp_dir</span>
+258:       <span class="ruby-identifier">sd</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{self.attribute}_tmp_dir&quot;</span>)
+259:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>].<span class="ruby-identifier">is_a?</span>( <span class="ruby-constant">Proc</span> )
+260:         <span class="ruby-identifier">sd</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>].<span class="ruby-identifier">call</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attribute</span>)
+261:       <span class="ruby-keyword kw">else</span>
+262:         <span class="ruby-identifier">sd</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:tmp_dir</span>]
+263:       <span class="ruby-keyword kw">end</span>
+264:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sd</span>
+265:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000035"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000035'>
+
+
+size
+
+()
+
+</a>
+</h3>
+<p>
+Returns the file&#8216;s <a href="UploadedFile.html#M000035">size</a>
+</p>
+
+<p class="source_link" id="M000035-show-link"><a id="M000035-link" onclick="toggle('M000035-source'); toggleText('M000035-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000035-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 142</span>
+142:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">size</span>
+143:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">path</span>)
+144:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000043"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000043'>
+
+
+store_dir
+
+()
+
+</a>
+</h3>
+<p>
+Returns the directory where the file is (or will be) permanently stored
+</p>
+
+<p class="source_link" id="M000043-show-link"><a id="M000043-link" onclick="toggle('M000043-source'); toggleText('M000043-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000043-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 236</span>
+236:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">store_dir</span>
+237:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_store_dir</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root_path</span>])
+238:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000045"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000045'>
+
+
+tmp_dir
+
+()
+
+</a>
+</h3>
+<p>
+Returns the directory where the file will be temporarily stored between
+form redisplays
+</p>
+
+<p class="source_link" id="M000045-show-link"><a id="M000045-link" onclick="toggle('M000045-source'); toggleText('M000045-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000045-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 252</span>
+252:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tmp_dir</span>
+253:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_tmp_dir</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root_path</span>])
+254:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000042"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000042'>
+
+
+url
+
+()
+
+</a>
+</h3>
+<p>
+Returns the URL of the file, you can use this in your views to easily
+create links to your files:
+</p>
+<pre>
+    &lt;%= link_to &quot;#{@song.title} Tab&quot;, @song.guitar_tab.url %&gt;
+</pre>
+<p>
+Or if your file is an image, you can use <tt><a
+href="UploadedFile.html#M000042">url</a></tt> like so:
+</p>
+<pre>
+    &lt;%= image_tag @user.picture.url %&gt;
+</pre>
+
+<p class="source_link" id="M000042-show-link"><a id="M000042-link" onclick="toggle('M000042-source'); toggleText('M000042-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000042-source"><pre>     <span class="ruby-comment cmt"># File lib/upload_column.rb, line 231</span>
+231:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">url</span>
+232:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:web_root</span>] <span class="ruby-operator">+</span> ( <span class="ruby-value str">&quot;/&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">relative_path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-value str">&quot;\\&quot;</span>, <span class="ruby-value str">&quot;/&quot;</span>) )
+233:     <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+
+
+
+
+</div></div><div class="clear" id="footer"><a href="http://blog.evanweaver.com/articles/2006/06/02/allison">Allison</a></div></body></html>

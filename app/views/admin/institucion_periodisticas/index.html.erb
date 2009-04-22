@@ -1,0 +1,35 @@
+<h1>Listado de instituciones periodisticas</h1>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+  Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+  <input type="submit" value="Buscar"> 
+<% end %>
+<p>
+  <%= link_to 'Nueva institucion_periodistica', new_admin_institucion_periodistica_path %> | <%= link_to(image_tag('print.gif', :title => "Imprimir listado de Instituciones periodisticas"), formatted_admin_institucion_periodisticas_path(:print))%>
+</p>
+<table>
+<tr>
+  <th>#</th>
+  <th>Institucion</th>
+  <th>Sigla</th>
+  <th>Direccion</th>
+</tr>
+<% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+<% contador = 0 %>
+<% for institucion_periodistica in @institucion_periodisticas %>
+  <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+    <td><%=h institucion_periodistica.institucion %></td>
+    <td><%=h institucion_periodistica.sigla %></td>
+    <td><%=h institucion_periodistica.direccion %></td>
+    <td><%= link_to 'Periodistas', admin_institucion_periodistica_periodistas_path(institucion_periodistica) %></td>
+    <td><%= link_to 'Mostrar', admin_institucion_periodistica_path(institucion_periodistica) %></td>
+    <td><%= link_to 'Editar', edit_admin_institucion_periodistica_path(institucion_periodistica) %></td>
+    <td><%= link_to 'Borrar', admin_institucion_periodistica_path(institucion_periodistica), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @institucion_periodisticas %>
+<p>
+  <%= link_to 'Nuevo institucion_periodistica', new_admin_institucion_periodistica_path %>
+</p>

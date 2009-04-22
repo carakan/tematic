@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /cgi-bin/
+Disallow: /Connections/
+Disallow: /documento/
+Disallow: /primera_mano/
+Disallow: /valor_noticia/

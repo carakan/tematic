@@ -1,0 +1,26 @@
+<% titulo('Directorio de Prefectos de Bolivia')%>
+<% for prefectura in @prefectos %>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <th><strong><%= prefectura.nombre %></strong></td>
+      </tr>
+      <tr>
+        <td><%= prefectura.departamento_bolivia.departamento %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{prefectura.id}', '/directorio/mostrar/#{prefectura.id}/?ver=prefecto')") %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+  <div style="clear:both;"></div>
+  <%= will_paginate @prefectos %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de prefecturas<strong>", width:300, height:200, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

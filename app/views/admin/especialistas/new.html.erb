@@ -1,0 +1,79 @@
+<h1>Nuevo especialista</h1>
+
+<%= error_messages_for :especialista %>
+
+<% form_for(@especialista, :url => admin_especialistas_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :nombre, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :telefono, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :celular, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Perfil<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= fckeditor :especialista, :perfil, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Publicacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= fckeditor :especialista, :publicacion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Profesion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= fckeditor :especialista, :profesion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Especialidad<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= fckeditor :especialista, :especialidad, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Lugar<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :lugar, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :email, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :paginaWeb, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_especialistas_path %>

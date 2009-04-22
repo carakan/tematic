@@ -1,0 +1,30 @@
+<table>
+  <tr>
+    <th>#</th>
+    <th>A</th>
+    <th>Nombres</th>
+    <th>Apellidos</th>
+    <th>Correo electronico</th>
+    <th>Usuario</th>
+    <th>Profesion</th>
+    <th>Ingresos</th>
+  </tr
+  <%- numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) -%>
+  <%- contador = 0 -%>
+  <%- for usuario in @usuarios -%>
+    <tr class="<%= cycle('odd','par') %>">
+      <%- contador +=1 -%>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= !usuario.activated_at.nil? ? image_tag('ok.gif', :title=>'Esta activo') : image_tag('warning.gif', :title=>'No esta activo')%></td>
+      <td><%=h usuario.nombre %></td>
+      <td><%=h usuario.apellido %></td>
+      <td><%=h usuario.email %></td>
+      <td><%=h usuario.login %></td>
+      <td><%=h usuario.profesion.Profesion if !usuario.profesion.nil? %></td>
+      <td><%=h usuario.total %></td>
+      <td><%= link_to 'Editar', edit_admin_user_path(usuario) %></td>
+      <td><%= link_to 'Borrar', admin_user_path(usuario), :confirm => _('Esta seguro de borrar este elemento?'), :method => :delete %></td>
+    </tr>
+  <%- end -%>
+</table>
+<%= will_paginate @usuarios %>

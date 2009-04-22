@@ -1,0 +1,11 @@
+<% titulo 'Primera mano: ' + truncate(@primera_mano.titular, 70) %>
+<%= link_to 'Volver al listado', primera_manos_path, :class => "link3", :title => 'Listado de primeras manos' %>
+<h3><%= @primera_mano.titular %></h3>  
+<div style="float:left;margin:5px;"><%= image_tag('/archivos/primeraMano/imagen/' + @primera_mano.imagen.filename) if !@primera_mano.imagen.nil? %></div>
+<span class="smallSubtitulo"><%=h @primera_mano.fecha.to_s(:date) %></span>
+    <%= @primera_mano.presentacion %>
+  <p>
+    <b>Fuentes:</b>
+    <%= @primera_mano.fuentes %>
+  </p>
+<%= link_to(image_tag('pdf.gif') + ' Descargar ...', @primera_mano.archivo1.url, :class => 'link6', :target=>"_blank") if !@primera_mano.archivo1.nil? %><%= ' | ' + link_to(image_tag('pdf.gif') + ' Descargar ...', @primera_mano.archivo2.url, :class => 'link6', :target=>"_blank") if !@primera_mano.archivo2.nil? %>

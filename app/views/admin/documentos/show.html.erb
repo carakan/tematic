@@ -1,0 +1,43 @@
+<p>
+  <b>Titulomonografia:</b>
+  <%=h @documento.tituloMonografia %>
+</p>
+
+<p>
+  <b>Autormonografia:</b>
+  <%=h @documento.autorMonografia %>
+</p>
+
+<p>
+  <b>Tituloanalitico:</b>
+  <%=h @documento.tituloAnalitico %>
+</p>
+
+<p>
+  <b>Autoranalitico:</b>
+  <%=h @documento.autorAnalitico %>
+</p>
+
+<p>
+  <b>Valortitular:</b>
+  <%=h @documento.valorTitular %>
+</p>
+
+<p>
+  <b>Valorautor:</b>
+  <%=h @documento.valorAutor %>
+</p>
+
+<p>
+  <b>Resumen:</b>
+  <%= @documento.resumen %>
+</p>
+
+<p>
+  <b>Archivo:</b>
+  <%=h @documento.archivo %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_documento_path(@documento) %> |
+<%= link_to 'Ir al listado', admin_documentos_path %>

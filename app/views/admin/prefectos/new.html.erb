@@ -1,0 +1,61 @@
+<h1>Nuevo prefecto</h1>
+
+<%= error_messages_for :prefecto %>
+
+<% form_for(@prefecto, :url => admin_prefectos_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Cargo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Departamento<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDepartamento, DepartamentoBolivia.find(:all, :order => 'departamento').collect { |c| [c.departamento, c.idDepartamento] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :telefono, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :celular, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fax<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fax, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Direccion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :direccion %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :paginaWeb, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_prefectos_path %>

@@ -1,0 +1,21 @@
+<h1>Nuevo favorito</h1>
+
+<%= error_messages_for :favorito %>
+
+<% form_for(@favorito, :url => favoritos_path) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Enlace</b><br />
+    <%= f.text_field :enlace %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_favoritos_path %>

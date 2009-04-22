@@ -1,0 +1,24 @@
+<h1>Editar  multimedia</h1>
+
+<%= error_messages_for :multimedia %>
+
+<% form_for(@multimedia, :url => admin_multimedia_path, :html => {:multipart => true}) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+  <p>
+    <b>Archivo</b><br />
+    <%= f.upload_column_field :archivo %>
+  </p>
+  <p>
+    <b>Creado en fecha</b><br />
+    <%= f.datetime_select :created %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+<%= link_to 'Mostrar', admin_multimedia_path(@multimedia) %> |
+<%= link_to 'Ir al listado', admin_multimedias_path %>

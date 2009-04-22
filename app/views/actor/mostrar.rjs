@@ -1,0 +1,4 @@
+page[:descripcion].hide
+page.replace_html :descripcion, :partial => 'actor'
+page[:descripcion].visual_effect :BlindDown, :duration => 0.5
+page[:descripcion].visual_effect :Highlight, :startcolor => '#F7FFAF'

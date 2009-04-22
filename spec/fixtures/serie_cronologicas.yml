@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  hecho: MyText
+  contexto: MyText
+  gobierno: MyText
+  fuentes: MyText
+  paginaWeb: MyString
+
+two:
+  hecho: MyText
+  contexto: MyText
+  gobierno: MyText
+  fuentes: MyText
+  paginaWeb: MyString

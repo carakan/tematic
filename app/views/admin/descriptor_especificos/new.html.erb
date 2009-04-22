@@ -1,0 +1,16 @@
+<h1>Nuevo descriptor_especifico</h1>
+<%= error_messages_for :descriptor_especifico %>
+<% form_for(@descriptor_especifico, :url => admin_descriptor_especificos_path) do |f| %>
+  <p>
+    <b>Descriptor Generico</b><br />
+    <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |p| [p.descriptorGenerico, p.idDescriptorGenerico] } %>
+  </p> 
+   <p>
+    <b>Descriptor Especifico</b><br />
+    <%= f.text_field :descriptorEspecifico %>
+  </p>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+<%= link_to 'Ir al listado', admin_descriptor_especificos_path %>

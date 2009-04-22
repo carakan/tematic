@@ -1,0 +1,17 @@
+*Listado de Cambios* 13 de mayo de 2008
+
+Se crearon las tablas - clases:
+*Comentario*, *Enlace*, *EnlaceUrl*, *EstadisticaUsuario*, *Foro*, *Mensaje*, *NotaDestacada*, *User*, *Role*
+
+y las clases auxiliares:
+*MensajeObserver*, *UserObserver*, *UserMailer*
+
+Las demas tablas se dejaron tal cual estaban diseñadas en el anterior sistema.
+
+Sitio web del Banco Tematico que esta desarrollado en Ruby on Rails, dentro de este encontrara la documentacion del que engloba a las clases, tablas y los ficheros que representan a este sitio.
+
+*Importante* La documentacion es variable a los requerimientos que se produscan dentro de la direccion del Banco Tematico, por tanto solo es una referencia, para poder tener una documentacion actualiza debe de utilizar el siguiente: "rake doc:reapp"
+
+Digrama entidad relacion del anterior sistema.
+
+Documentacion realizada el 08 de mayo de 2008 

@@ -1,0 +1,24 @@
+<h3>Datos del inscrito:</h3>
+<p>
+  <b>Nombres :</b>
+  <%=h @usuario.nombre %>
+</p>
+
+<p>
+  <b>Apellidos :</b>
+  <%=h @usuario.apellido %>
+</p>
+
+<p>
+  <b>Usuario :</b>
+  <%=h @usuario.login %>
+</p>
+
+<p>
+  <b>Correo electronico :</b>
+  <%=h @usuario.email %>
+</p>
+<p>
+  <b>Profesion :</b>
+  <%=h @usuario.profesion.Profesion if !@usuario.profesion.nil? %>
+</p>

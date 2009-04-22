@@ -1,0 +1,2 @@
+page.replace_html :inscritos_list, :partial => 'list'
+page[:indicador_busqueda].hide

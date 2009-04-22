@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fecha: 2008-03-04
+  tipo: MyString
+  titulo: MyString
+  resumen: MyText
+  lugar: MyString
+  paginaWeb: MyString
+  email: MyString
+
+two:
+  fecha: 2008-03-04
+  tipo: MyString
+  titulo: MyString
+  resumen: MyText
+  lugar: MyString
+  paginaWeb: MyString
+  email: MyString

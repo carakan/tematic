@@ -1,0 +1,35 @@
+<h1>Listado de articulos escritos</h1>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+  Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+  <input type="submit" value="Buscar"> 
+<% end %>
+<p>
+  <%= link_to 'Nuevo articulo en Primera Mano', new_admin_primera_mano_path%>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titular</th>
+    <th>Presentacion</th>
+    <th>Fecha</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for primera_mano in @primera_manos %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= link_to primera_mano.titular, primera_mano %></td>
+      <td><%= truncate(primera_mano.presentacion, 200, '[...]') %></td>
+      <td><%=h primera_mano.fecha.to_s(:date) %></td>
+      <td><%= link_to('Mostrar', admin_primera_mano_path(primera_mano)) %></td>
+      <td><%= link_to('Editar', edit_admin_primera_mano_path(primera_mano)) %></td>
+      <td><%= link_to('Borrar', admin_primera_mano_path(primera_mano), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @primera_mano, :prev_label => '&laquo;', :next_label   => '&raquo;' %>
+<br>
+<p>
+  <%= link_to 'Nuevo articulo en Primera Mano', new_admin_primera_mano_path%>
+</p>

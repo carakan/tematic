@@ -1,0 +1,38 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @prefecto.nombre %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @prefecto.telefono %>
+</p>
+
+<p>
+  <b>Celular:</b>
+  <%=h @prefecto.celular %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%=h @prefecto.fax %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%=h @prefecto.direccion %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @prefecto.email %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%=h @prefecto.paginaWeb %>
+</p>
+
+
+<%= link_to 'Editar', edit_prefecto_path(@prefecto) %> |
+<%= link_to 'Ir al listado', prefectos_path %>

@@ -1,0 +1,32 @@
+<h1>Listado de ficha_tematicas</h1>
+
+<table>
+  <tr>
+    <th>Autor</th>
+    <th>Resumen</th>
+    <th>Pagina</th>
+    <th>Titulo</th>
+    <th>Editorial</th>
+    <th>Lugar</th>
+    <th>Fechayear</th>
+  </tr>
+
+<% for ficha_tematica in @ficha_tematicas %>
+  <tr>
+    <td><%=h ficha_tematica.autor %></td>
+    <td><%=h ficha_tematica.resumen %></td>
+    <td><%=h ficha_tematica.pagina %></td>
+    <td><%=h ficha_tematica.titulo %></td>
+    <td><%=h ficha_tematica.editorial %></td>
+    <td><%=h ficha_tematica.lugar %></td>
+    <td><%=h ficha_tematica.fechaYear %></td>
+    <td><%= link_to 'Mostrar', ficha_tematica %></td>
+    <td><%= link_to 'Editar', edit_ficha_tematica_path(ficha_tematica) %></td>
+    <td><%= link_to 'Borrar', ficha_tematica, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo ficha_tematica', new_ficha_tematica_path %>

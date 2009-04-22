@@ -1,0 +1,18 @@
+<p>
+  <b>Descripcion:</b>
+  <%=h @valor_noticia.descripcion %>
+</p>
+
+<p>
+  <b>Contenido:</b>
+  <%=h @valor_noticia.contenido %>
+</p>
+
+<p>
+  <b>Archivo:</b>
+  <%=h @valor_noticia.archivo %>
+</p>
+
+
+<%= link_to 'Editar', edit_valor_noticia_path(@valor_noticia) %> |
+<%= link_to 'Ir al listado', valor_noticias_path %>

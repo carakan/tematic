@@ -1,0 +1,26 @@
+<p>
+  <strong>Descripción:</strong>
+  <%=h @tag.descripcion %>
+</p>
+
+<p><%= link_to 'Guardar lista de enlaces', :action=>'guardar', :id=>@tag.id %></p>
+
+<p>
+  <strong>Series Cronológicas</strong> -> 
+  <%= los_enlaces @serie_cronologicas, "/tema_clave/show_cronologia/"%>  
+</p>
+<p>
+  <strong>Series Comparativas</strong> -> 
+  <%= los_enlaces @serie_comparativas,"/tema_clave/show_comparativa/"%>    
+</p>
+<p>
+  <strong>Valores Noticia</strong> -> 
+  <%= los_enlaces @valores,"/biblioteca/valor_noticia/"%>    
+</p>
+<p>
+  <strong>Primera Manos</strong> -> 
+  <%= los_enlaces @primera_manos,"/primera_manos/"%>
+</p>
+
+<%= link_to 'Editar', edit_admin_tag_path(@tag) %> | 
+<%= link_to 'Atrás', admin_tags_path %>

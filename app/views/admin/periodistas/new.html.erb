@@ -1,0 +1,80 @@
+<h1>Nuevo periodista</h1>
+
+<%= error_messages_for :periodista %>
+
+<% form_for(@periodista, :url => admin_periodistas_path ) do |f| %>
+                <%= f.hidden_field(:idDescriptorGenerico, :value => 0 ) %>
+  <table class="no_flash">
+    <tr>
+      <th>Cargo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idCargo, Cargo.find(:all, :order => 'cargo').collect { |c| [c.cargo, c.idCargo] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Institucion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idInstituciones, InstitucionPeriodistica.find(:all, :order => 'institucion').collect { |c| [c.institucion, c.idInstituciones] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Departamento<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDepartamento, DepartamentoBolivia.find(:all, :order => 'departamento').collect { |c| [c.departamento, c.idDepartamento] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Tipo Medio<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idTipoMedio, TipoMedio.find(:all).collect { |c| [c.tipoMedio, c.idTipoMedio] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombres<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :telefono %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :celular %>
+      </td>
+    </tr>
+    <tr>
+      <th>Perfil<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :periodista, :perfil, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Profesion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :periodista, :profesion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Direccion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :periodista, :direccion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_periodistas_path %>

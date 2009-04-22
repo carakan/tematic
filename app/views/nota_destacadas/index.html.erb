@@ -1,0 +1,26 @@
+<% titulo 'Notas destacadas de periodistas' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "index"}, :method => :get) do %>
+      <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%> <%= link_to('Todas las notas destacadas', {:action => 'index'}, :class => 'link3') %>
+  <% end %>
+  </div>
+  <table id="box2">
+    <tr>
+      <td><strong>Fecha</strong></td>
+    </tr>
+    <% for nota_destacada in @nota_destacadas %>
+      <tr><td>
+      <table id="content" width="100%">	
+        <tr>
+          <td valign="top">
+            <%= nota_destacada.created_at.to_date.to_s(:date) %>
+          </td>
+          <td>
+            <h4><%= link_to(nota_destacada.titulo, nota_destacada, :class => "link3") %></h4>
+            <%= truncate(nota_destacada.resumen, 200, '[...]') %>
+          </td>
+        </tr>
+      </table>  
+    <% end %>
+  </table>
+  <%= will_paginate @nota_destacadas, :prev_label => '&laquo;', :next_label   => '&raquo;' %>

@@ -1,0 +1,4 @@
+<ul class="usuarios"><%- if !@usuarios.empty? -%><%- for usuario in @usuarios -%>
+<li class="usuario_com" id="usuario_<%=usuario.id%>"><%=h usuario.nombre + ' ' + usuario.apellido %>
+<div class="email_com"><%=h usuario.email %></div></li><%- end -%>
+</ul><%- else -%><%= '<li id="null">No existen registros.</li>'%><%- end -%>

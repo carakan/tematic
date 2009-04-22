@@ -1,0 +1,22 @@
+<h1>Listing imagens</h1>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Imagen</th>
+  </tr>
+
+<% for imagen in @imagens %>
+  <tr>
+    <td><%=h imagen.titulo %></td>
+    <td><%=h imagen.imagen %></td>
+    <td><%= link_to 'Mostrar', imagen %></td>
+    <td><%= link_to 'Edit', edit_imagen_path(imagen) %></td>
+    <td><%= link_to 'Destroy', imagen, :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New imagen', new_imagen_path %>

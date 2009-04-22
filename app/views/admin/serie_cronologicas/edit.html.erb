@@ -1,0 +1,56 @@
+<h1>Editing serie_cronologica</h1>
+
+<%= error_messages_for :serie_cronologica %>
+
+<% form_for(@serie_cronologica, :url => admin_serie_cronologica_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+        <%= f.select(:idDescriptorGenerico, DescriptorGenerico.find(:all).collect() { |x| [x.descriptorGenerico, x.idDescriptorGenerico]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descriptor Especifico<span class='ewmsg'>&nbsp;*</th>
+      <td>
+          <%= f.select(:idDescriptorEspecifico, DescriptorEspecifico.find(:all).collect() { |x| [x.descriptorEspecifico, x.idDescriptorEspecifico]}) %>
+      </td>
+    </tr>
+    <tr>
+      <th>A&ntilde;o:<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+    <%= f.text_field :fechaYear %>
+      </td>
+    </tr>
+    <tr>
+      <th>Hecho</th>
+      <td>
+    <%= fckeditor :serie_cronologica, :hecho, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contexto</th>
+      <td>
+    <%= fckeditor :serie_cronologica, :contexto, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Gobierno</th>
+      <td>
+    <%= fckeditor :serie_cronologica, :gobierno, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes</th>
+      <td>
+    <%= fckeditor :serie_cronologica, :fuentes, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Guardar cambios" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_serie_cronologica_path(@serie_cronologica) %> |
+<%= link_to 'Atr&aacute;s', admin_serie_cronologicas_path %>

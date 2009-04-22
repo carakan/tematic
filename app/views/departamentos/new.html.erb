@@ -1,0 +1,51 @@
+<h1>Nuevo departamento</h1>
+
+<%= error_messages_for :departamento %>
+
+<% form_for(@departamento) do |f| %>
+  <p>
+    <b>Nombre</b><br />
+    <%= f.text_field :nombre %>
+  </p>
+
+  <p>
+    <b>Fundacion</b><br />
+    <%= f.text_field :fundacion %>
+  </p>
+
+  <p>
+    <b>Aniversario</b><br />
+    <%= f.text_field :aniversario %>
+  </p>
+
+  <p>
+    <b>Altitud</b><br />
+    <%= f.text_field :altitud %>
+  </p>
+
+  <p>
+    <b>Poblacion</b><br />
+    <%= f.text_field :poblacion %>
+  </p>
+
+  <p>
+    <b>Superficie</b><br />
+    <%= f.text_field :superficie %>
+  </p>
+
+  <p>
+    <b>Capital</b><br />
+    <%= f.text_field :capital %>
+  </p>
+
+  <p>
+    <b>Poblacion</b><br />
+    <%= f.text_field :poblacion %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', departamentos_path %>

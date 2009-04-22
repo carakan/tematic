@@ -1,0 +1,61 @@
+<%= error_messages_for :usuario %>
+<h2>Formulario de ingreso al banco tematico</h2>
+<p><%= link_to('Listado de usuarios', admin_users_path) %></p>
+<% form_for :user, :url => admin_users_path do |f| -%>
+  <table class="no_flash">
+    <tr>
+      <th>Nombre <span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Apellido<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :apellido, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Profesion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :profesion_id, Profesion.find(:all).collect { |x| [x.Profesion, x.idProfesion] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre de usuario<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :login, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Correo electronico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contraseña<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.password_field :password, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Confirme contraseña<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.password_field :password_confirmation, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Activar?<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= check_box_tag(:activate, value = "1", checked = true) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">Siempre se va ha enviar a correo.</td>
+    </tr>
+  </table>
+  <p style="text-align:center;">
+    <%= submit_tag 'Registrar', :or =>link_to('Atras', admin_users_path) %>
+  </p>
+<% end -%>

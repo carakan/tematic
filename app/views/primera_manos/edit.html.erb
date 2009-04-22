@@ -1,0 +1,32 @@
+<h1>Editar  primera_mano</h1>
+
+<%= error_messages_for :primera_mano %>
+
+<% form_for(@primera_mano) do |f| %>
+  <p>
+    <b>Titular</b><br />
+    <%= f.text_field :titular %>
+  </p>
+
+  <p>
+    <b>Presentacion</b><br />
+    <%= f.text_area :presentacion %>
+  </p>
+
+  <p>
+    <b>Fecha</b><br />
+    <%= f.datetime_select :fecha %>
+  </p>
+
+  <p>
+    <b>Archivo1</b><br />
+    <%= f.text_field :archivo1 %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @primera_mano %> |
+<%= link_to 'Ir al listado', primera_manos_path %>

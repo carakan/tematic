@@ -1,0 +1,31 @@
+<% titulo 'Biblioteca - Fichas Tem&aacute;ticas' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "fichas_tematicas"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+  <% end %>
+</div>
+<table id="box2">
+  <%- if @fichas.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <%- for ficha in @fichas -%>
+      <tr><td>
+      <table id="content" width="100%" style="margin:5px;">	
+        <tr>
+          <td><strong><%= ficha.autor %></strong><br>
+            <span class="smallSubtitulo"><%= ficha.descriptor %></span>
+          </td>
+        </tr><tr>
+          <td>
+            <%= ficha.resumen %>
+          </td>
+        </tr><tr>
+          <td>
+            <span style="font-weight: bold"><%= ficha.titulo %></span>
+            <%= ficha.editorial %> - <%= ficha.lugar %> - <%= ficha.fechaYear %> 
+          </td>
+      </tr></table>
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @fichas %>

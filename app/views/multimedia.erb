@@ -1,0 +1,6 @@
+<lista>
+<multimedia titulo="Seleccione multimedia..." archivo=""/>
+<% for multimedia in @multimedias %>
+  <multimedia titulo="<%= multimedia.titulo %>" archivo="<%= multimedia.archivo %>"/>
+<% end %>
+</lista>

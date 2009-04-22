@@ -1,0 +1,18 @@
+<p>
+  <b>Titulo:</b>
+  <%=h @foro.titulo %>
+</p>
+
+<p>
+  <b>Mensaje:</b>
+  <%= @foro.mensaje %>
+</p>
+
+<p>
+  <b>Puntuacion:</b>
+  <%=h @foro.puntuacion %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_foro_path(@foro) %> |
+<%= link_to 'Ir al listado', admin_foros_path %>

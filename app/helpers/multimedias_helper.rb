@@ -1,0 +1,2 @@
+module MultimediasHelper
+end

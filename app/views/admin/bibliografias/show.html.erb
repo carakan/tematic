@@ -1,0 +1,38 @@
+<p>
+  <b>Autor:</b>
+  <%=h @bibliografia.autor %>
+</p>
+
+<p>
+  <b>Titulo:</b>
+  <%=h @bibliografia.titulo %>
+</p>
+
+<p>
+  <b>Lugar:</b>
+  <%=h @bibliografia.lugar %>
+</p>
+
+<p>
+  <b>Editorial:</b>
+  <%=h @bibliografia.editorial %>
+</p>
+
+<p>
+  <b>Pagina:</b>
+  <%=h @bibliografia.pagina %>
+</p>
+
+<p>
+  <b>Fechayear:</b>
+  <%=h @bibliografia.fechaYear %>
+</p>
+
+<p>
+  <b>Enlace:</b>
+  <%=h @bibliografia.enlace %>
+</p>
+
+
+<%= link_to 'Editar', edit_bibliografia_path(@bibliografia) %> |
+<%= link_to 'Ir al listado', bibliografias_path %>

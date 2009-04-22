@@ -1,0 +1,41 @@
+<h1>Listado de periodistas</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+  <%= buscar_departamento_admin_tag %> 
+<% end %>
+<p>
+  <%= link_to 'Nuevo periodista', new_admin_periodista_path %> | <%= link_to(image_tag('print.gif', :title => "Imprimir listado de periodistas"), formatted_admin_periodistas_path(:print), :target => '_blank')%>
+</p>
+<table>
+  <tr>    
+    <th>#</th>
+    <th>Tipo Medio</th>
+    <th>Departamento</th>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Perfil</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% if @periodistas.empty? %>
+    <strong>No existen registros</strong>
+  <% else %>
+  <% for periodista in @periodistas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h periodista.tipo_medio.tipoMedio if !periodista.tipo_medio.nil? %></td>
+      <td><%=h periodista.nom_departamento %></td>
+      <td><%=h periodista.nombre %></td>
+      <td><%=h periodista.telefono %></td>
+      
+      <td><%= link_to 'Mostrar', admin_periodista_path(periodista) %></td>
+      <td><%= link_to 'Editar', edit_admin_periodista_path(periodista) %></td>
+      <td><%= link_to 'Borrar', admin_periodista_path(periodista), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+  <% end %>
+  </table>
+<%= will_paginate @periodistas %>
+<p>
+  <%= link_to 'Nuevo periodista', new_admin_periodista_path %>
+</p>

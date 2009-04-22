@@ -1,0 +1,21 @@
+<h1>Listado de usuarios</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Activo</th>
+    <th>Nombres</th>
+    <th>Apellidos</th>
+    <th>Correo electronico</th>
+    <th>Usuario</th>
+  </tr><% contador = 0 %>
+  <% for usuario in @usuarios %>
+    <tr>
+      <td><%= contador += 1 %></td>
+      <td><%= !usuario.activated_at.nil? ? 'si' : 'no'%></td>
+      <td><%=h usuario.name %></td>
+      <td><%=h usuario.surname %></td>
+      <td><%=h usuario.email %></td>
+      <td><%=h usuario.login %></td>
+    </tr>
+  <% end %>
+</table>

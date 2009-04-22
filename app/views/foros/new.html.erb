@@ -1,0 +1,26 @@
+<h1>Nuevo foro</h1>
+
+<%= error_messages_for :foro %>
+
+<% form_for(@foro) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Mensaje</b><br />
+    <%= f.text_area :mensaje %>
+  </p>
+
+  <p>
+    <b>Puntuacion</b><br />
+    <%= f.text_field :puntuacion %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', foros_path %>

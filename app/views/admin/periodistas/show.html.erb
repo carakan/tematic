@@ -1,0 +1,38 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @periodista.nombre %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @periodista.telefono %>
+</p>
+
+<p>
+  <b>Celular:</b>
+  <%=h @periodista.celular %>
+</p>
+
+<p>
+  <b>Perfil:</b>
+  <%=h @periodista.perfil %>
+</p>
+
+<p>
+  <b>Profesion:</b>
+  <%=h @periodista.profesion %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%=h @periodista.direccion %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @periodista.email %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_periodista_path(@periodista) %> |
+<%= link_to 'Ir al listado', admin_periodistas_path %>

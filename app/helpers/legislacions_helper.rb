@@ -1,0 +1,2 @@
+module LegislacionsHelper
+end

@@ -1,0 +1,44 @@
+<% titulo 'Directorio de Ministerios'%>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "ministerios"}, :method => :get) do %>
+      <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%> <%= link_to('Todas los ministerios', '/directorio/ministerios', :class => 'link3') %>
+    <% end %>
+  </div>
+  <%- if !@ministerios.empty? -%>
+  <%- for institucion in @ministerios -%>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio_doble">
+      <tr>
+        <td><strong><%= institucion.ministerio %></strong></td>
+      </tr>
+      <tr>
+        <td><%= institucion.departamento_bolivia.departamento %> - <%= institucion.direccion %></td>
+      </tr>
+      <tr>
+        <td><strong>Responsable:</strong> <%= institucion.responsable %></td>
+      </tr>
+      <tr>
+        <td><strong>Tel:</strong> <%= institucion.telefono %> - <strong>Fax:</strong> <%= institucion.fax %></td>
+      </tr>
+      <tr>
+        <td><%= institucion.paginaWeb %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{institucion.id}', '/directorio/mostrar/#{institucion.id}?ver=ministerio')") %>
+        </td>
+      </tr>
+    </table>
+  <%- end -%>
+<%- else -%>
+<strong>No existen registros</strong>
+<%- end -%>
+  <div style="clear:both;"></div>
+  <%= will_paginate @ministerios %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de ministerios<strong>", width:350, height:250, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

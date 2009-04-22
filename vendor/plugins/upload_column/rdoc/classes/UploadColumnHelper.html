@@ -1,0 +1,562 @@
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><title>Module: UploadColumnHelper</title><link rel="stylesheet" type="text/css" media="screen" href=".././rdoc-style.css"/><script type="text/javascript">
+// Javascript for Allison RDoc template
+// Copyright 2006 Cloudburst LLC
+// Some sections originally from public domain material
+
+var href_base = '.././rdoc-style.css'.replace(/(.*\/).*/, '$1'); // haha! inline js is good for something  
+
+function $(id) {
+    if (document.getElementById)
+      elem = document.getElementById(id);
+    else if ( document.all )
+      elem = eval("document.all." + id);
+    else
+      return false;
+    return elem;
+}
+
+  function toggle(id) {
+    elem = $(id);
+    elemStyle = elem.style;   
+    if (elemStyle.display == "block") {
+      elemStyle.display = "none"
+    } else {
+      elemStyle.display = "block"
+    }
+    return true;
+  }
+
+  function toggleText(id) {
+    elem = $(id)
+    if (m = elem.innerHTML.match(/(Hide)(.*)/)) {
+      elem.innerHTML = "Show" + m[2];
+    } else if (m = elem.innerHTML.match(/(Show)(.*)/)) {
+      elem.innerHTML = "Hide" + m[2];
+    }
+    return true;
+  }
+
+function span(s, klass) {
+  return '<span class="' + klass + '">' + s + '</span>';
+}
+  
+function highlightSymbols() {
+  pres = document.getElementsByTagName('pre');
+  for(var i = 0; i < pres.length; i++) {
+    pre = pres[i];
+    spans = pre.getElementsByTagName('span');
+    for(var k = 0; k < spans.length; k++) {
+      span = spans[k];
+      if (span.className.match(/ruby-identifier/)) {
+        if (span.innerHTML.match(/^:/)) {
+          span.className += " ruby-symbol";
+        }
+      }
+    }
+  }
+}
+
+ function hasClass(obj) {
+     var result = false;
+     if (obj.getAttributeNode("class") != null) {
+         result = obj.getAttributeNode("class").value;
+     }
+     return result;
+  }   
+
+ function stripe() {
+    var even = true;
+    var color = "#f4eefd";
+    var tables = document.getElementsByTagName('table');
+    if (tables.length == 0) { return; }
+    for (var h = 0; h < tables.length; h++) {
+        var trs = tables[h].getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+          var tds = trs[i].getElementsByTagName("td");
+            for (var j = 0; j < tds.length; j++) {       
+              if (hasClass(tds[j]) != "first") {                
+              var mytd = tds[j];
+              if (even) {
+                mytd.style.backgroundColor = color;
+              }         
+            }
+          }
+          even =  ! even;
+      }
+    }
+  }
+  
+function ajaxGet(url) {
+  url = (href_base + url).replace('/./', '/')
+  var req = false;
+
+  if (window.ActiveXObject) {
+    try {
+      // stupid hack because IE7 disables local Ajax with the native xmlhttprequest object
+      // for security purposes. Yet ActiveX still works. Thanks, Microsoft. I hate you. Die.
+      req = new ActiveXObject("MSXML2.XMLHTTP.3.0");
+    } catch (e) {
+      try {
+        /* IE 6 and maybe 5, don't know, don't care */
+        req = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+        try {
+          req = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (e) {
+          req = false;
+        }
+      }
+    }
+  }
+    
+  /* real browsers */
+  if (!req && window.XMLHttpRequest) {
+    try {
+      req = new XMLHttpRequest();
+    } catch (e) {
+      req = false;
+    }
+  } 
+  
+  if (req) {
+    req.open('GET', url, false);
+    req.send(null);
+    return req.responseText;
+  } else {
+    return "Ajax error";  
+  }
+}
+
+
+function addEvent(elm, evType, fn, useCapture) {
+	if (elm.addEventListener) {
+	  elm.addEventListener(evType, fn, useCapture);  
+  	return true;
+	} else if (elm.attachEvent) {
+  	var r = elm.attachEvent('on' + evType, fn);  
+	  return r;  
+	} else {
+  	elm['on' + evType] = fn;
+	}
+}
+
+function insertIndices() {
+  pages = ["class", "file", "method"]
+  for (x in pages) { 
+    $(pages[x]).innerHTML += ajaxGet('fr_' + pages[x] + '_index.html').replace(/(href=")/g, '$1' + href_base);
+  }
+  /* mouseoverify method links */
+  links = $('method').getElementsByTagName('a');
+  for (var x = 0; x < links.length; x++) {
+    if (m = links[x].innerHTML.match(/(.*)\s\((.*)\)/)) {
+      links[x].innerHTML = m[1] + '<br>';
+      links[x].title = m[2];
+    }
+  }
+  /* this is stupid */
+  $('class').style.display = "block";
+  $('file').style.display = "block";
+  
+  /* has to be here because IE7 does not guarantee the onLoad callback order */
+  abbreviateIndicesInner(["class", "file"], 25, "a");
+  /* same, linkTitle() depends on the class link list */
+  linkTitle();
+}
+
+function abbreviateIndices() {
+  abbreviateIndicesInner(["defined_in", "child_of", "includes"], 20, 'a');
+  abbreviateIndicesInner(["defined_in", "requires", "child_of", "includes"], 20, 'span');
+}
+
+function abbreviateIndicesInner(indices, amount, tag) {
+  for (var x = 0; x < indices.length; x++) { 
+    var the_index = $(indices[x]);
+    if (the_index) {
+      links = the_index.getElementsByTagName(tag);
+      for (var y = 0; y < links.length; y++) {
+        var link = links[y];
+        if (link.getElementsByTagName('span').length == 0 && link.getElementsByTagName('a').length == 0) {
+          // avoid nesting
+          link.innerHTML = abbreviate(link.innerHTML, amount);
+        }
+      }
+    }
+  }
+}
+
+function linkTitle() {
+  /* grab the correct title element from the index */
+  var index_page = ajaxGet('index.html');
+  title_text = index_page.match(/<title>(.*)<\/title>/m)[1];
+  document.title = title_text + " - " + document.title;
+  var p = $('header').getElementsByTagName('p')[0]
+  if (p.innerHTML.match(/^\s*$/)) {
+    p.innerHTML = title_text;
+  } else {
+    p.innerHTML = title_text + ": " + p.innerHTML;
+  }
+  /* set the link properly */
+  title_link = index_page.match(/<a\s+href="(.*?)"/)[1];
+  var element = $('title');
+  var item_type = "";
+  var item_name = "";
+  if (m = element.innerHTML.match(/(Class:|Module:|File:)\s*(.*)/)) {
+    item_type = m[1];
+    item_name = m[2];
+  } else {
+    item_name = element.innerHTML;
+  }
+  element.innerHTML = '<a href="' + href_base + title_link + '">' + item_type + " " + abbreviate(item_name, 25) + '</a>';
+  /* breadcrumb navigation for the win */
+  items = item_name.split("::");
+  items_new = item_name.split("::");
+  var s = ""
+  file_links = $('class').getElementsByTagName('a');
+  for (var x = 0; x < items.length - 1; x++ ){
+    var item = items[x];
+    link = ("/classes/" + items.slice(0,x).join("/") + "/" + item + ".html").replace('//', '/');
+    regex = new RegExp(RegExp.escape(link) + '$');
+    for (var y = 0; y < file_links.length; y++) {
+      if (file_links[y].href.match(regex)) {
+         items_new[x] = '<a href="' + href_base + link + '">' + item + '</a>';
+         break;
+      }
+    }  
+  }
+  $('item_name').innerHTML = item_type + ' ' + items_new.join(" :: ");
+}
+
+function abbreviate(s, size) {
+  while (s.length > size) {
+    var old_s = s;
+    s = s.replace(/\s|\n/mg, '');
+    s = s.replace(/([A-Z])[a-z]+/m, '$1');
+    if (!s || old_s == s) {
+      return "..." + s.substring(s.length - size, s.length);
+    }
+  }
+  return s;
+}
+
+function disableSubmit(event) {
+  var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+  if (keyCode == 13) {
+    return false;
+  } else {
+    return true;
+  }
+}
+  
+function filterList(id, s, event) {
+  
+  /* some half-assed escaping */
+  s = s.replace(/[^\w\d\.\_\-\/\:\=\[\]\?\!]/g, '');
+  s = RegExp.escape(s);
+  
+  var show_all = false;
+  if (s.match(/^\s*$/)) {
+    show_all = true;
+  }
+  
+  links = $(id).getElementsByTagName('a')
+  regex = new RegExp(s, 'i');
+  
+  for (var x = 0; x < links.length; x++) {
+    var link = links[x];
+    if (show_all) {
+      link.style.display = 'inline';
+    } else {
+       if (link.innerHTML.match(regex)) {        
+         link.style.display = 'inline';
+       } else {
+         link.style.display = 'none';
+       }
+    }
+  }
+  return true;
+}
+
+RegExp.escape = function(text) {
+  if (!arguments.callee.sRE) {
+    var specials = [
+      '/', '.', '*', '+', '?', '|',
+      '(', ')', '[', ']', '{', '}', '\\'
+    ];
+    arguments.callee.sRE = new RegExp(
+      '(\\' + specials.join('|\\') + ')', 'g'
+    );
+  }
+  return text.replace(arguments.callee.sRE, '\\$1');
+}
+
+
+function hacks() {
+  // show the spacer if necessary, 
+  divs = document.getElementsByTagName('div');
+  for (x in divs) {
+    if (divs[x].className && divs[x].className.match(/top/)) {
+      document.getElementById('spacer').style.display = 'block';
+    }
+  }
+}
+
+addEvent(window, 'load', insertIndices, false);
+addEvent(window, 'load', abbreviateIndices, false);
+addEvent(window, 'load', stripe, false);
+addEvent(window, 'load', highlightSymbols, false);
+addEvent(window, 'load', hacks, false);
+</script></head><body><div id="container"><div class="curve" id="preheader_curve_0"></div><div class="curve" id="preheader_curve_1"></div><div class="curve" id="preheader_curve_2"></div><div class="curve" id="preheader_curve_3"></div><div class="curve" id="preheader_curve_4"></div><div class="curve" id="preheader_curve_5"></div><div class="curve" id="preheader_curve_6"></div><div class="curve" id="preheader_curve_7"></div><div class="curve" id="preheader_curve_8"></div><div class="curve" id="preheader_curve_9"></div><div id="header"><p>
+</p><span><h1 id="title">
+Module: UploadColumnHelper
+</h1></span></div><div class="clear"></div><div id="left">
+
+<div class="navigation dark top" id="defined_in"><h3>Defined in</h3>
+
+<a href="../files/lib/upload_column_helper_rb.html">lib/upload_column_helper.rb</a>
+
+</div>
+
+
+
+<div class="navigation top" id="methods"><h3>Methods</h3>
+
+<span class='bpink'>
+
+<a href='#M000055'>
+image<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000054'>
+remote_upload_form_tag<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000052'>
+upload_column_field<br/>
+</a>
+</span>
+
+
+<span class='bpink'>
+
+<a href='#M000053'>
+upload_form_tag<br/>
+</a>
+</span>
+
+</div>
+<div id="spacer"></div><div class="navigation dark index" id="class_wrapper"><div class="list_header"><h3>All classes</h3></div><div class="list_header_link"><a id="class_link" onclick="toggle('class'); toggleText('class_link'); return false;" href="#">Hide...</a></div><div class="clear"></div><div id="class"><form><label for="filter_class">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_class" type="text" onKeyUp="return filterList('class', this.value, event);"></input></form></div></div><div class="navigation dark index" id="file_wrapper"><div class="list_header"><h3>All files</h3></div><div class="list_header_link"><a id="file_link" onclick="toggle('file'); toggleText('file_link'); return false;" href="#">Hide...</a></div><div class="clear"></div><div id="file"><form><label for="filter_file">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_file" type="text" onKeyUp="return filterList('file', this.value, event);"></input></form></div></div><div class="navigation dark index" id="method_wrapper"><div class="list_header"><h3>All methods</h3></div><div class="list_header_link"><a id="method_link" onclick="toggle('method'); toggleText('method_link'); return false;" href="#">Show...</a></div><div class="clear"></div><div id="method"><form><label for="filter_method">Filter:&nbsp;&nbsp;</label><input onKeyPress="return disableSubmit(event);" id="filter_method" type="text" onKeyUp="return filterList('method', this.value, event);"></input></form></div></div><div class="curve" id="left_curve_0"></div><div class="curve" id="left_curve_1"></div><div class="curve" id="left_curve_2"></div><div class="curve" id="left_curve_3"></div><div class="curve" id="left_curve_4"></div><div class="curve" id="left_curve_5"></div><div class="curve" id="left_curve_6"></div><div class="curve" id="left_curve_7"></div><div class="curve" id="left_curve_8"></div><div class="curve" id="left_curve_9"></div></div><div id="content">
+<h1 id="item_name">Module: UploadColumnHelper</h1>
+
+
+
+
+
+<p></p>
+
+
+
+
+
+
+<div class="section_spacer"></div><h1>Public Instance methods</h1>
+
+
+<a class="small" name="M000055"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000055'>
+
+
+image
+
+(options = {}, html_options = {})
+
+</a>
+</h3>
+<p>
+Returns an <a href="UploadColumnHelper.html#M000055">image</a> tag using a
+URL created by the set of <tt>options</tt>. Accepts the same options as
+ActionController::Base#url_for. It&#8216;s also possible to pass a string
+instead of an options hash.
+</p>
+<p>
+Example
+</p>
+<pre>
+    image( :action =&gt; &quot;solarize_picture&quot;, :id =&gt; @user )
+</pre>
+<p>
+Use this in conjunction with <a
+href="UploadColumnRenderHelper.html#M000056">UploadColumnRenderHelper.render_image</a>
+to output dynamically rendered version of your RMagick manipulated images.
+</p>
+
+<p class="source_link" id="M000055-show-link"><a id="M000055-link" onclick="toggle('M000055-source'); toggleText('M000055-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000055-source"><pre>    <span class="ruby-comment cmt"># File lib/upload_column_helper.rb, line 81</span>
+81:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">image</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
+82:     <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:src</span>] = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">options</span> <span class="ruby-keyword kw">else</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword kw">end</span>
+83:     <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:alt</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:src</span>], <span class="ruby-value str">'.*'</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">capitalize</span>
+84: 
+85:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:size</span>]
+86:       <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:width</span>], <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:height</span>] = <span class="ruby-identifier">html_options</span>[<span class="ruby-identifier">:size</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;x&quot;</span>)
+87:       <span class="ruby-identifier">html_options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">:size</span>
+88:     <span class="ruby-keyword kw">end</span>
+89: 
+90:     <span class="ruby-identifier">tag</span>(<span class="ruby-value str">&quot;img&quot;</span>, <span class="ruby-identifier">html_options</span>)
+91:   <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000054"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000054'>
+
+
+remote_upload_form_tag
+
+( options = {}, &amp;block )
+
+</a>
+</h3>
+<p>
+What? You cry, files cannot be uploaded using JavaScript! Well,
+you&#8216;re right. But you see, this method will use an iframe, clever no?
+What this means for you is that you&#8216;ll probably want to fetch the
+respond_to_parent plugin, that will make handling this a breeze. You can
+pass the following keys to options
+</p>
+<dl>
+<dt><tt>url</tt></dt><dd>The target URL
+
+</dd>
+<dt><tt>fallback</tt></dt><dd>If JavaScript is disabled, the fallback address will be used, use
+Rails&#8217; ActionController::Base.url_for syntax.
+
+</dd>
+<dt><tt>force_html</tt></dt><dd>This will set the target attribute via HTML instead of JS, so if JS is
+disabled, it will submit to the iframe anyway (defaults to false)
+
+</dd>
+<dt><tt>html</tt></dt><dd>HTML options for the form tag
+
+</dd>
+<dt><tt>iframe</tt></dt><dd>HTML options for the iframe tag
+
+</dd>
+<dt><tt>before</tt></dt><dd>JavaScript called before the form is sent (via onsubmit)
+
+</dd>
+</dl>
+<p>
+Note: You can NOT use the normal prototype callbacks in this function,
+since it does not use Ajax to upload the form.
+</p>
+
+<p class="source_link" id="M000054-show-link"><a id="M000054-link" onclick="toggle('M000054-source'); toggleText('M000054-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000054-source"><pre>    <span class="ruby-comment cmt"># File lib/upload_column_helper.rb, line 39</span>
+39:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remote_upload_form_tag</span>( <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span> )
+40:     <span class="ruby-identifier">framename</span> = <span class="ruby-node">&quot;uf#{Time.now.usec}#{rand(1000)}&quot;</span>
+41:     <span class="ruby-identifier">iframe_options</span> = {
+42:       <span class="ruby-value str">&quot;style&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;position: absolute; width: 0; height: 0; border: 0;&quot;</span>,
+43:       <span class="ruby-value str">&quot;id&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">framename</span>,
+44:       <span class="ruby-value str">&quot;name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">framename</span>,
+45:       <span class="ruby-value str">&quot;src&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span>
+46:     }
+47:     <span class="ruby-identifier">iframe_options</span> = <span class="ruby-identifier">iframe_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:iframe</span>].<span class="ruby-identifier">stringify_keys</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:iframe</span>]
+48:     
+49:     <span class="ruby-identifier">form_options</span> = { <span class="ruby-value str">&quot;method&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;post&quot;</span> }
+50:     <span class="ruby-identifier">form_options</span> = <span class="ruby-identifier">form_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:html</span>].<span class="ruby-identifier">stringify_keys</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:html</span>]
+51: 
+52:     <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;enctype&quot;</span>] = <span class="ruby-value str">&quot;multipart/form-data&quot;</span>
+53: 
+54:     <span class="ruby-identifier">url</span> = <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:url</span>])
+55: 
+56:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force_html</span>]
+57:       <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;action&quot;</span>] = <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:url</span>])
+58:       <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;target&quot;</span>] = <span class="ruby-identifier">framename</span>
+59:     <span class="ruby-keyword kw">else</span>
+60:       <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;action&quot;</span>] = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:fallback</span>] <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:fallback</span>]) <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">url</span> <span class="ruby-keyword kw">end</span>
+61:       <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;onsubmit&quot;</span>] = <span class="ruby-node">%(this.action = '#{escape_javascript( url )}'; this.target = '#{escape_javascript( framename )}';)</span>
+62:       <span class="ruby-identifier">form_options</span>[<span class="ruby-value str">&quot;onsubmit&quot;</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:before</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:before</span>]
+63:     <span class="ruby-keyword kw">end</span>
+64:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+65:       <span class="ruby-identifier">content</span> = <span class="ruby-identifier">capture</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+66:       <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">tag</span>( <span class="ruby-identifier">:iframe</span>, <span class="ruby-identifier">iframe_options</span>, <span class="ruby-keyword kw">true</span> ) <span class="ruby-operator">+</span> <span class="ruby-value str">'&lt;/iframe&gt;'</span>, <span class="ruby-identifier">block</span>.<span class="ruby-identifier">binding</span>)
+67:       <span class="ruby-identifier">form_tag</span>( <span class="ruby-identifier">url</span>, <span class="ruby-identifier">form_options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span> )
+68:     <span class="ruby-keyword kw">else</span>
+69:       <span class="ruby-identifier">tag</span>( <span class="ruby-identifier">:iframe</span>, <span class="ruby-identifier">iframe_options</span>, <span class="ruby-keyword kw">true</span> ) <span class="ruby-operator">+</span> <span class="ruby-value str">'&lt;/iframe&gt;'</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">form_tag</span>( <span class="ruby-identifier">form_options</span>[<span class="ruby-identifier">:action</span>], <span class="ruby-identifier">form_options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span> )
+70:     <span class="ruby-keyword kw">end</span>
+71:   <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000052"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000052'>
+
+
+upload_column_field
+
+(object, method, options={})
+
+</a>
+</h3>
+<p>
+Returns an input tag of the &quot;file&quot; type tailored for accessing an
+upload_column field (identified by method) on an object assigned to the
+template (identified by object). Additional options on the input tag can be
+passed as a hash with options.
+</p>
+<p>
+Example (call, result)
+</p>
+<pre>
+    upload_column_field( :user, :picture )
+      &lt;input id=&quot;user_picture_temp&quot; name=&quot;user[picture_temp]&quot; type=&quot;hidden&quot; /&gt;
+      &lt;input id=&quot;user_picture&quot; name=&quot;user[picture]&quot; size=&quot;30&quot; type=&quot;file&quot; /&gt;
+</pre>
+<p>
+Note: if you use file_field instead of <a
+href="UploadColumnHelper.html#M000052">upload_column_field</a>, the file
+will not be stored across form redisplays.
+</p>
+
+<p class="source_link" id="M000052-show-link"><a id="M000052-link" onclick="toggle('M000052-source'); toggleText('M000052-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000052-source"><pre>    <span class="ruby-comment cmt"># File lib/upload_column_helper.rb, line 14</span>
+14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_column_field</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span>={})
+15:     <span class="ruby-identifier">result</span> = <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Helpers</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceTag</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword kw">self</span>).<span class="ruby-identifier">to_input_field_tag</span>(<span class="ruby-value str">&quot;file&quot;</span>, <span class="ruby-identifier">options</span>)
+16:     <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Helpers</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceTag</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;_temp&quot;</span>, <span class="ruby-keyword kw">self</span>).<span class="ruby-identifier">to_input_field_tag</span>(<span class="ruby-value str">&quot;hidden&quot;</span>, {})
+17:   <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+<a class="small" name="M000053"><br/></a>
+<div class="a_method"><div><h3>
+<a href='#M000053'>
+
+
+upload_form_tag
+
+(url_for_options = {}, options = {}, *parameters_for_url, &amp;proc)
+
+</a>
+</h3>
+<p>
+A helper method for creating a form tag to use with uploadng files, it
+works exactly like Rails&#8217; start_form_tag, except that :multipart is
+always true
+</p>
+
+<p class="source_link" id="M000053-show-link"><a id="M000053-link" onclick="toggle('M000053-source'); toggleText('M000053-link'); return false;" href="#">Show source...</a></p><div class="source" id="M000053-source"><pre>    <span class="ruby-comment cmt"># File lib/upload_column_helper.rb, line 21</span>
+21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_form_tag</span>(<span class="ruby-identifier">url_for_options</span> = {}, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">*</span><span class="ruby-identifier">parameters_for_url</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
+22:     <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:multipart</span>] = <span class="ruby-keyword kw">true</span>
+23:     <span class="ruby-identifier">form_tag</span>( <span class="ruby-identifier">url_for_options</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">parameters_for_url</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span> )
+24:   <span class="ruby-keyword kw">end</span></pre></div>
+</div></div>
+
+
+
+
+
+</div></div><div class="clear" id="footer"><a href="http://blog.evanweaver.com/articles/2006/06/02/allison">Allison</a></div></body></html>

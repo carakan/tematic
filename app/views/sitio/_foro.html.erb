@@ -1,0 +1,7 @@
+<img src="/images/libreta.jpg" align="left" style="padding-right:10px"/>
+<a href="/foros" class="enlaceTitulo_ficha">Periodistas en democracia</a>
+<p class="texto_ficha">Ingresa al foro de periodistas y participa con otros colegas.<br>
+<strong>Esta semana:</strong>&nbsp;<br>
+<% for post in Foro.find(:all, :order => 'id DESC', :limit => 3)%>
+  <%= link_to('<strong>' + post.autor + ': </strong>' + post.titulo, post) + '<br> ' %> 
+<% end %>

@@ -1,0 +1,66 @@
+<h1>Editar  ficha tematica</h1>
+<%= error_messages_for :ficha_tematica %>
+<% form_for(@ficha_tematica, :url => admin_ficha_tematica_path(@ficha_tematica) ) do |f| %>
+ <table class="no_flash">
+  <tr>
+    <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+    </td>
+  </tr>
+  <tr>
+    <th>Pais<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.select :idPais, Paise.find(:all, :order => "pais").collect { |x| [x.pais, x.idPais] } %>
+    </td>
+  </tr>
+  <tr>
+    <th>Autor<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :autor, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Resumen<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= fckeditor :ficha_tematica, :resumen, {:width => '600px', :height => '500px'} %>
+    </td>
+  </tr>
+  <tr>
+    <th>Pagina (Libro)<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+          <%= f.text_field :pagina, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :titulo, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Editorial<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+      <%= f.text_field :editorial, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Lugar<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+    <%= f.text_field :lugar, :size => 80 %>
+    </td>
+  </tr>
+  <tr>
+    <th>Año<span class='ewmsg'>&nbsp;*</span></th>
+    <td>
+    <%= f.text_field :fechaYear, :size => 80 %>
+    </td>
+  </tr>
+</table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_ficha_tematica_path(@ficha_tematica) %> |
+<%= link_to 'Ir al listado', admin_ficha_tematicas_path %>

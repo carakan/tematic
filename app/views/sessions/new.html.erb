@@ -1,0 +1,19 @@
+<% if !logged_in? %>
+  <% form_for(:user, :url => sessions_path) do |p| %>
+    <div class="login">
+      <div class="subtitle2">Iniciar sesi&oacute;n.</div>
+      <label class="menuTitulo">Usuario</label>
+      <%= text_field_tag 'login', nil, :size => 10 %><br>
+      <label class="menuTitulo">Contrase&ntilde;a</label>
+      <%= password_field_tag 'password', nil, :size => 10 %><br>
+      <%= submit_tag 'Ingresar', :style => 'text-align:center;width:100px;' %><br>
+      <p>
+        Para acceder a ciertos contenidos, debe ser usuario registrado.
+      </p>
+      <%= link_to 'Registrarse', new_user_path, :class => 'link3', :style => 'font-size:11px;' %> | <%= link_to('Recuperar contraseña', forgot_users_path, :class => 'link3', :style => 'font-size:11px;') %>
+    </div>
+    <%= hidden_field_tag('url', url_for(:controller => params[:controller], :action => params[:action])) %>
+  <% end %>
+<% else %>
+      <h4>Bienvenido al Banco Tem&aacute;tico.</h4>
+<% end %>

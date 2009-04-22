@@ -1,0 +1,25 @@
+<h1>Nuevo documento de interes</h1>
+
+<%= error_messages_for :documento_intere %>
+
+<% form_for(@documento_intere, :url => admin_documento_interes_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>idDocumentos<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :idDocumentos, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_documento_interes_path %>

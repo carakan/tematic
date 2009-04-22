@@ -1,0 +1,22 @@
+<h1>Listing favoritos</h1>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Enlace</th>
+  </tr>
+
+<% for favorito in @favoritos %>
+  <tr>
+    <td><%=h favorito.titulo %></td>
+    <td><%=h favorito.enlace %></td>
+    <td><%= link_to 'Mostrar', admin_favorito_path(favorito) %></td>
+    <td><%= link_to 'Editar', edit_admin_favorito_path(favorito) %></td>
+    <td><%= link_to 'Destruir', admin_favorito_path(favorito), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo favorito', new_admin_favorito_path %>

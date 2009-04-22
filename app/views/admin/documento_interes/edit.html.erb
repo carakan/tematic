@@ -1,0 +1,26 @@
+<h1>Editing documento_intere</h1>
+
+<%= error_messages_for :documento_intere %>
+
+<% form_for(@documento_intere, :url => admin_documento_intere_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>idDocumentos<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :idDocumentos, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_documento_intere_path(@documento_intere) %> |
+<%= link_to 'Ir al listado', admin_documento_interes_path %>

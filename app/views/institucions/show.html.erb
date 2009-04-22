@@ -1,0 +1,43 @@
+<p>
+  <b>Institucion:</b>
+  <%=h @institucion.institucion %>
+</p>
+
+<p>
+  <b>Sigla:</b>
+  <%=h @institucion.sigla %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%=h @institucion.direccion %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @institucion.telefono %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%=h @institucion.fax %>
+</p>
+
+<p>
+  <b>Casilla:</b>
+  <%=h @institucion.casilla %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @institucion.email %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%=h @institucion.paginaWeb %>
+</p>
+
+
+<%= link_to 'Editar', edit_institucion_path(@institucion) %> |
+<%= link_to 'Ir al listado', institucions_path %>

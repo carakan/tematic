@@ -1,0 +1,7 @@
+<% titulo('Valor Noticia: ' + truncate(@valor.titulo, 70)) %>
+<%= link_to 'Todos los valores noticia', {:controller => 'biblioteca', :action =>'valor_noticia', :id => nil}, :class => "link3" %>
+<h3><%= @valor.titulo %></h3>  
+<div style="float:left;margin:5px;"><%= image_tag('/archivos/valorNoticia/imagen/' + @valor.imagen.filename) if !@valor.imagen.nil? %></div>
+<strong>Autor: </strong><%= @valor.autor %><br>
+    <%= @valor.descripcion %>
+<%= link_to 'Archivo', @valor.archivo.url, :class => 'link3', :target => '_blank' %>

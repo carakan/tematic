@@ -1,0 +1,30 @@
+<h1>Listado de notas destacadas</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+  <%= buscar_admin_tag %> 
+<% end %>
+<p>
+  <%= link_to 'Nueva nota destacada', new_admin_nota_destacada_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Resumen</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for nota_destacada in @nota_destacadas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h nota_destacada.titulo %></td>
+      <td><%= truncate(nota_destacada.resumen, 150) %></td>
+      <td><%= link_to 'Mostrar', admin_nota_destacada_path(nota_destacada) %></td>
+      <td><%= link_to 'Editar', edit_admin_nota_destacada_path(nota_destacada) %></td>
+      <td><%= link_to 'Destruir', admin_nota_destacada_path(nota_destacada), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<p>
+  <%= link_to 'Nueva nota destacada', new_admin_nota_destacada_path %>
+</p>

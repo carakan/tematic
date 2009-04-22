@@ -1,0 +1,2 @@
+page[:imagen].replace_html(:partial => 'imagen')
+page[:imagen].visual_effect(:highlight)

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+  http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <url>
+    <loc><%= SITE_URL %>/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/primera_manos/</loc>
+    <priority>0.8</priority>
+  </url>
+  <%- for primera in PrimeraMano.find(:all) -%>
+    <url>
+      <loc><%= SITE_URL %>/primera_manos/<%= primera.id %></loc>
+      <priority>0.6</priority>
+    </url>
+  <%- end -%>
+  <url>
+    <loc><%= SITE_URL %>/nota_destacadas/</loc>
+    <priority>0.7</priority>
+  </url>
+  <%- for nota in NotaDestacada.find(:all) -%>
+    <url>
+      <loc><%= SITE_URL %>/nota_destacadas/<%= nota.id %></loc>
+      <priority>0.5</priority>
+    </url>
+  <%- end -%>
+  <url>
+    <loc><%= SITE_URL %>/documentos/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/fichas_tematicas/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/bibliografia/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/legislacion/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/glosario/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/valor_noticia/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/valorNoticia/</loc>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/primeraMano/</loc>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/primeraMano/archivos/resolucion_indigena.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/primeraMano/archivos/resolucion_congreso_minero.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/primeraMano/archivos/sip_declaracion.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/documentos/pnud_indicadores_de_desarrollo2007.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/documentos/joseluisexenicne.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/documentos/situacion_de_la_mujer.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/archivos/documentos/informejifeok.pdf</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/mostrar?fecha=07%2F04%2F2007</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/mostrar?fecha=08%2F04%2F2007</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/show/442</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/show/443</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/foros</loc>
+    <priority>0.8</priority>
+  </url>
+  <%- for foro in Foro.find(:all) -%>
+    <url>
+      <loc><%= SITE_URL %>/foros/<%= foro.id %></loc>
+      <priority>0.5</priority>
+    </url>
+  <%- end -%>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/eventos_concursos</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/eventos_concursos?page=2</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/eventos_concursos?page=3</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/calendarios/eventos_concursos?page=1</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/1</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/2</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/3</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/4</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/5</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/6</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/7</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/8</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/alcaldes/9</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/asambleistas</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/especialistas/1</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/instituciones</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/instituciones_periodisticas</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=1</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=2</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=3</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=4</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=5</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=6</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=7</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=8</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?departamento=9</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=1</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=10</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=6</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=4</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=2</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=9</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=5</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=11</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/periodistas?institucion=3</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/prefecturas</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc><%= SITE_URL %>/directorio/ministerios</loc>
+    <priority>0.4</priority>
+  </url>
+  <%- for cronologica in SerieCronologica.find(:all) -%>
+    <url>
+      <loc><%= SITE_URL %>/tema_clave/show_cronologia/<%= cronologica.id %></loc>
+      <priority>0.6</priority>
+    </url>
+  <%- end -%>
+  <%- for comparativa in SerieComparativa.find(:all) -%>
+    <url>
+      <loc><%= SITE_URL %>/tema_clave/show_comparativa/<%= comparativa.id %></loc>
+      <priority>0.6</priority>
+    </url>
+  <%- end -%>
+</urlset>

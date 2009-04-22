@@ -1,0 +1,5 @@
+<% for imagen in @imagenes %>
+  <h3><%= imagen.titulo %></h3>
+  <%= image_tag('/archivos/imagenes/' + imagen.imagen.filename, :alt => imagen.titulo, :class => 'reflect') %>
+  <%= will_paginate @imagenes , :renderer => 'RemoteLinkRenderer'%>
+<% end %>

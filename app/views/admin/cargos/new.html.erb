@@ -1,0 +1,16 @@
+<h1>Nuevo cargo</h1>
+
+<%= error_messages_for :cargo %>
+
+<% form_for(@cargo, :url => admin_cargos_path) do |f| %>
+  <p>
+    <b>Cargo</b><br />
+    <%= f.text_field :cargo %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_cargos_path %>

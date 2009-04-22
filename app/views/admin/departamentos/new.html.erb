@@ -1,0 +1,64 @@
+<h3>Nuevo registro de departamento</h3>
+<%= error_messages_for :departamento %>
+<% form_for(@departamento, :url => admin_departamentos_path, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Imagen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :imagen, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :departamento, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fundacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fundacion, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Aniversario<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :aniversarioCivico, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Altitud<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :altitud, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Poblacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :poblacion, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Superficie<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :superficie, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Capital<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :capital, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Poblacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :poblacion, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+<%= link_to 'Ir al listado', admin_departamentos_path %>

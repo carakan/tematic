@@ -1,0 +1,311 @@
+.headIdBox8{
+    border:1px solid #E3F1FF;
+    background-color:#E8ECFF;
+}
+.smallSubtitulo{
+    color:#514585;
+    size:8px;
+    font-weight:normal;
+}
+.menuTitulo {
+    /*color: #003366;*/
+    color: #334964;
+    font-family: Tahoma, Arial, Helvetica, Sans, Sans-serif;
+    font-size:13px;
+    font-weight:bold;
+}
+.menuSubtitulo {
+    color: #999999;
+    font-family: Tahoma, Arial, Helvetica, Sans, Sans-serif;
+    font-size:12px;
+}
+a:link,a:visited { 
+    color: #747576;
+    text-decoration: underline;
+    font-family: Tahoma, Arial, Helvetica, Sans, Sans-serif;
+}
+a:hover {
+    color: #999;
+    text-decoration:  none;
+    font-family: Tahoma, Arial, Helvetica, Sans, Sans-serif;
+}
+#container{
+    color: #000;
+    background: #fff;
+    font-family: Tahoma, Arial, Helvetica, Sans, Sans-serif;
+}
+#header{
+    background-color: #2a3c52;
+    height: 70px;
+    color: #fff;
+    margin:0;
+}
+#content{
+    font-size:0.9em;
+    text-align: left;
+    background-color:#FFFFFF;
+}
+#box1{
+    font-size: 0.95 em;
+    text-align: left;
+    line-height: 16px;
+    text-align: justify;
+    color: #999;
+}
+#box2{
+    width:100%;
+    background-color: #f4f5f6;
+    font-size: 0.95 em;
+    padding-left: 8px;
+    text-align: left;
+}
+#box3{
+    background-color: #fef5e5;
+    font-size: 0.95 em;
+    text-align: left;
+}
+#box4{
+    background-color: #f4f5f6;
+    font-size: 0.95 em;
+    line-height: 14px;
+}
+#box5{
+    background-color: #fff;
+    height: 25px;
+    padding-left: 5px;
+}
+#box6{
+    border: solid 1px #dceafc;
+    background-color: #f3f8ff;
+    padding: 10px;
+    text-align: left;
+    font-size:0.85em;
+}
+#box7{
+    background-color: #fff;
+    border: solid 1px #f2f4f5;
+    height: 25px;
+    padding: 10px;
+}
+.directorio{
+    color:#666;
+    background-color: #FAFAFA;
+    border: solid 1px #f2f4f5;
+    font-size: 11px;
+    margin:2px;
+    text-align: left;
+    line-height: 14px;
+    width:185px;
+    height:180px;
+    float:left;
+}
+.directorio:hover{
+    background-color: #FFF;
+}
+.directorio_doble{
+    color:#666;
+    background-color: #fbfcfc;
+    border: solid 1px #f2f4f5;
+    font-size: 11px;
+    margin:2px;
+    text-align: left;
+    line-height: 14px;
+    width:368px;
+    height:200px;
+    float:left;
+}
+.directorio_doble:hover{
+    background-color: #FFF;
+}
+#footer{
+    background-color: #2a3c52;
+    height: 60px;
+    color: #fff;
+    font-size: 10px;
+    text-align:left;
+    padding:10px;
+    margin:0;
+}
+.title{
+    color: #2a3c52;
+    font-size: 18px;
+    line-height: 24px;
+}
+.title2{
+    color: #fa9a04;
+    font-size: 18px;
+    line-height: 24px;
+}
+.title3{
+    color: #2a3c52;
+    font-size: 14px;
+    line-height: 16px;
+}
+.title4{
+    color: #2a3c52;
+    font-size: 24px;
+    line-height: 30px;
+}
+.title5{
+    color: #64a6f8;
+    font-size: 18px;
+    line-height: 22px;
+}
+.subtitle2{
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 700;
+    color: #fa9a04;
+    width:100%;
+    margin:10px 0;
+    text-align:center;
+}
+.txt10 { 
+    font-size: 10px;
+}
+.normal { 
+    font-size: 0.95 em;
+}
+.color2{
+    font-size:0.9em;
+    color: #838d99;
+}
+.color3{
+    color: #fa9a04;
+}
+.active{ 
+    color: #ffc307;
+    background-image: url(../images/templates/lib/bulletmenu.gif);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    padding-bottom: 15px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.input{
+    border: 1px solid #fa9a04;
+    background-color: #fff;
+    float: none;
+    margin: 0;
+    height: 18px;
+}
+/*LINKS*/
+a.menu:link, a.menu:visited  { 
+    color: #fff;
+    text-decoration: none;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+a.menu:hover { 
+    color: #ffc307;
+    text-decoration: none; 
+    padding-left: 6px;
+    padding-right: 6px;
+}
+a.link2:link, a.link2:visited  {
+    color: #2a3c52;
+        text-decoration: none;
+    font-size: 11px;
+}
+a.link2:hover { 
+    color: #2a3c52;
+    text-decoration: underline;
+    font-size: 11px;
+}
+a.link3:link, a.link3:visited  {
+    color: #fa9a04;
+    text-decoration: underline;
+    font-size: 0.95 em;
+    font-weight: 700;
+}
+a.link3:hover { 
+    color: #ffc307;
+    text-decoration: none;
+    font-size: 0.95 em;
+    font-weight: 700;
+}
+a.link4:link, a.link4:visited  {
+    color: #fa9a04;
+    text-decoration: underline;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link4:hover { 
+    color: #ffc307;
+    text-decoration: none;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link5:link, a.link5:visited  {
+    color: #208904;
+    text-decoration: underline;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link5:hover { 
+    color: #208904;
+    text-decoration: none;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link5rojo:link, a.link5rojo:visited  {
+    color: #FF0000;
+    text-decoration: underline;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link5rojo:hover { 
+    color:  #FF0000;
+    text-decoration: none;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}	
+a.link6:link, a.link6:visited  {
+    color: #ff0000;
+    text-decoration: underline;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link6:hover { 
+    color: #ff0000;
+    text-decoration: none;
+    font-size: 0.95 em;
+    padding-right: 10px;
+}
+a.link7:link, a.link7:visited  {
+    color: #fa9a04;
+    text-decoration: underline;
+    font-size: 0.95 em;
+}
+a.link7:hover { 
+    color: #ffc307;
+    text-decoration: none;
+    font-size: 0.95 em;
+}
+a.link8:link, a.link8:visited  {
+    color: #838d99;
+    text-decoration: none;
+    font-size: 10px;
+    padding-right: 5px;
+}
+a.link8:hover { 
+    color: #838d99;
+    text-decoration: underline;
+    padding-right: 5px;
+}
+a.link9:link, a.link9:visited  {
+    color: #747576;
+    text-decoration: none;
+    line-height:1.5em;
+    font-size:0.8em;
+}
+a.link9:hover { 
+    color: #999;
+    text-decoration: none;
+    padding-right: 5px;
+}
+.fichaColor{
+    border: 1px solid #E6E6E6;
+    text-align:left;
+    padding:5px;	
+}

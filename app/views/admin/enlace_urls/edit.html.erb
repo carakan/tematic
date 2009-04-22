@@ -1,0 +1,44 @@
+<h1>Editar el enlace URL</h1>
+
+<%= error_messages_for :enlace_url %>
+
+<% form_for(@enlace_url, :url => admin_enlace_url_path, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre, :size => 60 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descripcion corta:<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :descripcion, :size => 60 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Imagen:</th>
+      <td>
+        <%= f.upload_column_field :imagen, :size => 60 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Url<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :url, :size => 60 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Mostrar en la pagina principal</th>
+      <td>
+        <%= f.check_box :mostrar %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_enlace_url_path(@enlace_url) %> |
+<%= link_to 'Ir al listado', admin_enlace_urls_path %>

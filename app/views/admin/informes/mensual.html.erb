@@ -1,0 +1,30 @@
+<h1>Informe de ingresos de usuarios en fecha <%= params[:fecha].to_date.to_s(:date)%></h1>
+<p>
+  <%= link_to('Informes', '/admin/informes') %> | <%= link_to('Imprimir', :format => 'print', :fecha => params[:fecha]) %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Profesion</th>
+    <th>Visitas</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for usuario in @usuarios %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td>
+        <%= link_to(usuario.user.login, admin_user_path(usuario.user)) %>
+      </td>
+      <td>
+        <%= usuario.user.profesion.Profesion if !usuario.user.profesion.nil? %>
+      </td>
+      <td><%= usuario.total %></td>
+    </tr>
+  <% end %>
+</table>
+<% if params[:format] != 'print' %>
+<%= will_paginate @usuarios %>
+<% end %>

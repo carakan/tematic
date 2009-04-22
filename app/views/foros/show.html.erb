@@ -1,0 +1,38 @@
+<% titulo @foro.autor + ': ' + truncate(@foro.titulo, 70) %>
+<%= link_to 'Ir a los foros', foros_path, :class => "link3" %>
+<h3>
+  <%=h @foro.titulo %>
+</h3>
+<div class="post-foro">
+  <p><strong>Autor: </strong><%= @foro.autor %></p>
+  <p style="font-size:12px;">
+    <%= @foro.mensaje %>
+  </p>
+</div>
+<% if @comentarios.empty? %>
+  <div class="comment">
+    No se publicaron comentarios
+  </div>
+<% else%>
+        <% for comentario in @comentarios%>
+    <div class="comment">
+      <strong>Nombre: </strong><%= comentario.nombre %><br>
+      <%= comentario.mensaje %>
+    </div>
+  <% end%>
+  <%= will_paginate @comentarios %>
+<% end%>
+<div class="login">
+  <%- if logged_in? -%>
+    <% form_for(@comentario, :url => foro_comentarios_path(params[:id])) do |f|%>
+      <%= error_messages_for :comentario %>
+      <h4>Añada su comentario</h4>
+      <label>Nombre: </label> <%= f.text_field :nombre, :value => current_user.login %><span class="war">* Requerido</span><br>
+      <label>Email: </label> <%= f.text_field :email, :value => current_user.email %><span class="war">* Requerido (No se mostrara)</span><br>
+      <%= f.text_area :mensaje, :cols => 80, :rows => 5 %><span class="war">* Requerido</span><br>
+    <%= submit_tag 'Comentar' %>
+  <% end %>
+<% else %>      
+  Tiene que estar registrado para publicar un comentario.
+<%- end -%>
+</div>

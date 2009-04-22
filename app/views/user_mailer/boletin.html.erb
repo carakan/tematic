@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Boletin del <%= SITE_NAME %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="-1">
+    <style type="text/css"> 
+      body{
+        font-family:Arial, Helvetica, sans-serif;
+      }           
+    </style>
+  </head>
+  <body>
+    <font face="verdana,arial,helvetica" size="1">
+      Si no puedes ver correctamente este mensaje, accede a:
+      <%= link_to(SITE_URL + "/boletin/#{Time.now.to_date.to_s}.html" , SITE_URL + "/boletin/#{Time.now.to_date.to_s}.html") %>
+    </font>
+    <table width="700" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFF4">
+      <tr>
+        <td align="center"><img src="<%= SITE_URL %>/images/header_boletin.jpg" width="528" height="42"/></td>
+        <td>
+        <div style="margin:0 15px;">
+          <strong><%= @coder.encode(params[:nombre], :named) %><br>
+          <%= Time.now.to_date.strftime("%B de %Y")%></strong>
+        </div>
+      </tr>
+      <tr>
+        <td width="63%" valign="top" style="padding:10px;">
+          <div style="border:solid 1px #EAEAEA;padding:5px; ">		
+            <%= render :partial => '/user_mailer/noticias'%>
+          </div>
+        </td>
+        <td width="37%" valign="top" style="padding:10px;">
+          <div style="border:solid 1px #EAEAEA;padding:5px;">	
+            <%= render :partial => '/user_mailer/eventos'%>
+          </div>	
+          <br>
+          <div style="border:solid 1px #EAEAEA;padding:5px;">	
+            <%= render :partial => '/user_mailer/foro'%>
+          </div>
+          <br>
+          <div style="border:solid 1px #EAEAEA;padding:5px;">	
+            <%= render :partial => '/user_mailer/multimedia'%>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top" colspan="2" style="padding:10px;margin:solid 1px #EEE;">
+          <div style="border:solid 1px #EAEAEA;padding:5px;">	
+            <%= render :partial => '/user_mailer/valor'%>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"  bgcolor="#000000" style="font-size:0.7em; color:white;padding:10px;">
+          <img src="<%= SITE_URL %>/images/logo_unir.gif" align="right" hspace="10"/>
+          Av. 6 de Agosto # 2528
+          <br/>Tel&eacute;fonos: (591) 2-2110665 / 2-2119767
+          <br/>Fax: (591) 2-2110665
+          <br/>La Paz - Bolivia                
+        </td>
+      </tr>
+    </table>
+  </body>
+  <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <meta HTTP-EQUIV="Expires" CONTENT="-1"> <meta HTTP-EQUIV="Expires" CONTENT="-1">
+</html>

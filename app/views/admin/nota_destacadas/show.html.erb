@@ -1,0 +1,33 @@
+<p>
+  <b>Titulo:</b>
+  <%=h @nota_destacada.titulo %>
+</p>
+
+<p>
+  <b>Resumen:</b>
+  <%= @nota_destacada.resumen %>
+</p>
+
+<p>
+  <b>Fuente:</b>
+  <%=h @nota_destacada.fuente %>
+</p>
+
+<p>
+  <b>Archivo:</b>
+  <%=h @nota_destacada.archivo %>
+</p>
+
+<p>
+  <b>Enlace:</b>
+  <%=h @nota_destacada.enlace %>
+</p>
+
+<p>
+  <b>Imagen:</b>
+  <%=h @nota_destacada.imagen %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_nota_destacada_path(@nota_destacada) %> |
+<%= link_to 'Ir al listado', admin_nota_destacadas_path %>

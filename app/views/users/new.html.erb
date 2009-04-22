@@ -1,0 +1,42 @@
+<% titulo 'Registrarse como usuario del Banco Tem&aacute;tico' %>
+<%= error_messages_for :user %>
+<% form_for :user, :url => users_path do |f| -%>
+  <table width="70%" align="center" style="border:1px solid #6699CC">
+    <tr id="box6">
+      <td align="center" colspan="2" class="title5">Datos Personales</td>
+    </tr>
+    <tr>
+      <td class="menuTitulo" >Nombre(s) *</td>
+      <td><%= f.text_field :nombre %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Apellido(s) *</td>
+      <td><%= f.text_field :apellido %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Correo electronico *</td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Profesi&oacute;n *</td>
+      <td><%= f.select :profesion_id, Profesion.find(:all, :order => 'Profesion').collect { |x| [x.Profesion, x.idProfesion] } %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Usuario *</td>
+      <td><%= f.text_field :login %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Contrase&ntilde;a *</td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <td class="menuTitulo">Confirme contraseña *</td>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+    <%= submit_tag 'Registrarse' %>
+        </td>
+      </tr>
+  </table>
+<% end -%>

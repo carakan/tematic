@@ -1,0 +1,48 @@
+<% 
+cadena = 'Serie cronologica - '
+cadena += @cronologia.fechaYear.to_s if !@cronologia.fechaYear.nil?
+cadena += ': ' + @cronologia.descriptor_generico.descriptorGenerico if !@cronologia.descriptor_generico.nil?
+cadena += ' &gt; ' + @cronologia.descriptor_especifico.descriptorEspecifico if !@cronologia.descriptor_especifico.nil?
+titulo cadena
+%>
+<p>
+  <%= link_to('Todos los temas clave', '/tema_clave/clave/' + @cronologia.idDescriptorEspecifico.to_s, :class => "link3")  %>
+</p>
+<table id="box8">
+  <tr>
+    <td id="box5">
+      <span class="title2"><%= @cronologia.fechaYear %></span>&nbsp;
+      <span class="color2"><%= @cronologia.descriptor_generico.descriptorGenerico if !@cronologia.descriptor_generico.nil? %>&nbsp;&gt;&nbsp;<%= @cronologia.descriptor_especifico.descriptorEspecifico if !@cronologia.descriptor_especifico.nil? %></span>
+      <br>
+    </td>
+  </tr>
+  <tr>
+    <td id="box7">
+      <p class="texto_ficha">
+      <span class="title2">Hecho</span><br>
+      <%= @cronologia.hecho %>
+    </td>
+  </tr>
+  <tr><td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" id="box7">
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Contexto</span><br>
+            <%= @cronologia.contexto %>
+          </td>
+        </tr>
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Gobierno</span><br>
+            <%= @cronologia.gobierno %>
+          </td>
+          
+        </tr>
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Fuentes</span><br>
+            <%= @cronologia.fuentes %>
+          </td>
+        </tr>
+  </table></td></tr>
+</table>

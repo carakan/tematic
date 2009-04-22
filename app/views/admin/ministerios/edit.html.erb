@@ -1,0 +1,74 @@
+<h1>Editar  ministerio</h1>
+
+<%= error_messages_for :ministerio %>
+
+<% form_for(@ministerio, :url => admin_ministerio_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Departamento<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDepartamento, DepartamentoBolivia.find(:all).collect { |p| [p.departamento, p.idDepartamento] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Ministerio<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :ministerio, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre del responsable<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :responsable, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Direccion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :direccion, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :telefono, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :celular, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Numero Fax<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fax, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Casilla<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :casilla , :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Correo electronico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina Web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :paginaWeb , :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_ministerio_path(@ministerio) %> |
+<%= link_to 'Ir al listado', admin_ministerios_path %>

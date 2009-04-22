@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>#</th>
+    <th>A&ntilde;o</th>
+    <th>Descriptor Generico</th>
+    <th>Descriptor Especifico</th>
+    <th>Hecho</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for serie_cronologica in @serie_cronologicas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%= serie_cronologica.fechaYear %></td>
+      <td><%= serie_cronologica.descriptor_generico.descriptorGenerico if !serie_cronologica.descriptor_generico.nil? %></td>
+      <td><%= serie_cronologica.descriptor_especifico.descriptorEspecifico if !serie_cronologica.descriptor_especifico.nil? %></td>
+      <td><%= truncate(serie_cronologica.hecho, 200) %></td>
+      <td>
+        <%= link_to 'Mostrar', admin_serie_cronologica_path(serie_cronologica) %><br/>
+        <%= link_to 'Editar', edit_admin_serie_cronologica_path(serie_cronologica) %><br/>
+        <%= link_to 'Eliminar', admin_serie_cronologica_path(serie_cronologica), :confirm => '¿Está seguro de eliminar esta Serie Cronológica?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @serie_cronologicas %>

@@ -1,0 +1,21 @@
+<% titulo DescriptorGenerico.find(params[:dg]).descriptorGenerico + ' - ' + DescriptorEspecifico.find(params[:de]).descriptorEspecifico %>
+<div id="Div1"></div><div id="Div2"></div><div id="Div3"></div><div id="Div4"></div><div id="Div5"></div>
+<table width="100%" border="0" cellspacing="2" cellpadding="2">
+  <tr>
+    <td align="center">
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="650" height="500" align="middle">
+      <param name="allowScriptAccess" value="sameDomain" />
+      <PARAM NAME=movie VALUE='/actor/mapaDeActores/mapaActores.swf?varDeg=<%= params[:dg] %>&varDes=<%= params[:de] %>'> <PARAM NAME=quality VALUE=high><param name="quality" value="high" /><param name="wmode" value="transparent" /><param name="bgcolor" value="#ffffff" /><EMBED src='/actor/mapaDeActores/mapaActores.swf?varDeg=<%= params[:dg] %>&varDes=<%= params[:de] %>' quality="high" wmode="transparent" bgcolor="#ffffff" width="650" height="500" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                                                                                                                                                                                                                                                                                       </OBJECT>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<script type="text/javascript"> 
+  function abrirPosicionActor(url_w, t){
+    var win = new Window({id: t, className: "alphacube", title: "<strong>Directorio de instituciones</strong>", width:380, height:280, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

@@ -1,0 +1,18 @@
+<h3>
+  ¿Tienes problemas para acceder tu cuenta?
+</h3>
+<p>
+  ¿Olvidaste tu contraseña? Ingresa tu email de inicio de sesión y te mandaremos un enlace para cambiar tu contraseña.
+</p>
+<% form_tag url_for(:action => 'forgot_password') do %>
+      
+  <p>
+    <strong>Correo electrónico: </strong>
+    <%= text_field_tag :email, "", :size => 50 %><br>
+  </p>
+  <p>  
+    <%= submit_tag 'Recuperar contraseña' %>
+  </p>
+<% end %>
+
+

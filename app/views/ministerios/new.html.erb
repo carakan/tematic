@@ -1,0 +1,56 @@
+<h1>Nuevo ministerio</h1>
+
+<%= error_messages_for :ministerio %>
+
+<% form_for(@ministerio) do |f| %>
+  <p>
+    <b>Ministerio</b><br />
+    <%= f.text_field :ministerio %>
+  </p>
+
+  <p>
+    <b>Responsable</b><br />
+    <%= f.text_field :responsable %>
+  </p>
+
+  <p>
+    <b>Direccion</b><br />
+    <%= f.text_field :direccion %>
+  </p>
+
+  <p>
+    <b>Telefono</b><br />
+    <%= f.text_field :telefono %>
+  </p>
+
+  <p>
+    <b>Celular</b><br />
+    <%= f.text_field :celular %>
+  </p>
+
+  <p>
+    <b>Fax</b><br />
+    <%= f.text_field :fax %>
+  </p>
+
+  <p>
+    <b>Casilla</b><br />
+    <%= f.text_field :casilla %>
+  </p>
+
+  <p>
+    <b>Email</b><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b>Paginaweb</b><br />
+    <%= f.text_field :paginaWeb %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', ministerios_path %>

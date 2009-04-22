@@ -1,0 +1,8 @@
+<div class="login">
+  <div class="subtitle2">Bienvenid@ <%= current_user.nombre %></div>
+  <% if current_user.has_role?(:administrador) %>
+  <%= link_to 'Ir a administracion', '/admin', :class => 'link3' %>
+  &nbsp;
+  <% end %>
+  <%= link_to 'salir', '/logout', :class => 'link3' %>
+</div>

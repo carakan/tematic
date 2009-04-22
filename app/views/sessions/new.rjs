@@ -1,0 +1,5 @@
+if logged_in? 
+  page.replace_html :cuadro_login, :partial => '/sessions/autenticated' 
+else
+  page.replace_html :cuadro_login, :partial => '/sessions/login'
+end

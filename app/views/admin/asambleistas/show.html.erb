@@ -1,0 +1,23 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @asambleista.nombre %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%=h @asambleista.telefono %>
+</p>
+
+<p>
+  <b>Celular:</b>
+  <%=h @asambleista.celular %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @asambleista.email %>
+</p>
+
+
+<%= link_to 'Editar', edit_asambleista_path(@asambleista) %> |
+<%= link_to 'Ir al listado', asambleistas_path %>

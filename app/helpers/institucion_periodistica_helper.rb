@@ -1,0 +1,2 @@
+module InstitucionPeriodisticaHelper
+end

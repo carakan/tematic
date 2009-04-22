@@ -1,0 +1,46 @@
+<h1>Nuevo ficha_tematica</h1>
+
+<%= error_messages_for :ficha_tematica %>
+
+<% form_for(@ficha_tematica) do |f| %>
+  <p>
+    <b>Autor</b><br />
+    <%= f.text_field :autor %>
+  </p>
+
+  <p>
+    <b>Resumen</b><br />
+    <%= f.text_area :resumen %>
+  </p>
+
+  <p>
+    <b>Pagina</b><br />
+    <%= f.text_field :pagina %>
+  </p>
+
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Editorial</b><br />
+    <%= f.text_field :editorial %>
+  </p>
+
+  <p>
+    <b>Lugar</b><br />
+    <%= f.text_field :lugar %>
+  </p>
+
+  <p>
+    <b>Fechayear</b><br />
+    <%= f.text_field :fechaYear %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', ficha_tematicas_path %>

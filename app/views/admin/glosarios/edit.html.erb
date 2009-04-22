@@ -1,0 +1,32 @@
+<h1>Editar  glosario</h1>
+
+<%= error_messages_for :glosario %>
+
+<% form_for(@glosario, :url => admin_glosario_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Concepto<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :concepto, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Definicion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :glosario, :definicion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_glosario_path(@glosario) %> |
+<%= link_to 'Ir al listado', admin_glosarios_path %>

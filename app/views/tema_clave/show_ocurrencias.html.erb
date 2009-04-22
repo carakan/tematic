@@ -1,0 +1,30 @@
+<p>  
+  <h2 style="color:blue; "><span style="color:black; ">Las ocurrencias de </span><%=h @tag.descripcion %><span style="color:black; "> son:</span></h2>
+</p>
+<br />
+<table>
+  <tr>
+    <td width="49%" valign="top" bgcolor="#E8ECFF">
+      <% if @serie_cronologicas.length > 0 %>
+        <%= render :partial => "crono" %>
+      <% end %>
+    </td>
+    <td width="49%" valign="top" bgcolor="#FFFE96">
+      <% if @serie_comparativas.length > 0 %>
+        <%= render :partial => "compa" %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td width="49%" valign="top" bgcolor="#CCFFCC">
+      <% if @valores.length > 0 %>
+        <%= render :partial => "biblio" %>
+      <% end %>
+    </td>
+    <td width="49%" valign="top" bgcolor="#FFCCFF">
+      <% if @primera_manos.length > 0 %>
+        <%= render :partial => "prime" %>
+      <% end %>
+    </td>
+  </tr>
+</table>

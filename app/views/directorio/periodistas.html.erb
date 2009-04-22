@@ -1,0 +1,43 @@
+<% titulo 'Directorio de Periodistas'%>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "periodistas"}, :method => :get) do %>
+    <%= hidden_field_tag :departamento, (params[:departamento] == nil)?'Todos':params[:departamento] %>
+    <%= hidden_field_tag :institucion, params[:institucion] %>
+    <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%> <%= link_to('Todos los periodistas', {:action => :periodistas, :institucion => params[:institucion], :departamento => params[:departamento]}, :class => 'link3') %>
+  <% end %>
+</div>  
+<% if !@periodistas.empty? %>
+      <% for periodista in @periodistas %>
+    <table border="0" cellpadding="2" cellspacing="2" class="directorio">
+      <tr>
+        <td><strong><%= periodista.nombre %></strong></td>
+      </tr>
+      <tr>
+        <td><%= periodista.nom_institucion%></td>
+      </tr>
+      <tr>
+        <td><%= periodista.nom_cargo %></td>
+      </tr>
+      <tr>
+        <td><%= periodista.nom_departamento %></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to_function('Ficha', "ventana('#{periodista.id}', '/directorio/mostrar/#{periodista.id}?ver=periodista')") %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+<% else%>
+  <strong>No existen registros.</strong>
+<% end %>
+<div style="clear:both;"></div>
+<%= will_paginate @periodistas %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Directorio de periodistas</strong>", width:300, height:250, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+  </script>

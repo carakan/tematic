@@ -1,0 +1,2 @@
+page.replace_html :tags_lista, :partial => 'list'
+page[:indicador_busqueda].hide

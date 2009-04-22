@@ -1,0 +1,16 @@
+<h1>Editing profesion</h1>
+
+<%= error_messages_for :profesion %>
+
+<% form_for(@profesion, :url => admin_profesion_path) do |f| %>
+  <p>
+    <b>Profesion</b><br />
+    <%= f.text_field :Profesion %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_profesions_path %>

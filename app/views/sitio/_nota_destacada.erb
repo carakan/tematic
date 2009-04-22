@@ -1,0 +1,11 @@
+<table border="0">
+  <%- for nota in NotaDestacada.find(:all, :limit => 1, :order => 'id DESC') -%>
+    <tr>
+      <td>
+        <img src="/archivos/notaDestacada/imagen/<%= nota.imagen.filename %>" border=0 align="left" width="60" height="70" style="padding-right:10px">
+        <%= link_to(nota.titulo ,{:controller => 'nota_destacadas', :action => 'show', :id => nota}, :class => 'enlaceTitulo_ficha') %>
+        <p class="texto_ficha"><%= nota.resumen %></p>
+      </td>
+    </tr>
+  <%- end -%>
+</table>

@@ -1,0 +1,26 @@
+<h1>Listado de alcaldes registrados</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Email</th>
+    <th>Municipio</th>
+    <th>Departamento</th>
+    <th>Partido Politico</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for alcalde in @alcaldes %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h alcalde.nombre %></td>
+      <td><%=h alcalde.telefono %></td>
+      <td><%=h alcalde.email %></td>
+      <td><%=h alcalde.municipio.municipio if !alcalde.municipio.nil? %></td>
+      <td><%=h alcalde.departamento.departamento %></td>
+      <td><%=h alcalde.partido_politico.sigla if !alcalde.partido_politico.nil?  %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,23 @@
+<% if !request.xhr? %>
+  <%= link_to('Ir a todos los eventos',{:action => 'eventos_concursos'}, :class => "link3" )%>
+<% end %>
+<% titulo('Agenda: ' + h(@calendario.titulo)) %>
+<div class="login">
+  <table>
+    <tr>
+      <th align="center" colspan="2">
+        <h4><%= h(@calendario.titulo) %> <h4>
+      </th>
+    </tr>
+    <tr>
+      <td colspan="2" align="justify">
+        <%= @calendario.resumen %>
+      </td>
+    </tr>
+    <tr><td colspan="2">
+        <p align="right"><%=h @calendario.fecha.to_s(:date) %></p>
+    </td></tr>
+  </table>
+</div>
+<% %>
+

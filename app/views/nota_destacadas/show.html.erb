@@ -1,0 +1,11 @@
+<% titulo truncate(@nota_destacada.titulo, 70) %>
+<%= link_to 'Todas las notas destacadas', nota_destacadas_path, :class => "link3" %>
+<h3><%= @nota_destacada.titulo %></h3>  
+<div style="float:left;margin:5px;"><%= image_tag('/archivos/notaDestacada/imagen/' + @nota_destacada.imagen.filename) if !@nota_destacada.imagen.nil? %></div>
+<span class="smallSubtitulo"><%=h @nota_destacada.created_at.to_s(:date) %></span>
+    <%= @nota_destacada.resumen %>
+  <p>
+    <b>Fuentes:</b>
+    <%=h @nota_destacada.fuente %>
+  </p>
+<%= link_to('Archivo', @nota_destacada.archivo.url, :class => 'link3', :target => '_blank') if !@nota_destacada.archivo.nil? %>

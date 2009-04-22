@@ -1,0 +1,49 @@
+<h1>Nuevo valor_noticia</h1>
+
+<%= error_messages_for :valor_noticia %>
+
+<% form_for(@valor_noticia, :url => admin_valor_noticias_path, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Imagen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :imagen %>
+      </td>
+    </tr>
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Autor<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :autor, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descripcion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :valor_noticia, :descripcion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_valor_noticias_path %>

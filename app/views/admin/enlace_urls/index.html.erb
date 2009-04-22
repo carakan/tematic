@@ -1,0 +1,29 @@
+<h1>Listado de enlaces a otros sitios</h1>
+<p>
+  <%= link_to 'Nuevo enlace', new_admin_enlace_url_path %>
+</p>
+<table>
+  <tr>
+    <th>Mostrar</th>
+    <th>Nombre</th>
+    <th>Descripcion</th>
+    <th>Url</th>
+    <th>Imagen</th>
+  </tr>
+  
+  <% for enlace_url in @enlace_urls %>
+    <tr>
+      <td><%= (enlace_url.mostrar)?'Si':'No' %></td>
+      <td><%=h enlace_url.nombre %></td>
+      <td><%=h enlace_url.descripcion %></td>
+      <td><%=h enlace_url.url %></td>
+      <td><%= image_tag('/archivos/enlaces/' + enlace_url.imagen.filename) if !enlace_url.imagen.nil? %></td>
+      <td><%= link_to 'Editar', edit_admin_enlace_url_path(enlace_url) %></td>
+      <td><%= link_to 'Destruir', admin_enlace_url_path(enlace_url), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @enlace_urls %>
+<p>
+  <%= link_to 'Nuevo enlace', new_admin_enlace_url_path %>
+</p>

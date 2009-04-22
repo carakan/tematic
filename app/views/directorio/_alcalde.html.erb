@@ -1,0 +1,52 @@
+<div class="login">
+<table>
+  <tr>
+    <th>Nombre</th>
+    <td>
+      <%= alcalde.nombre %>
+    </td>
+  </tr>
+  <tr>
+    <th>Departamento</th>
+    <td>
+      <%= alcalde.departamento.departamento %>
+    </td>
+  </tr>
+  <tr>
+    <th>Municipio</th>
+    <td>
+      <%= alcalde.municipio.municipio %>
+    </td>
+  </tr>
+  <tr>
+    <th>Partido Politico</th>
+    <td>
+      <%= alcalde.partido_politico.partidoPolitico + ' - ' + alcalde.partido_politico.sigla %>
+    </td>
+  </tr>
+  <tr>
+    <th>Telefono</th>
+    <td>
+      <%= alcalde.telefono %>
+    </td>
+  </tr>
+  <tr>
+    <th>Celular</th>
+    <td>
+      <%= alcalde.celular %> 
+    </td>
+  </tr>
+  <tr>
+    <th>Correo Electronico</th>
+    <td>
+      <%= alcalde.email %>
+    </td>
+  </tr>
+  <tr>
+    <th>Pagina Web</th>
+    <td>
+      <%= alcalde.paginaWeb %>
+    </td>
+  </tr>
+</table>
+</div>

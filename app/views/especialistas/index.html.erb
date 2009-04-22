@@ -1,0 +1,38 @@
+<h1>Listado de especialistas</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Celular</th>
+    <th>Perfil</th>
+    <th>Publicacion</th>
+    <th>Profesion</th>
+    <th>Especialidad</th>
+    <th>Lugar</th>
+    <th>Email</th>
+    <th>Paginaweb</th>
+  </tr>
+
+<% for especialista in @especialistas %>
+  <tr>
+    <td><%=h especialista.nombre %></td>
+    <td><%=h especialista.telefono %></td>
+    <td><%=h especialista.celular %></td>
+    <td><%=h especialista.perfil %></td>
+    <td><%=h especialista.publicacion %></td>
+    <td><%=h especialista.profesion %></td>
+    <td><%=h especialista.especialidad %></td>
+    <td><%=h especialista.lugar %></td>
+    <td><%=h especialista.email %></td>
+    <td><%=h especialista.paginaWeb %></td>
+    <td><%= link_to 'Mostrar', especialista %></td>
+    <td><%= link_to 'Editar', edit_especialista_path(especialista) %></td>
+    <td><%= link_to 'Borrar', especialista, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo especialista', new_especialista_path %>

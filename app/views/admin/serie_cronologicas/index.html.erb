@@ -1,0 +1,14 @@
+<h1>Listado de Series Cronol&oacute;gicas</h1>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+  Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+  <input type="submit" value="Buscar">   <%= link_to('busqueda avanzada', {:action => 'busqueda'}) %>
+<% end %>
+<p>
+  <%= link_to 'Nueva Serie Cronol&oacute;gica', new_admin_serie_cronologica_path%>
+</p>
+<div id ="serie_cronologicas_list">
+  <%= render :partial => 'list'%>
+</div>
+<p>
+  <%= link_to 'Nueva Serie Cronol&oacute;gica', new_admin_serie_cronologica_path%>
+</p>

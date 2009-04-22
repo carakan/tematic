@@ -1,0 +1,19 @@
+<h1>Listado de tipos de instituciones</h1>
+
+<table>
+  <tr>
+    <th>Tipoinstitucion</th>
+  </tr>
+
+<% for tipo_institucion in @tipo_institucions %>
+  <tr class="<%= cycle('odd','par') %>">
+    <td><%=h tipo_institucion.tipoInstitucion %></td>
+    <td><%= link_to 'Editar', edit_admin_tipo_institucion_path(tipo_institucion) %></td>
+    <td><%= link_to 'Destruir', admin_tipo_institucion_path(tipo_institucion), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo tipo_institucion', new_admin_tipo_institucion_path %>

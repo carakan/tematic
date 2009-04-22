@@ -1,0 +1,27 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="501" bgcolor="#FFFFBB" style="width:100%;padding:5px;font-family:Verdana, Arial, Helvetica, sans-serif;color:#000099;"><h4 style="margin:0;">Primera Mano</h4></td>
+  </tr>
+  <%- for noticia in PrimeraMano.find(:all, :limit => 3, :order => "idPrimeraMano DESC") -%>
+    <tr style="border:1px solid #E8E8E8">
+      <td bordercolor="#CCCCCC">
+        <div style="border-bottom:dotted 2px #E0E0E0">
+          <table align="left" cellpadding="0" cellspacing="5" height="70" width="100">
+            <tbody>
+              <tr>
+                <td align="center">
+                    <%= image_tag(SITE_URL + '/archivos/primeraMano/imagen/' + noticia.imagen.filename, :size => '100x70') if !noticia.imagen.nil? %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 align="justify"><%= @coder.encode(noticia.titular, :named) %></h4>
+          <%= noticia.presentacion.sub(/<p>/i,"<p align='justify'>") %>
+          <p align="right"> 
+          <%= link_to(image_tag(SITE_URL + '/images/pdf.gif', :style =>'border:none;') + ' Descargar ...', SITE_URL + '/archivos/primeraMano/archivos/' + noticia.archivo1.filename, :target=>"_blank") if !noticia.archivo1.nil? %>
+          </p>
+        </div>
+      </td>
+    </tr>
+  <%- end -%>
+</table>

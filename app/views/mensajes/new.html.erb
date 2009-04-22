@@ -1,0 +1,24 @@
+<%= error_messages_for :mensaje %>
+<% titulo 'Nuevo mensaje' %>
+<div id="box6">
+  <%= link_to('Mensajes recibidos', :modo => 'recibido', :action => "index") %> | <%= link_to('Mensajes enviados', :modo => 'enviado', :action => "index") %>
+</div>
+<h3>Enviar un mensaje</h3>
+<% form_for(@mensaje) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo, :size => 80 %>
+  </p>
+  <p>
+    <b>Enviar a:</b><br />
+    <%= model_auto_completer "user[nombre]", params[:nombre],"mensaje[recibido_id]", params[:id], { }, { :size => 50 } %>
+  </p>
+  <p>
+    <b>Mensaje</b><br />
+    <%= f.text_area :mensaje %>
+  </p>
+
+  <p>
+    <%= f.submit "Enviar mensaje" %>
+  </p>
+<% end %>

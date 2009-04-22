@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  total: 1
+  mensual: 1
+
+two:
+  total: 1
+  mensual: 1

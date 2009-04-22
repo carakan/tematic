@@ -1,0 +1,38 @@
+<p>
+  <b>Imagen:</b>
+  <%=h @departamento.imagen %>
+</p>
+<p>
+  <b>Departamento:</b>
+  <%=h @departamento.departamento %>
+</p>
+<p>
+  <b>Fundacion:</b>
+  <%=h @departamento.fundacion %>
+</p>
+<p>
+  <b>Aniversario Civico:</b>
+  <%=h @departamento.aniversarioCivico %>
+</p>
+<p>
+  <b>Altitud:</b>
+  <%=h @departamento.altitud %>
+</p>
+<p>
+  <b>Poblacion:</b>
+  <%=h @departamento.poblacion %>
+</p>
+<p>
+  <b>Superficie:</b>
+  <%=h @departamento.superficie %>
+</p>
+<p>
+  <b>Capital:</b>
+  <%=h @departamento.capital %>
+</p>
+<p>
+  <b>Poblacion de la Capital:</b>
+  <%=h @departamento.poblacionCapital %>
+</p>
+<%= link_to _('Editar'), edit_admin_departamento_path(@aula) %> |
+<%= link_to _('Ir al listado'), admin_departamentos_path %>

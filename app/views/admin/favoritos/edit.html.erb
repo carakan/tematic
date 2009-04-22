@@ -1,0 +1,22 @@
+<h1>Editing favorito</h1>
+
+<%= error_messages_for :favorito %>
+
+<% form_for(@favorito, :url => admin_favorito_path) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Enlace</b><br />
+    <%= f.text_field :enlace %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', @favorito %> |
+<%= link_to 'Ir al listado', favoritos_path %>

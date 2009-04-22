@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th>#</th>    
+    <th>Descripción de la palabra clave</th>
+    <th>Ocurrencias</th>
+    <th>Enlazados</th>
+  </tr>
+  
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for tag in @tags %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*100 + contador) %></td>
+      <% para_mostrar="#{tag.descripcion}"%>      
+      <% para_mostrar="<strong style='color:red'>#{tag.descripcion}</strong> [Nuevo]" if tag.enlazados==0%>
+      <td><%= para_mostrar %></td>
+      <td><%=h tag.ocurrencias %></td>    
+      <td><%=h tag.enlazados %></td>
+      <td>
+        <%= link_to 'Mostrar', admin_tag_path(tag) %>
+        <%= link_to 'Editar', edit_admin_tag_path(tag) %>
+        <%= link_to 'Eliminar', admin_tag_path(tag), :confirm => '¿Est&aacute; seguro de eliminar este registro?', :method => :delete %>     
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @tags %>

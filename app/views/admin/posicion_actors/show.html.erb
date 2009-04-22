@@ -1,0 +1,23 @@
+<p>
+  <b>Fecha:</b>
+  <%=h @posicion_actor.fecha %>
+</p>
+
+<p>
+  <b>Titular:</b>
+  <%=h @posicion_actor.titular %>
+</p>
+
+<p>
+  <b>Posicion:</b>
+  <%=h @posicion_actor.posicion %>
+</p>
+
+<p>
+  <b>Fuente:</b>
+  <%=h @posicion_actor.fuente %>
+</p>
+
+
+<%= link_to 'Editar', edit_posicion_actor_path(@posicion_actor) %> |
+<%= link_to 'Ir al listado', posicion_actors_path %>

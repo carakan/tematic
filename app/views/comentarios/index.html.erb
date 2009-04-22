@@ -1,0 +1,23 @@
+<h1>Listado de comentarios</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Mensaje</th>
+  </tr>
+
+<% for comentario in @comentarios %>
+  <tr>
+    <td><%=h comentario.nombre %></td>
+    <td><%=h comentario.email %></td>
+    <td><%=h comentario.mensaje %></td>
+    <td><%= link_to 'Mostrar', comentario %></td>
+    <td><%= link_to 'Editar', edit_comentario_path(comentario) %></td>
+    <td><%= link_to 'Borrar', comentario, :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'Nuevo comentario', new_comentario_path %>

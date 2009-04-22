@@ -1,0 +1,19 @@
+<div class="cajazul">
+  <p>
+    <a href="/foros" class="link2" title="Foros del Banco Tematico"><img src="/images/group.gif" align="absmiddle" border="0px">&nbsp;Foro</a><br>
+  </p>
+  <p>
+    <% master = User.find(:first, :conditions => ["login = ?", 'webmaster']) %>
+    <%= link_to(image_tag('help.gif', :align => "absmiddle") + ' Pedir ayuda o informaci&oacute;n' , new_mensaje_path(:id => master, :nombre => 'Web Master del Banco Tematico' ), :class => 'link2', :title => 'Enviar una sugerencia al Webmaster') %>
+  </p>
+  <p>
+    <% primera = PrimeraMano.find(:first, :order => 'idPrimeraMano DESC') %>
+    <%= link_to(image_tag('star.gif', :align => "absmiddle") + ' ' + primera.titular, primera, :class => 'link2', :title => 'Nuestra primera mano') %>
+  </p><p>
+    <% nota = NotaDestacada.find(:first, :order => 'id DESC') %>
+    <%= link_to(image_tag('star.gif', :align => "absmiddle") + ' ' + nota.titulo, nota, :class => 'link2', :title => 'Nuestra nota destacada') %>
+  </p><p>
+    <% valor = ValorNoticia.find(:first, :order => 'idValorNoticia DESC') %>
+    <%= link_to(image_tag('star.gif', :align => "absmiddle") + ' ' + valor.titulo, {:controller => 'biblioteca', :action => 'valor_noticia', :id => valor}, :class => 'link2', :title => 'Nuestro valor noticia') %>
+  </p>
+</div>

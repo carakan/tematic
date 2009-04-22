@@ -1,0 +1,38 @@
+<h1>Editar  legislacion</h1>
+
+<%= error_messages_for :legislacion %>
+
+<% form_for(@legislacion, :url => admin_legislacion_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Descriptor Generico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDescriptorGenerico, DescriptorGenerico.find(:all).collect { |x| [x.descriptorGenerico, x.idDescriptorGenerico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Descripcion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :descripcion %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contenido<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :legislacion, :contenido, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :archivo %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_legislacion_path(@legislacion) %> |
+<%= link_to 'Ir al listado', admin_legislacions_path %>

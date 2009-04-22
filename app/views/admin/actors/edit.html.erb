@@ -1,0 +1,26 @@
+<h1>Editar  actor</h1>
+
+<%= error_messages_for :actor %>
+
+<% form_for(@actor, :url => admin_actor_path) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre %>
+      </td>
+    </tr>
+    <tr>
+      <th>Url del archivo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :urlArchivo %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_actor_path(@actor) %> |
+<%= link_to 'Ir al listado', admin_actors_path %>

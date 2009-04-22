@@ -1,0 +1,25 @@
+<h1>Editing imagen</h1>
+
+<%= error_messages_for :imagen %>
+<% form_for(@imagen, :url => admin_imagen_path, :html => {:multipart => true}) do |f| %>
+    <table class="no_flash">
+    <tr>
+      <th>Titulo o descripción<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Imagen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :imagen, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_imagens_path %>

@@ -1,0 +1,12 @@
+<table>
+  <% offset = params[:offset].to_i %>
+  <tr>
+    <td><%= link_to_remote(image_tag('izq.gif', :title => 'Ir al anterior actor'), :url => {:action => "index", :offset => (offset - 1)}) if offset > 0 %></td>
+    <td>
+      <% for actor in @actors %>
+        <%= link_to_remote(image_tag('/archivos/imgMapaActores/' + actor.urlArchivo.filename, :title => actor.nombre), :url=>{:action => 'mostrar', :id => actor.id}) if !actor.urlArchivo.nil? %>
+      <% end %>
+    </td>
+    <td><%= link_to_remote(image_tag('der.gif', :title => 'Ir al siguiente actor'), :url => {:action => "index", :offset => (offset + 1)}) %></td>
+  </tr>
+</table>

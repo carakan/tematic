@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="description" content="Los datos que mejoran las noticias,sitio de consulta de los periodistas, analisis profundo de temas claves, primera mano y notas destacadas " />
+    <meta name="keywords" content="periodismo, priodista Bolivia, primera mano, temas clave, bibliotena virtual, directorio de periodistas, directorio de periodistas Bolivia, periodistas de Bolivia, foro periodistas, eventos periodistas Bolivia, periodista, banco tematico, tematica periodistica, autonomia santa cruz" />
+    <link href="<%=formatted_primera_manos_url(:rss)%>" rel="alternate" title="Banco Temático - Primera Mano RSS" type="application/rss+xml">
+    <link href="<%=formatted_nota_destacadas_url(:rss)%>" rel="alternate" title="Banco Temático - Notas destacadas RSS" type="application/rss+xml">
+    <title>Banco Tematico - Los datos que mejoran las noticias, Primera mano, Valores Noticia</title>
+    <%= stylesheet_link_tag 'style.css' %>
+    <%= stylesheet_link_tag 'banco.css' %>
+  </head>
+  <body onload="holas();" id="body">
+    <div id='header'>
+      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="1000" height="70" align="middle">
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="movie" value="/swf/inicio_Banco_Tematico.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" /><embed src="/swf/inicio_Banco_Tematico.swf" quality="high" bgcolor="#000000" width="1000" height="70" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+      </object>
+    </div>
+    <div class="clearfix" id="menujs">
+      <%= javascript_include_tag 'stmenu', :languaje => 'JavaScript1.2' %>   
+      <script id="Sothink Widgets:index.pgt" type="text/javascript" language="JavaScript1.2" src="/javascripts/tematicom.js"></script>
+    </div>
+    <div class="clearfix" id="buscarp">
+      <%= render :partial => '/sitio/busqueda' %>
+    </div>
+    <div id="contenido">
+      <%= ('<div id="mensaje">' + flash[:notice] + '</div>') if !flash[:notice].nil? %>
+      <%= yield %>
+    </div>
+    <div id="footer">
+      <%= image_tag 'logo_unir.gif', :align=>'right' %>Av. 6 de Agosto # 2528<br>Teléfonos: (591) 2-2110665 / 2-2119767<br>Fax: (591) 2-2110665<br>La Paz - Bolivia
+    </div>
+    <%= javascript_include_tag 'prototype-packer' %>
+    <script type="text/javascript"> 
+        function holas() {new Ajax.Request('/sessions/new', {method: 'get', asynchronous:true, evalScripts:true});new Effect.Highlight('mensaje', {startcolor :'#BFEEFF'});}
+    </script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-915307-1");pageTracker._initData();pageTracker._trackPageview();
+    </script>
+  </body>
+</html>

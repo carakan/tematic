@@ -1,0 +1,30 @@
+<% titulo 'Calendario de fechas hist&oacute;ricas'%>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "index"}, :method => :get) do %>
+    <%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+        <%= calendar_date_select_tag "e_date", nil, :embedded => true, :year_range => 100, :buttons => false, :month_year => "label",
+                                     :onchange => "ventana($F(this), '/calendarios/mostrar?fecha=' + $F(this));" %>
+    <% end %>
+  </div>
+  <table id="box2">
+    <% for calendario in @calendarios %>
+      <tr><td>
+      <table id="content" width="100%">	
+        <tr>
+          <td>
+            <strong><%=h calendario.titulo %></strong><br>
+            <span class="smallSubtitulo"><%= calendario.fecha.to_s(:date) %></span>
+            <p align="justify"><%= calendario.resumen %></p>
+          </td>
+      </tr></table>
+    <% end %>
+  </table>
+  <%= will_paginate @calendarios, :prev_label => '&laquo;', :next_label   => '&raquo;' %>
+<script type="text/javascript"> 
+  function ventana(id_w, url_w){
+    var win = new Window({id: id_w, className: "alphacube", title: "<strong>Fechas hist&oacute;ricas</strong>", width:320, height:200, maximizable: false, minimizable: false, wiredDrag: true}); 
+    win.setAjaxContent(url_w,{ method: 'get'});
+    win.setDestroyOnClose();
+    win.showCenter();
+  }
+</script>

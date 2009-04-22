@@ -1,0 +1,22 @@
+<h1>Listado de descriptores especificos</h1>
+<p>
+  <%= link_to 'Nuevo descriptor especifico', new_admin_descriptor_especifico_path %>
+</p>
+<table>
+  <tr>
+    <th>Descriptor Generico</th>
+    <th>Descriptor Especifico</th>
+  </tr>
+  <% for descriptor_especifico in @descriptor_especificos %>
+    <tr class="<%= cycle('odd','par') %>">
+      <td><%=h descriptor_especifico.descriptor_generico.descriptorGenerico %></td>
+      <td><%=h descriptor_especifico.descriptorEspecifico %></td>
+      <td><%= link_to 'Editar', edit_admin_descriptor_especifico_path(descriptor_especifico) %></td>
+      <td><%= link_to 'Destruir', admin_descriptor_especifico_path(descriptor_especifico), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @descriptor_especificos %>
+<p>
+  <%= link_to 'Nuevo descriptor especifico', new_admin_descriptor_especifico_path %>
+</p>

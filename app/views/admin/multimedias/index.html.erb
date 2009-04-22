@@ -1,0 +1,31 @@
+<h1>Listado de elementos multimedia</h1>
+<p>
+  <%= link_to 'Nuevo multimedia', new_admin_multimedia_path %> 
+</p>
+<p>
+  <%= link_to 'Crear archivo sitemap', formatted_admin_multimedias_path(:xml) %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Archivo</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for multimedia in @multimedias %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h multimedia.titulo %></td>
+      <td><%=h multimedia.archivo.filename %></td>
+      <td><%= link_to 'Editar', edit_admin_multimedia_path(multimedia) %></td>
+      <td><%= link_to 'Borrar', admin_multimedia_path(multimedia), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @multimedias %>
+<br />
+<p>
+  <%= link_to 'Nuevo multimedia', new_admin_multimedia_path %>
+</p>

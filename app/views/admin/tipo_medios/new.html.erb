@@ -1,0 +1,16 @@
+<h1>Nuevo tipo_medio</h1>
+
+<%= error_messages_for :tipo_medio %>
+
+<% form_for(@tipo_medio, :url => admin_tipo_medios_path) do |f| %>
+  <p>
+    <b>Tipomedio</b><br />
+    <%= f.text_field :tipoMedio %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_tipo_medios_path %>

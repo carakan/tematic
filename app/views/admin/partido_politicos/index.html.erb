@@ -1,0 +1,24 @@
+<h1>Listado de partidos politicos</h1>
+<p>
+  <%= link_to 'Nuevo partido_politico', new_admin_partido_politico_path %>
+</p>
+<table>
+  <tr>
+    <th>Sigla</th>
+    <th>Partidopolitico</th>
+  </tr>
+  
+  <% for partido_politico in @partido_politicos %>
+    <tr class="<%= cycle('odd','par') %>">
+      <td><%=h partido_politico.sigla %></td>
+      <td><%=h partido_politico.partidoPolitico %></td>
+      <td><%= link_to 'Mostrar', admin_partido_politico_path(partido_politico) %></td>
+      <td><%= link_to 'Editar', edit_admin_partido_politico_path(partido_politico) %></td>
+      <td><%= link_to 'Destruir', admin_partido_politico_path(partido_politico), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @partido_politicos %>
+<p>
+  <%= link_to 'Nuevo partido_politico', new_admin_partido_politico_path %>
+</p>

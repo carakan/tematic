@@ -1,0 +1,36 @@
+<h1>Listado de ministerios</h1>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+  Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+  <input type="submit" value="Buscar"> 
+<% end %>
+<p>
+  <%= link_to 'Nuevo ministerio', new_admin_ministerio_path %> | <%= link_to(image_tag('print.gif', :title => "Imprimir listado de ministerios"), formatted_admin_ministerios_path(:print))%>
+</p>
+<table>
+<tr>
+  <th>#</th>
+  <th>Ministerio</th>
+  <th>Responsable</th>
+  <th>Direccion</th>
+  <th>Telefono</th>
+</tr>
+<% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+<% contador = 0 %>
+<% for ministerio in @ministerios %>
+  <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+    <td><%=h ministerio.ministerio %></td>
+    <td><%=h ministerio.responsable %></td>
+    <td><%=h ministerio.direccion %></td>
+    <td><%=h ministerio.telefono %></td>
+    <td><%= link_to 'Mostrar', admin_ministerio_path(ministerio) %></td>
+    <td><%= link_to 'Editar', edit_admin_ministerio_path(ministerio) %></td>
+    <td><%= link_to 'Borrar', admin_ministerio_path(ministerio), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @ministerios %>
+<p>
+  <%= link_to 'Nuevo ministerio', new_admin_ministerio_path %>
+</p>

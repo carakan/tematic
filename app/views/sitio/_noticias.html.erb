@@ -1,0 +1,18 @@
+<table cellpadding="0" cellspacing="0" align="center">
+  <% for noticia in PrimeraMano.find(:all, :limit => 3, :order => "idPrimeraMano DESC")%>
+    <tr>
+      <td style="padding-top:5px;border-bottom:1px dashed #CCCCCC">
+        <div class="imagen">
+             <%= image_tag('/archivos/primeraMano/imagen/' + noticia.imagen.filename, :size => '100x70') if !noticia.imagen.nil? %>
+        </div>
+        <span class="titulo_ficha"><%= noticia.titular %></span>
+        <p class="texto_ficha">
+          <%= noticia.presentacion %>
+        </p>
+        <p align="right">
+          <%= link_to(image_tag('pdf.gif') + ' Descargar ...', noticia.archivo1.url, :class => 'link6', :target=>"_blank") if !noticia.archivo1.nil? %><%= ' | ' + link_to(image_tag('pdf.gif') + ' Descargar ...', noticia.archivo2.url, :class => 'link6', :target=>"_blank") if !noticia.archivo2.nil? %>
+        </p>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,11 @@
+<div class="cajazul">
+  <p><span class="title5">Hoy en la historia</span><br /><br />
+    <% dia = Time.now.to_date %>
+    <% hoy = Calendario.find(:all, :conditions => ["DAY(fecha) = DAY(?) AND MONTH(fecha) = MONTH(?) AND tipo = 'F'", dia, dia]) %>
+    <span class="title"><%= dia.strftime("%d de %B") %></span><br />
+    <br />
+    <% for hecho in hoy %>
+        <%= hecho.resumen %>
+    <% end %>
+  </p>
+</div>

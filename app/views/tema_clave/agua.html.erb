@@ -1,0 +1,14 @@
+<% titulo 'Tema clave: ' + @descriptor.descriptor_generico.descriptorGenerico + ' - ' + @descriptor.descriptorEspecifico %>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td width="49%" valign="top">
+      <%= render :partial => "cronologica" %>
+    </td>
+    <td width="2%">
+      &nbsp;
+    </td>
+    <td width="49%" valign="top">
+      <%= render :partial => "comparativa" %>
+    </td>
+  </tr>
+</table>

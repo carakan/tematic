@@ -1,0 +1,35 @@
+<h4>Series Cronol&oacute;gicas </h4>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" class="ewContentColumn">
+      <div class="cuadro_busqueda">
+        <% form_tag({:action => params[:action]}, :method => :get) do %>
+          <strong>Desde el año: <%= text_field_tag(:ini, params[:ini], :size => 4)%> al <%= text_field_tag(:fin, params[:fin], :size => 4)%></strong>
+          <br>
+          <%= text_field_tag(:b_cro, params[:b_cro])%> <%= submit_tag '', :class => 'botonBuscar'%>
+    <% end %>
+      </div>
+      <table id="box2" width="100%">
+        <% if @cronologicas.empty? %>
+          <h5>No existen registros.</h5>
+        <% else%>
+            <% for cronologia in @cronologicas  %>
+            <tr>
+              <td id="box5">
+                <span class="title2"><%= cronologia.fechaYear %></span>&nbsp;
+                <span class="color2"><%= cronologia.generico %> &gt; <%= cronologia.especifico %></span>
+                <br>
+              </td>
+            </tr>
+            <tr>
+              <td align="justify" style="padding:5px;">
+                <%= link_to(truncate(cronologia.hecho, 150), {:action => 'show_cronologia', :id => cronologia }, :class=>"link9") %>
+              </td>
+            </tr>
+          <% end %>
+      <% end %>
+      </table>
+      <%= will_paginate @cronologicas, :param_name => 'page_cro', :prev_label   => '&laquo;', :next_label   => '&raquo;' %>
+    </td>
+  </tr>
+</table>

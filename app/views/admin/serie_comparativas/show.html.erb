@@ -1,0 +1,28 @@
+<p>
+  <b>Hecho:</b>
+  <%= @serie_comparativa.hecho %>
+</p>
+
+<p>
+  <b>Contexto:</b>
+  <%= @serie_comparativa.contexto %>
+</p>
+
+<p>
+  <b>Gobierno:</b>
+  <%= @serie_comparativa.gobierno %>
+</p>
+
+<p>
+  <b>Fuentes:</b>
+  <%= @serie_comparativa.fuentes %>
+</p>
+
+<p>
+  <b>Paginaweb:</b>
+  <%= @serie_comparativa.paginaWeb %>
+</p>
+
+
+<%= link_to 'Editar', edit_admin_serie_comparativa_path(@serie_comparativa) %> |
+<%= link_to 'Ir al listado', admin_serie_comparativas_path %>

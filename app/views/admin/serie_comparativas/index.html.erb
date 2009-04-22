@@ -1,0 +1,36 @@
+<h1>Listado de Serie comparativas</h1>
+<% form_tag({:action => 'index'}, :method => :get) do %>
+Buscar: <%= text_field_tag :busqueda, params[:busqueda] %>
+<input type="submit" value="Buscar">   <%= link_to('busqueda avanzada', {:action => 'busqueda'}) %>
+<% end %>
+<p>
+<%= link_to 'Nuevo serie_comparativa', new_admin_serie_comparativa_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Pais</th>
+    <th>Descriptor Generico</th>
+    <th>Descriptor Especifico</th>
+    <th>Hecho</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for serie_comparativa in @serie_comparativas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h serie_comparativa.paise.pais if !serie_comparativa.paise.nil? %></td>
+      <td><%= serie_comparativa.descriptor_generico.descriptorGenerico if !serie_comparativa.descriptor_generico.nil? %></td>
+      <td><%= serie_comparativa.descriptor_especifico.descriptorEspecifico if !serie_comparativa.descriptor_especifico.nil? %></td>
+      <td><%= truncate(serie_comparativa.hecho, 150) %></td>
+      <td><%= link_to 'Mostrar', admin_serie_comparativa_path(serie_comparativa) %></td>
+      <td><%= link_to 'Editar', edit_admin_serie_comparativa_path(serie_comparativa) %></td>
+      <td><%= link_to 'Borrar', admin_serie_comparativa_path(serie_comparativa), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @serie_comparativas %>
+<p>
+<%= link_to 'Nuevo serie_comparativa', new_admin_serie_comparativa_path %>
+</p>

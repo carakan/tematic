@@ -1,0 +1,24 @@
+<h1>Listado de asambleistas registrados</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Departamento</th>
+    <th>Partido Politico</th>
+    <th>Nombre</th>
+    <th>Telefono</th>
+    <th>Email</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for asambleista in @asambleistas %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h asambleista.departamento.departamento %></td>
+      <td><%=h asambleista.partido_politico.sigla if !asambleista.partido_politico.nil? %></td>
+      <td><%=h asambleista.nombre %></td>
+      <td><%=h asambleista.telefono %></td>
+      <td><%=h asambleista.email %></td>
+    </tr>
+  <% end %>
+</table>

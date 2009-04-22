@@ -1,0 +1,17 @@
+<h1>Editing cargo</h1>
+
+<%= error_messages_for :cargo %>
+
+<% form_for(@cargo, :url => admin_cargo_path ) do |f| %>
+  <p>
+    <b>Cargo</b><br />
+    <%= f.text_field :cargo %>
+  </p>
+
+  <p>
+    <%= f.submit "Actualizar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Mostrar', admin_cargo_path(@cargo) %> |
+<%= link_to 'Ir al listado', admin_cargos_path %>

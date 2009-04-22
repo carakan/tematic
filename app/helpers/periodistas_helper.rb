@@ -1,0 +1,2 @@
+module PeriodistasHelper
+end

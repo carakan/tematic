@@ -1,0 +1,52 @@
+<h1>Nuevo articulo en Primera mano</h1>
+<%= error_messages_for :primera_mano %>
+<% form_for(@primera_mano, :url => admin_primera_manos_path, :html => {:multipart => true}) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Titular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titular, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Imagen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :imagen %>
+      </td>
+    </tr>
+    <tr>
+      <th>Presentacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :primera_mano, :presentacion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fecha<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= calendar_date_select_tag :fecha, Time.now.to_date.to_s(:date) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuentes<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :fuentes %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo 1<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo1 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Archivo 2<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.upload_column_field :archivo2 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+<%= link_to 'Ir al listado', admin_primera_manos_path %>

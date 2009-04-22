@@ -1,0 +1,31 @@
+<% titulo 'Biblioteca - Legislaci&oacute;n' %>
+<div class="cuadro_busqueda">
+  <% form_tag({:action => "legislacion"}, :method => :get) do %>
+    <strong>Buscar en: <%= busqueda_tag %></strong>&nbsp;&nbsp;<%= text_field_tag(:busqueda, params[:busqueda])%> <%= submit_tag '', :class => 'botonBuscar'%>
+  <% end %>
+</div>
+<table id="box2">
+  <%- if @legislaciones.empty? -%>
+    <strong>No existen registros.</strong>
+  <%- else -%>
+    <% for legislacion in @legislaciones %>
+      <tr><td>
+      <table id="content" width="100%" style="margin:5px;">	
+        <tr>
+          <td><strong><%= legislacion.descripcion %></strong><br>
+          <span class="smallSubtitulo"></span>		</td>
+        </tr><tr>
+          <td>
+            <%= legislacion.contenido %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= link_to 'Archivo', '/archivos/legislacion/' + legislacion.archivo.filename, :class => "link3", :target => "_blank" %>
+          </td>
+        </tr>
+      </table>
+    <%- end -%>
+  <%- end -%>
+</table>
+<%= will_paginate @legislaciones %>

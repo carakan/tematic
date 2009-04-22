@@ -1,0 +1,36 @@
+<h1>Listado de valor noticias</h1>
+<% form_tag({:action => "index"}, :method => :get) do %>
+<%= buscar_generico_admin_tag %> 
+<% end %>
+<p>
+<%= link_to 'Nuevo valor_noticia', new_admin_valor_noticia_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Descriptor Generico</th>
+    <th>Titulo</th>
+    <th>Autor</th>
+    <th>Descripcion</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for valor_noticia in @valor_noticias %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h valor_noticia.descriptor %></td>
+      <td><%=h valor_noticia.titulo %></td>
+      <td><%=h valor_noticia.autor %></td>
+      <td><%= truncate(valor_noticia.descripcion, 100) %></td>
+      <td><%= link_to 'Mostrar', admin_valor_noticia_path(valor_noticia) %></td>
+      <td><%= link_to 'Editar', edit_admin_valor_noticia_path(valor_noticia) %></td>
+      <td><%= link_to 'Borrar', admin_valor_noticia_path(valor_noticia), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @valor_noticias %>
+<br />
+<p>
+<%= link_to 'Nuevo valor_noticia', new_admin_valor_noticia_path %>
+</p>

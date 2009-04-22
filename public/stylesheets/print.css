@@ -1,0 +1,67 @@
+body {
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    margin: 10px;
+    padding: 0;
+    width: 600px;
+    font-size: 10px;
+}
+h1 {
+    color: #55a51c;
+    font-size: 1.6em;
+}
+h6 {
+    font-size: 8px;
+}
+a {
+    color: #55a51c;
+    text-decoration: none;
+}
+a.grey, span.grey {
+    color: #a5a5a5;
+}
+span.bold {
+    font-weight: bold;
+}
+span.red {
+    color: #ff0000;
+}
+span.green {
+    color: #00ff00;
+}
+span.right {
+    font-size: 12px;
+    float: right;
+    margin: 0px 0;
+}
+table {
+    width: 600px;
+}
+td {
+    height:20px;
+    padding:3px;
+}
+html > body #content {
+    width: 650px; /* ie5win fudge ends */
+}
+.logo {
+    float: right;
+}
+.bolder {
+    font-weight: bold;
+    height: 25px;
+}
+.right {
+    text-align: right;
+    width:65px;
+}
+.medio {
+    text-align: center;
+    widht:30px;
+}
+.mediano {
+    width: 110px;
+}
+.centro {
+    text-align: center;
+    width:35px;
+}

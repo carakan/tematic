@@ -1,0 +1,56 @@
+<%
+cadena='Serie comparativa - '
+cadena += @comparacion.paise.pais if !@comparacion.paise.nil?
+cadena += ': ' + @comparacion.descriptor_generico.descriptorGenerico if !@comparacion.descriptor_generico.nil?
+cadena += ' &gt; ' + @comparacion.descriptor_especifico.descriptorEspecifico if !@comparacion.descriptor_especifico.nil?
+titulo cadena
+%>
+<p>
+<%= link_to('Todos los temas clave', '/tema_clave/clave/' + @comparacion.idDescriptorEspecifico.to_s, :class => "link3")  %>
+</p>
+<table id="box8">
+  <tr>
+    <td id="box5">
+      <span class="title2"><%= @comparacion.paise.pais if !@comparacion.paise.nil? %></span>&nbsp;
+      <span class="color2"><%= @comparacion.descriptor_generico.descriptorGenerico  if !@comparacion.descriptor_generico.nil?%>&nbsp;&gt;&nbsp;<%= @comparacion.descriptor_especifico.descriptorEspecifico if !@comparacion.descriptor_especifico.nil? %></span> <br>	
+    </td>
+  </tr>
+  <tr>
+    <td id="box7">
+      <p class="texto_ficha">
+      <span class="title2">Hecho</span><br>
+      <%= @comparacion.hecho %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" id="box7">
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Contexto</span><br>
+            <%= @comparacion.contexto %>
+          </td>
+        </tr>
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Gobierno</span><br>
+            <%= @comparacion.gobierno %>
+          </td>
+        </tr>
+        <tr>
+          <td><p class="texto_ficha">
+            <span class="color3">Fuentes</span><br>
+            <%= @comparacion.fuentes %>
+          </td>
+        </tr>
+        <tr>
+          <td><p class="texto_ficha">
+              <span class="color3">Pagina Web</span><br>
+              <%= @comparacion.paginaWeb %>
+            </p><br>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

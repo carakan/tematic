@@ -1,0 +1,3 @@
+<h2>Series Cronológicas</h2>
+<%= lista_enlaces @serie_cronologicas, "/tema_clave/show_cronologia/"%>
+<%= will_paginate @serie_cronologicas, :param_name => 'page_cro', :prev_label   => '&laquo;', :next_label   => '&raquo;' %>

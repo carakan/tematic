@@ -1,0 +1,13 @@
+<p>
+  <b>Sigla:</b>
+  <%=h @partido_politico.sigla %>
+</p>
+
+<p>
+  <b>Partidopolitico:</b>
+  <%=h @partido_politico.partidoPolitico %>
+</p>
+
+
+<%= link_to 'Editar', edit_partido_politico_path(@partido_politico) %> |
+<%= link_to 'Ir al listado', partido_politicos_path %>

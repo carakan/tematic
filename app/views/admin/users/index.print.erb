@@ -1,0 +1,26 @@
+<h1>Listado de usuarios inscritos</h1>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Nombres</th>
+    <th>Apellidos</th>
+    <th>Correo electronico</th>
+    <th>Usuario</th>
+    <th>Profesion</th>
+    <th>Ingresos</th>
+  </tr
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for usuario in @usuarios %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h usuario.nombre %></td>
+      <td><%=h usuario.apellido %></td>
+      <td><%=h usuario.email %></td>
+      <td><%=h usuario.login %></td>
+      <td><%=h usuario.profesion.Profesion if !usuario.profesion.nil? %></td>
+      <td><%=h usuario.total %></td>
+    </tr>
+  <% end %>
+</table>

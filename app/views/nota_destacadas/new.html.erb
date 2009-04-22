@@ -1,0 +1,41 @@
+<h1>New nota_destacada</h1>
+
+<%= error_messages_for :nota_destacada %>
+
+<% form_for(@nota_destacada) do |f| %>
+  <p>
+    <b>Titulo</b><br />
+    <%= f.text_field :titulo %>
+  </p>
+
+  <p>
+    <b>Resumen</b><br />
+    <%= f.text_area :resumen %>
+  </p>
+
+  <p>
+    <b>Fuente</b><br />
+    <%= f.text_field :fuente %>
+  </p>
+
+  <p>
+    <b>Archivo</b><br />
+    <%= f.text_field :archivo %>
+  </p>
+
+  <p>
+    <b>Enlace</b><br />
+    <%= f.text_field :enlace %>
+  </p>
+
+  <p>
+    <b>Imagen</b><br />
+    <%= f.text_field :imagen %>
+  </p>
+
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', nota_destacadas_path %>

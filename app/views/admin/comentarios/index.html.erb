@@ -1,0 +1,24 @@
+<h1>Listado de comentarios</h1>
+<%= link_to('Listado de foros', admin_foros_path) %>
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Mensaje</th>
+  </tr>
+  
+  <% for comentario in @comentarios %>
+    <tr>
+      <td><%=h comentario.nombre %></td>
+      <td><%=h comentario.email %></td>
+      <td><%= comentario.mensaje %></td>
+      <td><%= link_to 'Mostrar', admin_foro_comentario_path(@foro, comentario) %></td>
+      <td><%= link_to 'Editar', edit_admin_foro_comentario_path(@foro, comentario) %></td>
+      <td><%= link_to 'Borrar', admin_foro_comentario_path(@foro, comentario), :confirm => 'Esta seguro de borrar este elemento?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @comentarios %>
+<p>
+  <%= link_to 'Nuevo comentario', new_admin_foro_comentario_path %>
+</p>

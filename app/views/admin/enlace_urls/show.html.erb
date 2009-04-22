@@ -1,0 +1,18 @@
+<p>
+  <b>Nombre:</b>
+  <%=h @enlace_url.nombre %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%=h @enlace_url.descripcion %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @enlace_url.url %>
+</p>
+
+
+<%= link_to 'Editar', edit_enlace_url_path(@enlace_url) %> |
+<%= link_to 'Ir al listado', enlace_urls_path %>

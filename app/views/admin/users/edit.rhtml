@@ -1,0 +1,60 @@
+<h1><%= _('Editar  estudiante')%></h1>
+
+<%= error_messages_for :user %>
+
+<% form_for(@user, :url => admin_user_path(@user)) do |f| %>
+  <table>
+    <tr>
+      <th>Nombre <span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Apellido<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :apellido, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Profesion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :profesion_id, Profesion.find(:all).collect { |x| [x.Profesion, x.idProfesion] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre de usuario<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :login, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Correo electronico<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Contraseña<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.password_field :password, :size => 40 %> Dejelo en blanco si no quiere cambiar la contraseña
+      </td>
+    </tr>
+    <tr>
+      <th>Confirme contraseña<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.password_field :password_confirmation, :size => 40 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Activado?<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= check_box_tag(:activate, value = "1", checked = true) %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= submit_tag "Actualizar" %>
+  </p>
+<% end %>
+<%= link_to 'Listado', admin_users_path %>

@@ -1,0 +1,2 @@
+module AlcaldesHelper
+end

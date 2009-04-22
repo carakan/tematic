@@ -1,0 +1,18 @@
+<% cache Time.now.to_date.to_s do %>
+  <table><tr><td width="50%" valign="top">
+    <%= render :partial => 'noticias', :layout => "panel", :locals => {:titulo => 'Primera Mano'}   %>
+    <%= render :partial => 'biblioteca', :layout => "panel", :locals => {:titulo => 'Biblioteca / Documentos de Interés'} %>
+    <%= render :partial => 'calendario', :layout => "panel", :locals => {:titulo => 'Calendario Histórico'} %>
+    <%= render :partial => 'eventos', :layout => "panel", :locals => {:titulo => 'Eventos'} %>
+    <%= render :partial => 'enlaces', :layout => "panel", :locals => {:titulo => 'Enlaces de inter&eacute;s'} %>
+    <%= render :partial => 'rss', :layout => "panel", :locals => {:titulo => nil} %>    
+  </td><td width="50%" valign="top">
+    <%= render :partial => 'titulares', :layout => "panel", :locals => {:titulo => nil}   %>
+    <%= render :partial => 'multimedia', :layout => "panel", :locals => {:titulo => 'Multimedia'}   %>
+    <%= render :partial => 'actores', :layout => "panel", :locals => {:titulo => 'Mapa de Actores'} %>
+    <%= render :partial => 'nota_destacada', :layout => "panel", :locals => {:titulo => 'La nota destacada'} %>
+    <%= render :partial => 'foro', :layout => "panel", :locals => {:titulo => 'Foro de Periodistas'} %>
+    <%= render :partial => 'valor', :layout => "panel", :locals => {:titulo => 'Valores Noticia'} %>
+    <%= render :partial => 'login', :layout => "panel", :locals => {:titulo => nil} %>    
+  </td></tr></table>  
+<% end %>

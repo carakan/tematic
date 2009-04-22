@@ -1,0 +1,32 @@
+<% @departamento = Departamento.find(params[:id])%>
+<% titulo 'Informaci&oacute;n del departamento de ' + @departamento.departamento %>
+<div id="box6">
+  <%= link_to_departamentos %><span class="color3">&nbsp;&lt;&lt;&nbsp;Seleccione un departamento</span> 
+</div>
+<table width="95%" height="350px" border="0" cellpadding="2" cellspacing="2" id="content">
+  <tr>
+    <td rowspan="8" width="265px" height="265px"><img src="/archivos/boliviaEnCifras/<%= @departamento.imagen %>" /></td>
+    <td><h4>Departamento: <%= @departamento.departamento %></h4></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Fundaci&oacute;n:</span><%= @departamento.fundacion %></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Aniversario c&iacute;vico: </span><%= @departamento.aniversarioCivico %></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Altitud:</span><%= @departamento.altitud %></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Poblaci&oacute;n:</span><%= @departamento.poblacion %> habitantes</td>
+  </tr>
+  <tr>
+    <td><span class="color3">Superficie: </span><%= @departamento.superficie %></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Capital:</span><span class="bold2"><%= @departamento.capital %></span></td>
+  </tr>
+  <tr>
+    <td><span class="color3">Poblaci&oacute;n en la Capital:</span><%= @departamento.poblacionCapital %></td>
+  </tr>
+</table>

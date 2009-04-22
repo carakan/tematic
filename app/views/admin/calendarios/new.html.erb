@@ -1,0 +1,62 @@
+<h1>Nuevo calendario</h1>
+<%= error_messages_for :calendario %>
+<% form_for(@calendario, :url => admin_calendarios_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Fecha<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.date_select :fecha %>
+      </td>
+    </tr>
+    <tr>
+      <th>Tipo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <select id="calendario_tipo" name="calendario[tipo]">
+          <option value="" selected>
+          Por favor Seleccione</option>
+          <option value="E">
+          Eventos</option>
+          <option value="F">
+          Fecha Historica</option>
+          <option value="P">
+          Premio Concurso</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Titulo<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titulo, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Resumen<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :calendario, :resumen, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Lugar<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :lugar, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :paginaWeb, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_calendarios_path %>

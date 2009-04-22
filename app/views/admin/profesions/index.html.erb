@@ -1,0 +1,26 @@
+<h1>Listado de profesiones</h1>
+<p>
+<%= link_to 'Nueva profesion', new_admin_profesion_path %>
+</p>
+<table>
+  <tr>
+    <th>#</th>
+    <th>Profesion</th>
+  </tr>
+  <% numero = params[:page].nil? ? 0 : (params[:page].to_i - 1) %>
+  <% contador = 0 %>
+  <% for profesion in @profesions %>
+    <tr class="<%= cycle('odd','par') %>">
+      <%contador +=1 %>
+      <td><%= (numero*20 + contador) %></td>
+      <td><%=h profesion.Profesion %></td>
+      <td><%= link_to 'Mostrar', admin_profesion_path(profesion) %></td>
+      <td><%= link_to 'Editar', edit_admin_profesion_path(profesion) %></td>
+      <td><%= link_to 'Destruir', admin_profesion_path(profesion), :confirm => 'Esta seguro de borrarlo?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @profecions %>
+<p>
+<%= link_to 'Nueva profesion', new_admin_profesion_path %>
+</p>

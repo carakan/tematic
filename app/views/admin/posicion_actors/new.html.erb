@@ -1,0 +1,38 @@
+<h1>Nuevo posicion de actor</h1>
+<h4>Actor: <%= @actor.nombre %></h4>
+<%= error_messages_for :posicion_actor %>
+
+<% form_for(@posicion_actor, :url => admin_posicion_actors_path) do |f| %>
+  <%= f.hidden_field(:id_Actor, :value => @actor.id)%>
+  <table class="no_flash">
+    <tr>
+      <th>Fecha<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.date_select :fecha %>
+      </td>
+    </tr>
+    <tr>
+      <th>Titular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :titular, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Posicion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :posicion_actor, :posicion, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fuente<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= fckeditor :posicion_actor, :fuente, {:width => '600px', :height => '500px'} %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_posicion_actors_path %>

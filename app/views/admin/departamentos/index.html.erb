@@ -1,0 +1,18 @@
+<h3 class="title">Listado de Departamentos</h3>
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Poblacion</th>
+  </tr>
+<% for departamento in @departamentos %>
+  <tr class="<%= cycle('odd','par') %>">
+    <td><%=h departamento.departamento %></td>
+    <td><%=h departamento.poblacion %></td>
+    <td><%= link_to 'Mostrar', admin_departamento_path(departamento) %></td>
+    <td><%= link_to 'Editar', edit_admin_departamento_path(departamento) %></td>
+    <td><%= link_to 'Borrar', admin_departamento_path(departamento), :confirm => _('Esta seguro de borrar este elemento?'), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'Nueva informacion de Departamento', new_admin_departamento_path %>

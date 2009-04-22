@@ -1,0 +1,59 @@
+<h1>Nuevo alcalde</h1>
+<%= error_messages_for :alcalde %>
+<% form_for(@alcalde, :url => admin_alcaldes_path ) do |f| %>
+  <table class="no_flash">
+    <tr>
+      <th>Departamento<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idDepartamento, DepartamentoBolivia.find(:all).collect { |x| [x.departamento, x.idDepartamento] }  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Municipio<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idMunicipio, Municipio.find(:all).collect { |x| [x.municipio, x.idMunicipio] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.select :idPartidoPolitico, PartidoPolitico.find(:all).collect { |x| [x.sigla, x.idPartidoPolitico] } %>
+      </td>
+    </tr>
+    <tr>
+      <th>Nombre<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :nombre, :size => 80  %>
+      </td>
+    </tr>
+    <tr>
+      <th>Telefono<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :telefono, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Celular<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :celular, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Fundacion<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :email, :size => 80 %>
+      </td>
+    </tr>
+    <tr>
+      <th>Pagina web<span class='ewmsg'>&nbsp;*</span></th>
+      <td>
+        <%= f.text_field :paginaWeb, :size => 80 %>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Ir al listado', admin_alcaldes_path %>

@@ -1,0 +1,70 @@
+<div class="login">
+<table>
+<tr>
+  <th>Nombre</td>
+  <td>
+    <%= @periodista.nombre %>
+  </td>
+</tr>
+<tr>
+  <th>Cargo</td>
+  <td>
+    <%= @periodista.cargo.cargo %>
+  </td>
+</tr>
+<tr>
+  <th>Instituci&oacute;n</td>
+  <td>
+    <%= @periodista.institucion %>
+  </td>
+</tr>
+<tr>
+  <th>Tipo de Medio</td>
+  <td>
+    <%= @periodista.tipo_medio.tipoMedio if !@periodista.tipo_medio.nil? %>
+  </td>
+</tr>
+<tr>
+  <th>Departamento</td>
+  <td>
+    <%= @periodista.departamento.departamento %>
+  </td>
+</tr>
+<tr>
+  <th>Tel&eacute;fono</td>
+  <td>
+    <%= @periodista.telefono %>
+  </td>
+</tr>
+<tr>
+  <th>Celular</td>
+  <td>
+    <%= @periodista.celular %>
+  </td>
+</tr>
+<tr>
+  <th>Perfil</td>
+  <td>
+    <%= @periodista.perfil %>
+  </td>
+</tr>
+<tr>
+  <th>Profesi&oacute;n</td>
+  <td>
+    <%= @periodista.profesion %>
+  </td>
+</tr>
+<tr>
+  <th>Direcci&oacute;n</td>
+  <td>
+    <%= @periodista.direccion %>
+  </td>
+</tr>
+<tr>
+  <th>Correo Electr&oacute;nico</td>
+  <td>
+    <%= @periodista.email %>
+  </td>
+</tr>
+</table>
+</div>

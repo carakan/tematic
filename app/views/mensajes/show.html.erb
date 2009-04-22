@@ -1,0 +1,17 @@
+<% nombre = @mensaje.enviado.nombre + ' ' + @mensaje.enviado.apellido %>
+<% titulo('Mensaje de: ' + nombre ) %>
+<div id="box6">
+<%= link_to('Mensajes recibidos', :modo => 'recibido', :action => "index") %> | <%= link_to('Mensajes enviados', :modo => 'enviado', :action => "index") %>
+  </div>
+<h3><%=h @mensaje.titulo %></h3>
+<p>
+  <strong>De: </strong><%= nombre %>
+</p>
+<p>
+  <%=h @mensaje.mensaje %>
+</p>
+<% if @mensaje.enviado_id != current_user.id %>
+<p>
+  <%= link_to('Responder', new_mensaje_path(:nombre => nombre, :id => @mensaje.enviado_id), :class => 'link3' ) %>
+</p>
+<% end %>

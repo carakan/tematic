@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tituloMonografia: MyString
+  autorMonografia: MyString
+  tituloAnalitico: MyString
+  autorAnalitico: MyString
+  valorTitular: MyString
+  valorAutor: MyString
+  resumen: MyText
+  archivo: MyString
+
+two:
+  tituloMonografia: MyString
+  autorMonografia: MyString
+  tituloAnalitico: MyString
+  autorAnalitico: MyString
+  valorTitular: MyString
+  valorAutor: MyString
+  resumen: MyText
+  archivo: MyString
